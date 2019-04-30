@@ -17,7 +17,8 @@ namespace DAL
 
             Property(x => x.DurakAdi).IsRequired().HasMaxLength(30);
 
-            
+            HasRequired(x => x.Sefer).WithMany(x => x.Duraklar).HasForeignKey(x => x.DurakID);
+            //eksik
         }
 
     }

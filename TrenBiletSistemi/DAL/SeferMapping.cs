@@ -14,8 +14,8 @@ namespace DAL
         {
             ToTable("Seferler");
             HasKey(x => x.SeferID);
-
-            Property(x=>x.)
+            HasRequired(x => x.Tren).WithRequiredPrincipal(x => x.Sefer);
+           //eksik
         }
     }
 }

@@ -48,11 +48,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="BiletMapping.cs" />
     <Compile Include="Context.cs" />
     <Compile Include="DurakMapping.cs" />
+    <Compile Include="KoltukMapping.cs" />
+    <Compile Include="KullaniciMapping.cs" />
+    <Compile Include="KullaniciTipMapping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SeferMapping.cs" />
+    <Compile Include="TrenMapping.cs" />
+    <Compile Include="VagonMapping.cs" />
+    <Compile Include="VagonTipiMapping.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

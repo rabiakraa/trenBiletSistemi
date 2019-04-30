@@ -19,5 +19,6 @@ namespace Data
 
         public virtual List<Durak> Duraklar { get; set; }
         public virtual List<Bilet> Biletler { get; set; }
+        public virtual Tren Tren { get; set; }
     }
 }
