@@ -1,12 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Data
 {
     public class Durak
     {
+
+        
         public int DurakID { get; set; }
+
         public string DurakAdi { get; set; }
 
-        public virtual Sefer Sefer { get; set; }
+        /*[ForeignKey("Sefer")]
+        public int SeferID { get; set; }*/
+
+        public virtual List<Rota> Rota { get; set; }
     }
 }

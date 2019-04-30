@@ -14,6 +14,8 @@ namespace DAL
         {
             ToTable("Tren");
             HasKey(x => x.TrenID);
+            HasRequired(x => x.Sefer).WithRequiredPrincipal(x => x.Tren);
+
         }
 
     }
