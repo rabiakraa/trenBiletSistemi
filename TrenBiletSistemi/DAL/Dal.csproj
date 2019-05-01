@@ -48,19 +48,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BiletMapping.cs" />
+    <Compile Include="Mapping\BiletMapping.cs" />
     <Compile Include="Context.cs" />
-    <Compile Include="DurakMapping.cs" />
-    <Compile Include="KoltukMapping.cs" />
-    <Compile Include="KullaniciMapping.cs" />
-    <Compile Include="KullaniciTipMapping.cs" />
+    <Compile Include="Mapping\DurakMapping.cs" />
+    <Compile Include="Mapping\KoltukMapping.cs" />
+    <Compile Include="Mapping\KullaniciMapping.cs" />
+    <Compile Include="Mapping\KullaniciTipMapping.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RotaMapping.cs" />
-    <Compile Include="SeferMapping.cs" />
-    <Compile Include="TrenMapping.cs" />
-    <Compile Include="VagonMapping.cs" />
-    <Compile Include="VagonTipiMapping.cs" />
+    <Compile Include="Mapping\RotaMapping.cs" />
+    <Compile Include="Mapping\SeferMapping.cs" />
+    <Compile Include="Mapping\TrenMapping.cs" />
+    <Compile Include="Mapping\VagonMapping.cs" />
+    <Compile Include="Mapping\VagonTipiMapping.cs" />
+    <Compile Include="Repositories\EFRepository.cs" />
+    <Compile Include="Repositories\Irepository.cs" />
+    <Compile Include="UnitOfWork\EFUnitOfWork.cs" />
+    <Compile Include="UnitOfWork\IUnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -72,5 +76,6 @@
       <Name>Data</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
