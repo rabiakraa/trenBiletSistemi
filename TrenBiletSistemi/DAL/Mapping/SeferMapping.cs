@@ -16,6 +16,7 @@ namespace DAL
             HasKey(x => x.SeferID);
 
             HasRequired(x => x.Rota).WithMany(x => x.Seferler).HasForeignKey(x => x.RotaID);
+            HasRequired(x => x.Tren).WithMany(x => x.Seferler).HasForeignKey(x => x.TrenID);
             //eksik
         }
     }

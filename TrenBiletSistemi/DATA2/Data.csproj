@@ -50,13 +50,14 @@
   <ItemGroup>
     <Compile Include="Bilet.cs" />
     <Compile Include="Durak.cs" />
-    <Compile Include="Koltuk.cs" />
+    <Compile Include="DoluKoltuk.cs" />
     <Compile Include="Kullanici.cs" />
     <Compile Include="KullaniciTip.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rota.cs" />
     <Compile Include="Sefer.cs" />
     <Compile Include="Tren.cs" />
+    <Compile Include="TrenVagon.cs" />
     <Compile Include="Vagon.cs" />
     <Compile Include="VagonTipi.cs" />
   </ItemGroup>

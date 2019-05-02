@@ -15,8 +15,8 @@ namespace DAL
             ToTable("Rotalar");
             HasKey(x => x.RotaID);
 
-            HasRequired(x => x.Durak).WithMany(x => x.Rota).HasForeignKey(x => x.CikisID);
-            HasRequired(x => x.Durak).WithMany(x => x.Rota).HasForeignKey(x => x.VarisID);
+            HasRequired(x => x.Durak).WithMany(x => x.Rotalar).HasForeignKey(x => x.CikisID);
+            HasRequired(x => x.Durak).WithMany(x => x.Rotalar).HasForeignKey(x => x.VarisID);
         }
        
 
