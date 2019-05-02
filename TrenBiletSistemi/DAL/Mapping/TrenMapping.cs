@@ -1,6 +1,7 @@
 ﻿using Data;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 using System.Linq;
 using System.Text;
@@ -16,8 +17,7 @@ namespace DAL
             HasKey(x => x.TrenID);
 
             // HasRequired(x => x.Sefer).WithRequiredPrincipal(x => x.Tren);
-
-
+             Property(x => x.TrenID).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
 
         }
