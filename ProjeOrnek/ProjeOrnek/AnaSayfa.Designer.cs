@@ -74,7 +74,7 @@
             // 
             this.pbResim.Location = new System.Drawing.Point(12, 43);
             this.pbResim.Name = "pbResim";
-            this.pbResim.Size = new System.Drawing.Size(100, 50);
+            this.pbResim.Size = new System.Drawing.Size(690, 426);
             this.pbResim.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbResim.TabIndex = 9;
             this.pbResim.TabStop = false;

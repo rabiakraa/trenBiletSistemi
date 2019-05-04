@@ -37,13 +37,13 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.rdoGidisDonus = new System.Windows.Forms.RadioButton();
             this.rdoTekyon = new System.Windows.Forms.RadioButton();
-            this.rdoRezervasyon = new System.Windows.Forms.RadioButton();
-            this.rdoSatıs = new System.Windows.Forms.RadioButton();
+            this.btnBiletlerim = new System.Windows.Forms.Button();
+            this.cmbNereye = new System.Windows.Forms.ComboBox();
+            this.cmbNereden = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.nmrYolcuSayisi)).BeginInit();
             this.SuspendLayout();
             // 
@@ -107,7 +107,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(318, 284);
+            this.label5.Location = new System.Drawing.Point(357, 284);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(0, 17);
             this.label5.TabIndex = 17;
@@ -120,13 +120,6 @@
             this.label3.Size = new System.Drawing.Size(92, 17);
             this.label3.TabIndex = 18;
             this.label3.Text = "Gidiş Tarihi";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(50, 125);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(231, 22);
-            this.textBox1.TabIndex = 14;
             // 
             // label2
             // 
@@ -149,13 +142,11 @@
             // rdoGidisDonus
             // 
             this.rdoGidisDonus.AutoSize = true;
-            this.rdoGidisDonus.Checked = true;
             this.rdoGidisDonus.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.rdoGidisDonus.Location = new System.Drawing.Point(620, 33);
+            this.rdoGidisDonus.Location = new System.Drawing.Point(291, 33);
             this.rdoGidisDonus.Name = "rdoGidisDonus";
             this.rdoGidisDonus.Size = new System.Drawing.Size(135, 24);
             this.rdoGidisDonus.TabIndex = 8;
-            this.rdoGidisDonus.TabStop = true;
             this.rdoGidisDonus.Text = "Gidiş-Dönüş";
             this.rdoGidisDonus.UseVisualStyleBackColor = true;
             // 
@@ -163,40 +154,46 @@
             // 
             this.rdoTekyon.AutoSize = true;
             this.rdoTekyon.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.rdoTekyon.Location = new System.Drawing.Point(442, 33);
+            this.rdoTekyon.Location = new System.Drawing.Point(48, 33);
             this.rdoTekyon.Name = "rdoTekyon";
             this.rdoTekyon.Size = new System.Drawing.Size(89, 24);
             this.rdoTekyon.TabIndex = 9;
             this.rdoTekyon.Text = "Tekyön";
             this.rdoTekyon.UseVisualStyleBackColor = true;
             // 
-            // rdoRezervasyon
+            // btnBiletlerim
             // 
-            this.rdoRezervasyon.AutoSize = true;
-            this.rdoRezervasyon.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.rdoRezervasyon.Location = new System.Drawing.Point(209, 33);
-            this.rdoRezervasyon.Name = "rdoRezervasyon";
-            this.rdoRezervasyon.Size = new System.Drawing.Size(138, 24);
-            this.rdoRezervasyon.TabIndex = 10;
-            this.rdoRezervasyon.Text = "Rezervasyon";
-            this.rdoRezervasyon.UseVisualStyleBackColor = true;
+            this.btnBiletlerim.Location = new System.Drawing.Point(572, 125);
+            this.btnBiletlerim.Name = "btnBiletlerim";
+            this.btnBiletlerim.Size = new System.Drawing.Size(183, 23);
+            this.btnBiletlerim.TabIndex = 24;
+            this.btnBiletlerim.Text = "Biletlerim";
+            this.btnBiletlerim.UseVisualStyleBackColor = true;
             // 
-            // rdoSatıs
+            // cmbNereye
             // 
-            this.rdoSatıs.AutoSize = true;
-            this.rdoSatıs.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.rdoSatıs.Location = new System.Drawing.Point(50, 33);
-            this.rdoSatıs.Name = "rdoSatıs";
-            this.rdoSatıs.Size = new System.Drawing.Size(73, 24);
-            this.rdoSatıs.TabIndex = 11;
-            this.rdoSatıs.Text = "Satış";
-            this.rdoSatıs.UseVisualStyleBackColor = true;
+            this.cmbNereye.FormattingEnabled = true;
+            this.cmbNereye.Location = new System.Drawing.Point(291, 124);
+            this.cmbNereye.Name = "cmbNereye";
+            this.cmbNereye.Size = new System.Drawing.Size(121, 24);
+            this.cmbNereye.TabIndex = 25;
+            // 
+            // cmbNereden
+            // 
+            this.cmbNereden.FormattingEnabled = true;
+            this.cmbNereden.Location = new System.Drawing.Point(48, 124);
+            this.cmbNereden.Name = "cmbNereden";
+            this.cmbNereden.Size = new System.Drawing.Size(121, 24);
+            this.cmbNereden.TabIndex = 25;
             // 
             // BiletSayfasi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(821, 521);
+            this.Controls.Add(this.cmbNereden);
+            this.Controls.Add(this.cmbNereye);
+            this.Controls.Add(this.btnBiletlerim);
             this.Controls.Add(this.btnAra);
             this.Controls.Add(this.btnGuvenliCikis);
             this.Controls.Add(this.nmrYolcuSayisi);
@@ -206,13 +203,10 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.rdoGidisDonus);
             this.Controls.Add(this.rdoTekyon);
-            this.Controls.Add(this.rdoRezervasyon);
-            this.Controls.Add(this.rdoSatıs);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.Name = "BiletSayfasi";
             this.Text = "BiletSayfasi";
@@ -233,12 +227,12 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.RadioButton rdoGidisDonus;
         private System.Windows.Forms.RadioButton rdoTekyon;
-        private System.Windows.Forms.RadioButton rdoRezervasyon;
-        private System.Windows.Forms.RadioButton rdoSatıs;
+        private System.Windows.Forms.Button btnBiletlerim;
+        private System.Windows.Forms.ComboBox cmbNereye;
+        private System.Windows.Forms.ComboBox cmbNereden;
     }
 }

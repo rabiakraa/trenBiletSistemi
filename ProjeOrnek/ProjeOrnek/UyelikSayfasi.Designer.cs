@@ -133,7 +133,7 @@
             // rdoErkek
             // 
             this.rdoErkek.AutoSize = true;
-            this.rdoErkek.Location = new System.Drawing.Point(493, 163);
+            this.rdoErkek.Location = new System.Drawing.Point(459, 163);
             this.rdoErkek.Name = "rdoErkek";
             this.rdoErkek.Size = new System.Drawing.Size(70, 21);
             this.rdoErkek.TabIndex = 1;
@@ -154,52 +154,52 @@
             // 
             // txtAdres
             // 
-            this.txtAdres.Location = new System.Drawing.Point(493, 228);
+            this.txtAdres.Location = new System.Drawing.Point(459, 228);
             this.txtAdres.Multiline = true;
             this.txtAdres.Name = "txtAdres";
-            this.txtAdres.Size = new System.Drawing.Size(240, 90);
+            this.txtAdres.Size = new System.Drawing.Size(274, 90);
             this.txtAdres.TabIndex = 2;
             // 
             // txtEposta
             // 
-            this.txtEposta.Location = new System.Drawing.Point(210, 34);
+            this.txtEposta.Location = new System.Drawing.Point(153, 34);
             this.txtEposta.Name = "txtEposta";
-            this.txtEposta.Size = new System.Drawing.Size(100, 22);
+            this.txtEposta.Size = new System.Drawing.Size(157, 22);
             this.txtEposta.TabIndex = 3;
             // 
             // txtSifre
             // 
-            this.txtSifre.Location = new System.Drawing.Point(210, 100);
+            this.txtSifre.Location = new System.Drawing.Point(153, 100);
             this.txtSifre.Name = "txtSifre";
-            this.txtSifre.Size = new System.Drawing.Size(100, 22);
+            this.txtSifre.Size = new System.Drawing.Size(157, 22);
             this.txtSifre.TabIndex = 3;
             // 
             // txtSifreTekrar
             // 
-            this.txtSifreTekrar.Location = new System.Drawing.Point(210, 167);
+            this.txtSifreTekrar.Location = new System.Drawing.Point(153, 167);
             this.txtSifreTekrar.Name = "txtSifreTekrar";
-            this.txtSifreTekrar.Size = new System.Drawing.Size(100, 22);
+            this.txtSifreTekrar.Size = new System.Drawing.Size(157, 22);
             this.txtSifreTekrar.TabIndex = 3;
             // 
             // txtTcNo
             // 
-            this.txtTcNo.Location = new System.Drawing.Point(210, 236);
+            this.txtTcNo.Location = new System.Drawing.Point(153, 236);
             this.txtTcNo.Name = "txtTcNo";
-            this.txtTcNo.Size = new System.Drawing.Size(100, 22);
+            this.txtTcNo.Size = new System.Drawing.Size(157, 22);
             this.txtTcNo.TabIndex = 3;
             // 
             // txtAd
             // 
-            this.txtAd.Location = new System.Drawing.Point(493, 30);
+            this.txtAd.Location = new System.Drawing.Point(459, 30);
             this.txtAd.Name = "txtAd";
-            this.txtAd.Size = new System.Drawing.Size(100, 22);
+            this.txtAd.Size = new System.Drawing.Size(134, 22);
             this.txtAd.TabIndex = 3;
             // 
             // txtSoyad
             // 
-            this.txtSoyad.Location = new System.Drawing.Point(493, 90);
+            this.txtSoyad.Location = new System.Drawing.Point(459, 90);
             this.txtSoyad.Name = "txtSoyad";
-            this.txtSoyad.Size = new System.Drawing.Size(100, 22);
+            this.txtSoyad.Size = new System.Drawing.Size(134, 22);
             this.txtSoyad.TabIndex = 3;
             // 
             // btnKaydet
@@ -215,7 +215,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(807, 395);
+            this.ClientSize = new System.Drawing.Size(780, 361);
             this.Controls.Add(this.btnKaydet);
             this.Controls.Add(this.txtSoyad);
             this.Controls.Add(this.txtAd);
