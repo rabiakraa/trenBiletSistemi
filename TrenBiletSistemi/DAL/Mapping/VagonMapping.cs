@@ -14,7 +14,7 @@ namespace DAL
         {
             ToTable("Vagon");
             HasKey(x => x.VagonID);
-            HasRequired(x => x.Tren).WithMany(x => x.Vagonlar).HasForeignKey(x => x.VagonTipiID);
+
             HasRequired(x => x.VagonTipi).WithMany(x => x.Vagonlar).HasForeignKey(x => x.VagonTipiID);
         }
     }

@@ -21,7 +21,8 @@ namespace DAL
             Property(x => x.Email).IsRequired().HasMaxLength(40);
             Property(x => x.Telefon).IsRequired().HasMaxLength(25);
 
-            HasRequired(x => x.KullaniciTip).WithRequiredPrincipal(x => x.Kullanici);
+            HasRequired(x => x.KullaniciTip).WithMany(x => x.Kullanicilar).HasForeignKey(x => x.KullaniciTipID);
+
         }
     }
 }

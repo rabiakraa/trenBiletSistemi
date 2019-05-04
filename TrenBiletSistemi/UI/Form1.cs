@@ -38,7 +38,7 @@ namespace UI
         {
             Durak durak = new Durak
             {
-                DurakAdi = "İstanbul"
+                DurakAdi = "Erzincan"
             };
             _durakRepository.Add(durak);
             int process = _uow.SaveChanges();

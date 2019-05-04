@@ -15,6 +15,7 @@ namespace Data
         /*[ForeignKey("Sefer")]
         public int SeferID { get; set; }*/
 
-        public virtual List<Rota> Rota { get; set; }
+        public virtual List<Rota> Rotalar { get; set; }
+
     }
 }

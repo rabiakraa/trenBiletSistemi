@@ -9,6 +9,6 @@ namespace Data
         public int TipID { get; set; }
         public string TipAdi { get; set; }
 
-        public virtual Kullanici Kullanici { get; set; }
+        public virtual List<Kullanici> Kullanicilar { get; set; }
     }
 }

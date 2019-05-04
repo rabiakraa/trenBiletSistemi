@@ -1,4 +1,5 @@
-﻿using Data;
+﻿using DAL.Mapping;
+using Data;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -11,6 +12,8 @@ namespace DAL
 {
     public class Context: DbContext
     {
+        //Çıkış saati, varış saati, süre leri time yap
+
         public Context()
         {
 
@@ -23,7 +26,7 @@ namespace DAL
 
         public DbSet<Bilet> Personeller { get; set; }
         public DbSet<Durak> Duraklar { get; set; }
-        public DbSet<Koltuk> Koltuklar { get; set; }
+        public DbSet<DoluKoltuk> Koltuklar { get; set; }
         public DbSet<Kullanici> Kullanicilar { get; set; }
         public DbSet<KullaniciTip> KullaniciTipleri { get; set; }
         public DbSet<Sefer> Seferler { get; set; }
@@ -37,7 +40,7 @@ namespace DAL
         {
             modelBuilder.Configurations.Add(new BiletMapping());
             modelBuilder.Configurations.Add(new DurakMapping());
-            modelBuilder.Configurations.Add(new KoltukMapping());
+            modelBuilder.Configurations.Add(new DoluKoltukMapping());
             modelBuilder.Configurations.Add(new KullaniciMapping());
             modelBuilder.Configurations.Add(new KullaniciTipMapping());
             modelBuilder.Configurations.Add(new SeferMapping());
@@ -45,6 +48,15 @@ namespace DAL
             modelBuilder.Configurations.Add(new VagonMapping());
             modelBuilder.Configurations.Add(new VagonTipiMapping());
             modelBuilder.Configurations.Add(new RotaMapping());
+            modelBuilder.Configurations.Add(new TrenVagonMapping());
+
+           /* modelBuilder.Entity<Bilet>()
+          .HasOptional(x => x.DoluKoltuk).WithMany()
+          .HasForeignKey(x => x.KoltukID);
+          
+            modelBuilder.Entity<DoluKoltuk>()
+                .HasRequired(x => x.Bilet).WithMany()
+                .HasForeignKey(x => x.KoltukID);*/
 
             base.OnModelCreating(modelBuilder);
         }

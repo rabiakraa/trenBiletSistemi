@@ -4,13 +4,13 @@ using System.Text;
 
 namespace Data
 {
-    public class Koltuk
+    public class DoluKoltuk
     {
         public int KoltukID { get; set; }
         public int KoltukNo { get; set; }
-        public bool DoluMu { get; set; }
         public int VagonID { get; set; }
 
         public virtual Vagon Vagon { get; set; }
+
     }
 }

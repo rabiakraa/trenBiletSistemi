@@ -14,11 +14,14 @@ namespace Data
         //public int CikisDurakID { get; set; }
 
         public int RotaID{ get; set; }
-
-        public DateTime CikisSaati { get; set; }
-        public DateTime VarisSaati { get; set; }
+        [Column(TypeName = "time")]
+        public TimeSpan CikisSaati { get; set; }
+        [Column(TypeName = "time")]
+        public TimeSpan VarisSaati { get; set; }
+        
         public DateTime Tarih { get; set; }
-        public DateTime SeferSuresi { get; set; }
+        [Column(TypeName = "time")]
+        public TimeSpan SeferSuresi { get; set; }
         public int TrenID { get; set; }
 
         public virtual Rota Rota { get; set; }
