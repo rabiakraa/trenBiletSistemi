@@ -24,10 +24,11 @@ namespace Data
         public int KullaniciID { get; set; }
         public float Fiyat { get; set; }
 
+        public int KoltukID { get; set; }
+
         public virtual Sefer Sefer { get; set; }
         public virtual Kullanici Kullanici { get; set; }
-
-
+        public virtual DoluKoltuk DoluKoltuk { get; set; }
 
 
     }

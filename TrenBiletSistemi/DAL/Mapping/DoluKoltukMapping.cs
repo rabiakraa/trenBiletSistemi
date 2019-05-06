@@ -14,7 +14,7 @@ namespace DAL
         public DoluKoltukMapping()
         {
             ToTable("DoluKoltuklar");
-            HasKey(x => x.KoltukID);
+           // HasKey(x => x.KoltukID);
 
             Property(x => x.KoltukNo).IsRequired();
 
