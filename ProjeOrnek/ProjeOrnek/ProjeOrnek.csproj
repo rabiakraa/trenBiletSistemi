@@ -111,11 +111,20 @@
     <EmbeddedResource Include="AnaSayfa.resx">
       <DependentUpon>AnaSayfa.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Biletlerim.resx">
+      <DependentUpon>Biletlerim.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="BiletSayfasi.resx">
       <DependentUpon>BiletSayfasi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="BusinessKoltuk.resx">
       <DependentUpon>BusinessKoltuk.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cafeterya.resx">
+      <DependentUpon>Cafeterya.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EconomiKoltuk.resx">
+      <DependentUpon>EconomiKoltuk.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -151,6 +160,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\lüx Vagon 1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ekonomi.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Person.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Famale.icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Male.icon.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
