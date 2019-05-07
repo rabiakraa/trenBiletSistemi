@@ -55,7 +55,6 @@
     <Compile Include="Mapping\KullaniciMapping.cs" />
     <Compile Include="Mapping\KullaniciTipMapping.cs" />
     <Compile Include="Mapping\TrenVagonMapping.cs" />
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Mapping\RotaMapping.cs" />
     <Compile Include="Mapping\SeferMapping.cs" />
