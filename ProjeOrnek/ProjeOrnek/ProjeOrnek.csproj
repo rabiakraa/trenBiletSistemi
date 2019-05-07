@@ -64,23 +64,11 @@
     <Compile Include="BiletSayfasi.Designer.cs">
       <DependentUpon>BiletSayfasi.cs</DependentUpon>
     </Compile>
-    <Compile Include="BusinessKoltuk.cs">
+    <Compile Include="KoltukVagonSec.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BusinessKoltuk.Designer.cs">
-      <DependentUpon>BusinessKoltuk.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Cafeterya.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Cafeterya.Designer.cs">
-      <DependentUpon>Cafeterya.cs</DependentUpon>
-    </Compile>
-    <Compile Include="EconomiKoltuk.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="EconomiKoltuk.Designer.cs">
-      <DependentUpon>EconomiKoltuk.cs</DependentUpon>
+    <Compile Include="KoltukVagonSec.Designer.cs">
+      <DependentUpon>KoltukVagonSec.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -102,12 +90,6 @@
     <Compile Include="UyelikSayfasi.Designer.cs">
       <DependentUpon>UyelikSayfasi.cs</DependentUpon>
     </Compile>
-    <Compile Include="VagonSec.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="VagonSec.Designer.cs">
-      <DependentUpon>VagonSec.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="AnaSayfa.resx">
       <DependentUpon>AnaSayfa.cs</DependentUpon>
     </EmbeddedResource>
@@ -117,14 +99,8 @@
     <EmbeddedResource Include="BiletSayfasi.resx">
       <DependentUpon>BiletSayfasi.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="BusinessKoltuk.resx">
-      <DependentUpon>BusinessKoltuk.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Cafeterya.resx">
-      <DependentUpon>Cafeterya.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EconomiKoltuk.resx">
-      <DependentUpon>EconomiKoltuk.cs</DependentUpon>
+    <EmbeddedResource Include="KoltukVagonSec.resx">
+      <DependentUpon>KoltukVagonSec.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -172,6 +148,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Male.icon.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\business.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

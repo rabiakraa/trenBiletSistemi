@@ -54,7 +54,6 @@
             // 
             // listView1
             // 
-            this.listView1.CheckBoxes = true;
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
@@ -65,7 +64,7 @@
             this.columnHeader7,
             this.columnHeader8});
             this.listView1.GridLines = true;
-            this.listView1.Location = new System.Drawing.Point(33, 64);
+            this.listView1.Location = new System.Drawing.Point(33, 66);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(759, 217);
             this.listView1.TabIndex = 0;
@@ -142,7 +141,6 @@
             // 
             // listView2
             // 
-            this.listView2.CheckBoxes = true;
             this.listView2.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader9,
             this.columnHeader10,

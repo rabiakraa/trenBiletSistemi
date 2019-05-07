@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace ProjeOrnek
 {
-    public partial class VagonSec : Form
+    public partial class KoltukVagonSec : Form
     {
-        public VagonSec()
+        public KoltukVagonSec()
         {
             InitializeComponent();
         }
