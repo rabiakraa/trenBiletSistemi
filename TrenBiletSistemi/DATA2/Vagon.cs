@@ -13,6 +13,5 @@ namespace Data
 
         public virtual List<TrenVagon> VagonunTrenleri { get; set; }
         public virtual VagonTipi VagonTipi { get; set; }
-        public virtual List<DoluKoltuk> Koltuklar { get; set; }
     }
 }

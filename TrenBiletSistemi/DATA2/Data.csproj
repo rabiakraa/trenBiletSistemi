@@ -50,7 +50,6 @@
   <ItemGroup>
     <Compile Include="Bilet.cs" />
     <Compile Include="Durak.cs" />
-    <Compile Include="DoluKoltuk.cs" />
     <Compile Include="Kullanici.cs" />
     <Compile Include="KullaniciTip.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

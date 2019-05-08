@@ -51,10 +51,10 @@
     <Compile Include="Mapping\BiletMapping.cs" />
     <Compile Include="Context.cs" />
     <Compile Include="Mapping\DurakMapping.cs" />
-    <Compile Include="Mapping\DoluKoltukMapping.cs" />
     <Compile Include="Mapping\KullaniciMapping.cs" />
     <Compile Include="Mapping\KullaniciTipMapping.cs" />
     <Compile Include="Mapping\TrenVagonMapping.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Mapping\RotaMapping.cs" />
     <Compile Include="Mapping\SeferMapping.cs" />

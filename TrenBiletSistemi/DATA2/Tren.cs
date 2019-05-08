@@ -7,7 +7,7 @@ namespace Data
 {
     public class Tren
     {
-        //[DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int TrenID { get; set; }
 
         public virtual List<Sefer> Seferler { get; set; }

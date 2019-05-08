@@ -9,9 +9,9 @@ namespace DAL.Repositories
 {
     public interface IRepository<T> where T:class
     {
-        IQueryable<T> GetAll();
-        IQueryable<T> GetAll(Expression<Func<T, bool>> predicate); // LINQ desteği sunabilmek içinde expression'ları kullanıyoruz.
-        T GetById(int id);
+        IQueryable<T> GetAll();     //Select * işlemi
+        IQueryable<T> GetAll(Expression<Func<T, bool>> predicate); // select * from where ...
+        T GetById(int id); //select * from where id=...
         T Get(Expression<Func<T, bool>> predicate);
 
         void Add(T entity);

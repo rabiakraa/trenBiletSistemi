@@ -24,9 +24,8 @@ namespace DAL
 
         }
 
-        public DbSet<Bilet> Personeller { get; set; }
+        public DbSet<Bilet> Biletler { get; set; }
         public DbSet<Durak> Duraklar { get; set; }
-        public DbSet<DoluKoltuk> Koltuklar { get; set; }
         public DbSet<Kullanici> Kullanicilar { get; set; }
         public DbSet<KullaniciTip> KullaniciTipleri { get; set; }
         public DbSet<Sefer> Seferler { get; set; }
@@ -40,7 +39,6 @@ namespace DAL
         {
             modelBuilder.Configurations.Add(new BiletMapping());
             modelBuilder.Configurations.Add(new DurakMapping());
-            modelBuilder.Configurations.Add(new DoluKoltukMapping());
             modelBuilder.Configurations.Add(new KullaniciMapping());
             modelBuilder.Configurations.Add(new KullaniciTipMapping());
             modelBuilder.Configurations.Add(new SeferMapping());

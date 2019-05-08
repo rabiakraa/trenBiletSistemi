@@ -19,3 +19,5 @@ C:\Users\mkara\Documents\GitHub\trenbiletsistemi\TrenBiletSistemi\UI\obj\Debug\U
 C:\Users\mkara\Documents\GitHub\trenbiletsistemi\TrenBiletSistemi\UI\obj\Debug\UI.csproj.CopyComplete
 C:\Users\mkara\Documents\GitHub\trenbiletsistemi\TrenBiletSistemi\UI\obj\Debug\UI.exe
 C:\Users\mkara\Documents\GitHub\trenbiletsistemi\TrenBiletSistemi\UI\obj\Debug\UI.pdb
+C:\Users\mkara\Documents\GitHub\trenbiletsistemi\TrenBiletSistemi\UI\obj\Debug\UI.UyeOl.resources
+C:\Users\mkara\Documents\GitHub\trenbiletsistemi\TrenBiletSistemi\UI\obj\Debug\UI.TrenBilet.resources
