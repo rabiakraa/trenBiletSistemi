@@ -37,12 +37,12 @@ namespace UI
         private void Form1_Load(object sender, EventArgs e)
         {
 
-                 /*Durak durak = new Durak
-              {
-                  DurakAdi = "Erzincan"
-              };
-              _durakRepository.Add(durak);
-              int process = _uow.SaveChanges();*/
+            /*Durak durak = new Durak
+         {
+             DurakAdi = "Erzincan"
+         };
+         _durakRepository.Add(durak);
+         int process = _uow.SaveChanges();*/
 
             //DELETE
             /*_durakRepository.Delete(6);
@@ -61,14 +61,26 @@ namespace UI
 
             // var duraklarim = _durakRepository.GetAll().ToList();
 
-           /* string duraklar = "";
+            /* string duraklar = "";
 
-            foreach (var item in duraklarim)
-            {
-                duraklar += item.DurakAdi.ToString() + " ";
+             foreach (var item in duraklarim)
+             {
+                 duraklar += item.DurakAdi.ToString() + " ";
+             }
+
+             label1.Text = duraklar; */
+
+     
+
+                    ////btn.BackColor = Color.Green;
+                    //btn.Enabled = false;
+                    //sayac++;
+                }
+
+
             }
 
-            label1.Text = duraklar; */
+
         }
-    }
-}
+    
+
