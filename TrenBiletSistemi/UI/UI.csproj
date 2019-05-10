@@ -53,6 +53,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cinsiyet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Cinsiyet.Designer.cs">
+      <DependentUpon>Cinsiyet.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -74,6 +80,9 @@
     <Compile Include="UyeOl.Designer.cs">
       <DependentUpon>UyeOl.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Cinsiyet.resx">
+      <DependentUpon>Cinsiyet.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -85,6 +94,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="TrenBilet.resx">
       <DependentUpon>TrenBilet.cs</DependentUpon>
@@ -116,8 +126,54 @@
       <Name>Data</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="images\" />
+    <None Include="Resources\masa.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bos.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bufe.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\trenSol.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\trenBus.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\trenEko.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\trenSag.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\girisTren.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bufe1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bos1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\erkekRezerve.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\erkekSatinAl.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\kadinRezerve.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\kadinRezerve1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\kadinSatinAl.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\secili.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
