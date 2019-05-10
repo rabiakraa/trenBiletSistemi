@@ -118,7 +118,7 @@
             this.label19 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
+            this.KoltukSecimiYolcu = new System.Windows.Forms.Label();
             this.Biletlerim = new System.Windows.Forms.TabPage();
             this.button1 = new System.Windows.Forms.Button();
             this.btnBiletIptal = new System.Windows.Forms.Button();
@@ -170,6 +170,9 @@
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.pbEko = new System.Windows.Forms.PictureBox();
             this.pbBusiness = new System.Windows.Forms.PictureBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label46 = new System.Windows.Forms.Label();
+            this.label47 = new System.Windows.Forms.Label();
             this.TrenTab.SuspendLayout();
             this.Giris.SuspendLayout();
             this.BiletDurak.SuspendLayout();
@@ -679,6 +682,9 @@
             // 
             // BiletKoltuk
             // 
+            this.BiletKoltuk.Controls.Add(this.label47);
+            this.BiletKoltuk.Controls.Add(this.label13);
+            this.BiletKoltuk.Controls.Add(this.label46);
             this.BiletKoltuk.Controls.Add(this.grpKoltukEkonomi);
             this.BiletKoltuk.Controls.Add(this.grpKoltukBusiness);
             this.BiletKoltuk.Controls.Add(this.btnRezerve);
@@ -687,7 +693,7 @@
             this.BiletKoltuk.Controls.Add(this.pnlKisi4);
             this.BiletKoltuk.Controls.Add(this.label12);
             this.BiletKoltuk.Controls.Add(this.label11);
-            this.BiletKoltuk.Controls.Add(this.label10);
+            this.BiletKoltuk.Controls.Add(this.KoltukSecimiYolcu);
             this.BiletKoltuk.Controls.Add(this.pictureBox5);
             this.BiletKoltuk.Controls.Add(this.pictureBox4);
             this.BiletKoltuk.Controls.Add(this.pbEko);
@@ -736,7 +742,7 @@
             this.grpKoltukEkonomi.Controls.Add(this.e2);
             this.grpKoltukEkonomi.Controls.Add(this.e3);
             this.grpKoltukEkonomi.Controls.Add(this.e1);
-            this.grpKoltukEkonomi.Location = new System.Drawing.Point(20, 138);
+            this.grpKoltukEkonomi.Location = new System.Drawing.Point(20, 137);
             this.grpKoltukEkonomi.Name = "grpKoltukEkonomi";
             this.grpKoltukEkonomi.Size = new System.Drawing.Size(634, 237);
             this.grpKoltukEkonomi.TabIndex = 63;
@@ -1280,15 +1286,15 @@
             this.label11.TabIndex = 1;
             this.label11.Text = ". yolcu için koltuk seçiniz:";
             // 
-            // label10
+            // KoltukSecimiYolcu
             // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label10.Location = new System.Drawing.Point(16, 3);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(20, 23);
-            this.label10.TabIndex = 0;
-            this.label10.Text = "1";
+            this.KoltukSecimiYolcu.AutoSize = true;
+            this.KoltukSecimiYolcu.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.KoltukSecimiYolcu.Location = new System.Drawing.Point(16, 3);
+            this.KoltukSecimiYolcu.Name = "KoltukSecimiYolcu";
+            this.KoltukSecimiYolcu.Size = new System.Drawing.Size(20, 23);
+            this.KoltukSecimiYolcu.TabIndex = 0;
+            this.KoltukSecimiYolcu.Text = "1";
             // 
             // Biletlerim
             // 
@@ -1439,9 +1445,9 @@
             this.label9.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.label9.Location = new System.Drawing.Point(34, 20);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(74, 23);
+            this.label9.Size = new System.Drawing.Size(78, 23);
             this.label9.TabIndex = 20;
-            this.label9.Text = "Bilet ID :";
+            this.label9.Text = "Bilet No :";
             // 
             // pictureBox2
             // 
@@ -1814,7 +1820,7 @@
             // pictureBox5
             // 
             this.pictureBox5.Image = global::UI.Properties.Resources.trenSol;
-            this.pictureBox5.Location = new System.Drawing.Point(38, 26);
+            this.pictureBox5.Location = new System.Drawing.Point(38, 20);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(142, 85);
             this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -1824,7 +1830,7 @@
             // pictureBox4
             // 
             this.pictureBox4.Image = global::UI.Properties.Resources.trenSag;
-            this.pictureBox4.Location = new System.Drawing.Point(484, 19);
+            this.pictureBox4.Location = new System.Drawing.Point(484, 13);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(146, 98);
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -1834,7 +1840,7 @@
             // pbEko
             // 
             this.pbEko.Image = global::UI.Properties.Resources.trenEko;
-            this.pbEko.Location = new System.Drawing.Point(331, 32);
+            this.pbEko.Location = new System.Drawing.Point(331, 26);
             this.pbEko.Name = "pbEko";
             this.pbEko.Size = new System.Drawing.Size(150, 85);
             this.pbEko.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -1845,13 +1851,46 @@
             // pbBusiness
             // 
             this.pbBusiness.Image = global::UI.Properties.Resources.trenBus;
-            this.pbBusiness.Location = new System.Drawing.Point(181, 37);
+            this.pbBusiness.Location = new System.Drawing.Point(181, 31);
             this.pbBusiness.Name = "pbBusiness";
             this.pbBusiness.Size = new System.Drawing.Size(149, 77);
             this.pbBusiness.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbBusiness.TabIndex = 64;
             this.pbBusiness.TabStop = false;
             this.pbBusiness.Click += new System.EventHandler(this.pbBusiness_Click);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.BackColor = System.Drawing.Color.Yellow;
+            this.label13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label13.Location = new System.Drawing.Point(31, 118);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(43, 19);
+            this.label13.TabIndex = 23;
+            this.label13.Text = "Seçili";
+            // 
+            // label46
+            // 
+            this.label46.AutoSize = true;
+            this.label46.BackColor = System.Drawing.Color.Orange;
+            this.label46.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label46.Location = new System.Drawing.Point(77, 118);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(63, 19);
+            this.label46.TabIndex = 24;
+            this.label46.Text = "Rezerve";
+            // 
+            // label47
+            // 
+            this.label47.AutoSize = true;
+            this.label47.BackColor = System.Drawing.Color.Chartreuse;
+            this.label47.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label47.Location = new System.Drawing.Point(144, 118);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(48, 19);
+            this.label47.TabIndex = 68;
+            this.label47.Text = "Satıldı";
             // 
             // TrenBilet
             // 
@@ -1967,7 +2006,7 @@
         private System.Windows.Forms.TextBox txtBiletId;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label KoltukSecimiYolcu;
         private System.Windows.Forms.TabPage BiletSefer;
         private System.Windows.Forms.Panel pnlKisi4;
         private System.Windows.Forms.Label lblBiletFiyati4;
@@ -2063,5 +2102,8 @@
         private System.Windows.Forms.PictureBox pbEko;
         private System.Windows.Forms.PictureBox pbBusiness;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Label label47;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label46;
     }
 }

@@ -41,7 +41,7 @@ namespace UI
         int secilenKoltuk;
         string sinif;
         Kullanici kullanici;
-        int fiyat = 10;
+        int fiyat = 70;
         Cinsiyet cns;
 
         public void DbInitialize()
@@ -87,9 +87,9 @@ namespace UI
         private void TrenBilet_Load(object sender, EventArgs e)
         {
             //Tableri gizle
-          /*  TrenTab.Appearance = TabAppearance.FlatButtons;
-            TrenTab.ItemSize = new Size(0, 1);
-            TrenTab.SizeMode = TabSizeMode.Fixed;*/
+            /*  TrenTab.Appearance = TabAppearance.FlatButtons;
+              TrenTab.ItemSize = new Size(0, 1);
+              TrenTab.SizeMode = TabSizeMode.Fixed;*/
 
             dtGidis.MinDate = DateTime.Today;
             dtGidis.MaxDate = DateTime.Today.AddDays(14);
@@ -186,7 +186,7 @@ namespace UI
                 cikisId = Convert.ToInt32(((ComboboxItem)cmbNereden.SelectedItem).Value);
                 varisId = Convert.ToInt32(((ComboboxItem)cmbNereye.SelectedItem).Value);
                 gidisTarihi = new DateTime(dtGidis.Value.Year, dtGidis.Value.Month, dtGidis.Value.Day, 0, 0, 0);
-                
+
                 SeferleriGetir(cikisId, varisId, gidisTarihi);
                 TrenTab.SelectedIndex = (TrenTab.SelectedIndex + 1) % TrenTab.TabCount;
 
@@ -215,26 +215,54 @@ namespace UI
             PictureBox secilenPb = (sender as PictureBox);
             cns = new Cinsiyet();
             cns.Show();
-           cinsiyet = cns.rdoErkek.Checked;
+            cinsiyet = cns.rdoErkek.Checked;
             secilenKoltuk = Convert.ToInt32((sender as PictureBox).Tag.ToString());
 
-            foreach (Control item in grpKoltukBusiness.Controls)
-            {
-                if (item is PictureBox)
-                {((PictureBox)item).Image = UI.Properties.Resources.bos1; }
+            /*   foreach (Control item in grpKoltukBusiness.Controls)
+               {
+                   if (item is PictureBox)
+                   {
+                       if (((PictureBox)item).Image == UI.Properties.Resources.secili)
+                           ((PictureBox)item).Image = UI.Properties.Resources.bos1; }
+               }
+               foreach (Control item in grpKoltukEkonomi.Controls)
+               {
+                   if (item is PictureBox)
+                   {
+                       if (((PictureBox)item).Image == UI.Properties.Resources.secili)
+                           ((PictureBox)item).Image = UI.Properties.Resources.bos1;
+                   }
+               }*/
 
-            }
-            foreach (Control item in grpKoltukBusiness.Controls)
-            {
-                if (item is PictureBox)
-                { ((PictureBox)item).Image = UI.Properties.Resources.bos1; }
-            }
+            KoltuklariDoldur();
 
             secilenPb.Image = UI.Properties.Resources.secili;
 
 
             sinif = biletSinifi == 2 ? "Business" : "Ekonomi";
             MessageBox.Show(sinif + " " + secilenKoltuk.ToString());
+        }
+
+        private void KoltuklariDoldur()
+        {
+            //İlgili sefere ait satılmış veya rezerve edilmiş biletleri koltuklara doldur.
+
+            if (biletSinifi == 1)  //Ekonomi
+            {
+                var alinmisBiletler = biletRepo.Get(x => x.BiletID == gidisSeferID);
+
+                if (alinmisBiletler.BiletDurumu == true && alinmisBiletler.Cinsiyet == true)  //satın alınan biletler
+                {
+                    string pbName = "e" + alinmisBiletler.KoltukNo;
+                    PictureBox pb = this.Controls.Find(pbName, true).FirstOrDefault() as PictureBox ;
+                    pb.Image = UI.Properties.Resources.kadinSatinAl;
+
+                }
+                else    //Business
+                {     
+
+                }
+            }
         }
 
         private void BiletKoltuk_Click(object sender, EventArgs e)
@@ -246,24 +274,24 @@ namespace UI
         {
             if (rdoCocuk.Checked)
             {
-                fiyat -= 5;
+                fiyat -= 35;
             }
             if (chkSigortali.Checked)
             {
-                fiyat += 5;
+                fiyat += 10;
             }
             if (chkYemekli.Checked)
             {
                 if (biletSinifi == 1)
-                    fiyat += 5;
+                    fiyat += 20;
                 else
                 {
-                    fiyat += 10;
+                    fiyat += 15;
                 }
             }
             if (ckhEkstraHizmet.Checked)
             {
-                fiyat += 5;
+                fiyat += 10;
             }
         }
 
@@ -277,7 +305,7 @@ namespace UI
                 Ad = txtAd.Text,
                 Soyad = txtSoyad.Text,
                 TcNo = txtTc.Text,
-                BiletDurumu = true,     //Satın almada true, rezervasyonda false
+                BiletDurumu = biletDurum,     //Satın almada true, rezervasyonda false
                 Cinsiyet = cinsiyet,
                 CocukMu = rdoCocuk.Checked,
                 SigortaliMi = chkSigortali.Checked,
@@ -294,7 +322,7 @@ namespace UI
             uow.SaveChanges();
         }
 
-   
+
 
 
         public void SeferleriGetir(int cikisId, int varisId, DateTime gidisTarihi)
@@ -348,7 +376,7 @@ namespace UI
             }
             else
             {
-                donusSeferID = gidisSeferID = Convert.ToInt32(lstSeferler.SelectedItems[0].SubItems[0].Text);
+                donusSeferID = Convert.ToInt32(lstSeferler.SelectedItems[0].SubItems[0].Text);
                 MessageBox.Show("Dönüş seferi id: " + donusSeferID);
             }
         }
