@@ -38,11 +38,13 @@ namespace UI
         DateTime gidisTarihi, donusTarihi;
         int biletSinifi; //1 ekonomi 2 business
         int yolcuSayisi;
+        int aktifYolcu = 1;
         int secilenKoltuk;
         string sinif;
         Kullanici kullanici;
         int fiyat = 70;
         Cinsiyet cns;
+        int koltukGidis = 0;   //Dönüş bileti de alınacaksa 1 olur.
 
         public void DbInitialize()
         {
@@ -97,6 +99,7 @@ namespace UI
             dtDonus.MaxDate = DateTime.Today.AddDays(14);
 
         }
+
         private void btnGirisYap_Click(object sender, EventArgs e)
         {
             var girisYapan = kullaniciRepo.Get(x => x.Email == txtEposta.Text && x.Sifre == txtSifre.Text);
@@ -151,6 +154,8 @@ namespace UI
             if (rdoGidisDonus.Checked)
             {
                 dtDonus.Enabled = true;
+                donusBileti = 1;
+                koltukGidis = 1;
             }
         }
 
@@ -199,6 +204,11 @@ namespace UI
             grpKoltukEkonomi.Visible = false;
 
             biletSinifi = 2;
+           KoltuklariDoldur(gidisSeferID);
+
+            lblFiyat.Text = "100";
+            fiyat = 100;
+
         }
 
         private void pbEko_Click(object sender, EventArgs e)
@@ -207,6 +217,9 @@ namespace UI
             grpKoltukEkonomi.Visible = true;
 
             biletSinifi = 1;
+            KoltuklariDoldur(gidisSeferID);
+            lblFiyat.Text = "70";
+            fiyat = 70;
 
         }
 
@@ -218,49 +231,110 @@ namespace UI
             cinsiyet = cns.rdoErkek.Checked;
             secilenKoltuk = Convert.ToInt32((sender as PictureBox).Tag.ToString());
 
-            /*   foreach (Control item in grpKoltukBusiness.Controls)
-               {
-                   if (item is PictureBox)
-                   {
-                       if (((PictureBox)item).Image == UI.Properties.Resources.secili)
-                           ((PictureBox)item).Image = UI.Properties.Resources.bos1; }
-               }
-               foreach (Control item in grpKoltukEkonomi.Controls)
-               {
-                   if (item is PictureBox)
-                   {
-                       if (((PictureBox)item).Image == UI.Properties.Resources.secili)
-                           ((PictureBox)item).Image = UI.Properties.Resources.bos1;
-                   }
-               }*/
-
-            KoltuklariDoldur();
-
+            KoltuklariDoldur(gidisSeferID);
             secilenPb.Image = UI.Properties.Resources.secili;
 
+            /* sinif = biletSinifi == 2 ? "Business" : "Ekonomi";
+            MessageBox.Show(sinif + " " + secilenKoltuk.ToString());*/
 
-            sinif = biletSinifi == 2 ? "Business" : "Ekonomi";
-            MessageBox.Show(sinif + " " + secilenKoltuk.ToString());
         }
 
-        private void KoltuklariDoldur()
+        private void KoltuklariDoldur(int seferID)
         {
             //İlgili sefere ait satılmış veya rezerve edilmiş biletleri koltuklara doldur.
 
             if (biletSinifi == 1)  //Ekonomi
             {
-                var alinmisBiletler = biletRepo.Get(x => x.BiletID == gidisSeferID);
+                var alinmisBiletler = biletRepo.GetAll(x => x.SeferID == seferID && x.VagonSinifi == false ).ToList();
 
-                if (alinmisBiletler.BiletDurumu == true && alinmisBiletler.Cinsiyet == true)  //satın alınan biletler
+                foreach (Control koltuk in grpKoltukEkonomi.Controls)
                 {
-                    string pbName = "e" + alinmisBiletler.KoltukNo;
-                    PictureBox pb = this.Controls.Find(pbName, true).FirstOrDefault() as PictureBox ;
-                    pb.Image = UI.Properties.Resources.kadinSatinAl;
+                    if (koltuk is PictureBox && koltuk.Name.StartsWith("kd") == false)
+                    {
+                        ((PictureBox)koltuk).Image = UI.Properties.Resources.bos1;
+                        ((PictureBox)koltuk).Enabled = true;
+                    }
+                }
+
+                foreach (var item in alinmisBiletler)
+                {
+                    if (item.BiletDurumu == true && item.Cinsiyet == false)  //satın alınan ve bayan
+                    {
+                        string pbName = "e" + item.KoltukNo;
+                        PictureBox pb = this.Controls.Find(pbName, true).FirstOrDefault() as PictureBox;
+                        pb.Image = UI.Properties.Resources.kadinSatinAl;
+                        pb.Enabled = false;
+                    }
+                    else if (item.BiletDurumu == true && item.Cinsiyet == true )  //satın alınan ve erkek
+                    {
+                        string pbName = "e" + item.KoltukNo;
+                        PictureBox pb = this.Controls.Find(pbName, true).FirstOrDefault() as PictureBox;
+                        pb.Image = UI.Properties.Resources.erkekSatinAl;
+                        pb.Enabled = false;
+                    }
+
+                    else if (item.BiletDurumu == false && item.Cinsiyet == false)  //rezerve ve bayan 
+                    {
+                        string pbName = "e" + item.KoltukNo;
+                        PictureBox pb = this.Controls.Find(pbName, true).FirstOrDefault() as PictureBox;
+                        pb.Image = UI.Properties.Resources.kadinRezerve;
+                        pb.Enabled = false;
+                    }
+                    else if (item.BiletDurumu == false && item.Cinsiyet == true)  //rezerve ve erkek
+                    {
+                        string pbName = "e" + item.KoltukNo;
+                        PictureBox pb = this.Controls.Find(pbName, true).FirstOrDefault() as PictureBox;
+                        pb.Image = UI.Properties.Resources.erkekRezerve;
+                        pb.Enabled = false;
+                    }
 
                 }
-                else    //Business
-                {     
 
+            }
+            else if (biletSinifi == 2)  //Business
+            {
+                var alinmisBiletler = biletRepo.GetAll(x => x.SeferID == seferID && x.VagonSinifi == true ).ToList();
+
+                foreach (Control koltuk in grpKoltukBusiness.Controls)
+                {
+                    if (koltuk is PictureBox && koltuk.Name.StartsWith("kd") == false)
+                    {
+                        ((PictureBox)koltuk).Image = UI.Properties.Resources.bos1;
+                        ((PictureBox)koltuk).Enabled = true;
+                    }
+                }
+
+                foreach (var item in alinmisBiletler)
+                {
+                    if (item.BiletDurumu == true && item.Cinsiyet == false)  //satın alınan ve bayan
+                    {
+                        string pbName = "b" + item.KoltukNo;
+                        PictureBox pb = this.Controls.Find(pbName, true).FirstOrDefault() as PictureBox;
+                        pb.Image = UI.Properties.Resources.kadinSatinAl;
+                        pb.Enabled = false;
+                    }
+                    else if (item.BiletDurumu == true && item.Cinsiyet == true)  //satın alınan ve erkek
+                    {
+                        string pbName = "b" + item.KoltukNo;
+                        PictureBox pb = this.Controls.Find(pbName, true).FirstOrDefault() as PictureBox;
+                        pb.Image = UI.Properties.Resources.erkekSatinAl;
+                        pb.Enabled = false;
+                    }
+
+                    else if (item.BiletDurumu == false && item.Cinsiyet == false)  //rezerve ve bayan 
+                    {
+                        string pbName = "b" + item.KoltukNo;
+                        PictureBox pb = this.Controls.Find(pbName, true).FirstOrDefault() as PictureBox;
+                        pb.Image = UI.Properties.Resources.kadinRezerve;
+                        pb.Enabled = false;
+                    }
+                    else if (item.BiletDurumu == false && item.Cinsiyet == true)  //rezerve ve erkek
+                    {
+                        string pbName = "b" + item.KoltukNo;
+                        PictureBox pb = this.Controls.Find(pbName, true).FirstOrDefault() as PictureBox;
+                        pb.Image = UI.Properties.Resources.erkekRezerve;
+                        pb.Enabled = false;
+                    }
                 }
             }
         }
@@ -293,12 +367,14 @@ namespace UI
             {
                 fiyat += 10;
             }
+            lblFiyat.Text = fiyat.ToString();
+
         }
 
         private void btnSatinAl_Click(object sender, EventArgs e)
         {
-            bool biletDurum = ((Button)sender).Name == "btnSatinAl" ? true : false;
             FiyatBelirle();
+            bool biletDurum = ((Button)sender).Name == "btnSatinAl" ? true : false;
 
             Bilet bilet = new Bilet
             {
@@ -320,10 +396,54 @@ namespace UI
 
             biletRepo.Add(bilet);
             uow.SaveChanges();
+
+            if (biletDurum == true)
+                MessageBox.Show("Bilet satın alma işlemi yapılmıştır. ");
+            else
+                MessageBox.Show("Bilet rezervasyon işlemi yapılmıştır.");
+
+            yolcuSayisi--;
+            aktifYolcu++;
+
+            if(yolcuSayisi != 0)
+            {
+                YeniBiletAl();
+            }
+            else
+            {
+                if (koltukGidis == 1)
+                {
+                    gidisSeferID = donusSeferID;
+                    aktifYolcu = 1;
+                    yolcuSayisi = Convert.ToInt32(nmrYolcuSayisi.Value);
+                    YeniBiletAl();
+                    koltukGidis = 0;
+                }
+                else
+                {
+                    TrenTab.SelectedIndex = (TrenTab.SelectedIndex + 1) % TrenTab.TabCount;
+                }
+            }
         }
 
+        public void YeniBiletAl()
+        {
+            KoltukSecimiYolcu.Text = aktifYolcu.ToString();
+            KoltuklariDoldur(gidisSeferID);
+            OrtakMetodlar.Temizle(pnlKisi);
+            rdoYetiskin.Checked = true;
+            lblFiyat.Text = "0";
+            grpKoltukBusiness.Visible = false;
+            grpKoltukEkonomi.Visible = false;
+        }
 
-
+        private void TrenTab_SelectedIndexChanged(object sender, EventArgs e)
+        {
+          if( TrenTab.SelectedIndex== 3)
+            {
+               // MessageBox.Show("Koltuk seç");
+            }
+        }
 
         public void SeferleriGetir(int cikisId, int varisId, DateTime gidisTarihi)
         {

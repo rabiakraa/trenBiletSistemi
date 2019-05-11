@@ -103,6 +103,16 @@ namespace UI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap bufeYeni {
+            get {
+                object obj = ResourceManager.GetObject("bufeYeni", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap erkekRezerve {
             get {
                 object obj = ResourceManager.GetObject("erkekRezerve", resourceCulture);
@@ -166,6 +176,16 @@ namespace UI.Properties {
         internal static System.Drawing.Bitmap masa {
             get {
                 object obj = ResourceManager.GetObject("masa", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap masaYeni {
+            get {
+                object obj = ResourceManager.GetObject("masaYeni", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

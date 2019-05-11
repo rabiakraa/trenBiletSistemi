@@ -49,6 +49,7 @@ namespace DAL.Repositories
             return _dbSet.Where(predicate).SingleOrDefault();
         }
 
+
         public void Add(T entity)
         {
             _dbSet.Add(entity);

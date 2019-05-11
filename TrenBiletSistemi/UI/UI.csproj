@@ -126,7 +126,9 @@
       <Name>Data</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\bufeYeni.png" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="Resources\masa.jpg" />
   </ItemGroup>
@@ -174,6 +176,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\secili.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\masaYeni.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

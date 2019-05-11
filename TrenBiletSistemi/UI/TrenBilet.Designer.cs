@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TrenBilet));
             this.TrenTab = new System.Windows.Forms.TabControl();
             this.Giris = new System.Windows.Forms.TabPage();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label16 = new System.Windows.Forms.Label();
             this.btnDevamEt = new System.Windows.Forms.Button();
             this.btnGirisYap = new System.Windows.Forms.Button();
@@ -70,6 +71,9 @@
             this.columnHeader17 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnIleriSefer = new System.Windows.Forms.Button();
             this.BiletKoltuk = new System.Windows.Forms.TabPage();
+            this.label47 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label46 = new System.Windows.Forms.Label();
             this.grpKoltukEkonomi = new System.Windows.Forms.GroupBox();
             this.label45 = new System.Windows.Forms.Label();
             this.label44 = new System.Windows.Forms.Label();
@@ -77,6 +81,12 @@
             this.label41 = new System.Windows.Forms.Label();
             this.label42 = new System.Windows.Forms.Label();
             this.label43 = new System.Windows.Forms.Label();
+            this.e16 = new System.Windows.Forms.PictureBox();
+            this.e14 = new System.Windows.Forms.PictureBox();
+            this.e15 = new System.Windows.Forms.PictureBox();
+            this.e13 = new System.Windows.Forms.PictureBox();
+            this.e12 = new System.Windows.Forms.PictureBox();
+            this.e11 = new System.Windows.Forms.PictureBox();
             this.label30 = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
@@ -87,7 +97,19 @@
             this.label37 = new System.Windows.Forms.Label();
             this.label38 = new System.Windows.Forms.Label();
             this.label39 = new System.Windows.Forms.Label();
+            this.e10 = new System.Windows.Forms.PictureBox();
+            this.e8 = new System.Windows.Forms.PictureBox();
+            this.e9 = new System.Windows.Forms.PictureBox();
+            this.e7 = new System.Windows.Forms.PictureBox();
+            this.e6 = new System.Windows.Forms.PictureBox();
+            this.e5 = new System.Windows.Forms.PictureBox();
+            this.e4 = new System.Windows.Forms.PictureBox();
+            this.e2 = new System.Windows.Forms.PictureBox();
+            this.e3 = new System.Windows.Forms.PictureBox();
+            this.e1 = new System.Windows.Forms.PictureBox();
             this.grpKoltukBusiness = new System.Windows.Forms.GroupBox();
+            this.kd = new System.Windows.Forms.PictureBox();
+            this.kd2 = new System.Windows.Forms.PictureBox();
             this.label29 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
@@ -95,6 +117,16 @@
             this.label21 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
+            this.b10 = new System.Windows.Forms.PictureBox();
+            this.b8 = new System.Windows.Forms.PictureBox();
+            this.b9 = new System.Windows.Forms.PictureBox();
+            this.b7 = new System.Windows.Forms.PictureBox();
+            this.b6 = new System.Windows.Forms.PictureBox();
+            this.b5 = new System.Windows.Forms.PictureBox();
+            this.b4 = new System.Windows.Forms.PictureBox();
+            this.b2 = new System.Windows.Forms.PictureBox();
+            this.b3 = new System.Windows.Forms.PictureBox();
+            this.b1 = new System.Windows.Forms.PictureBox();
             this.label26 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
@@ -102,7 +134,8 @@
             this.btnRezerve = new System.Windows.Forms.Button();
             this.btnSatinAl = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.pnlKisi4 = new System.Windows.Forms.Panel();
+            this.pnlKisi = new System.Windows.Forms.Panel();
+            this.lblFiyat = new System.Windows.Forms.Label();
             this.ckhEkstraHizmet = new System.Windows.Forms.CheckBox();
             this.lblBiletFiyati4 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
@@ -119,6 +152,10 @@
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.KoltukSecimiYolcu = new System.Windows.Forms.Label();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.pbEko = new System.Windows.Forms.PictureBox();
+            this.pbBusiness = new System.Windows.Forms.PictureBox();
             this.Biletlerim = new System.Windows.Forms.TabPage();
             this.button1 = new System.Windows.Forms.Button();
             this.btnBiletIptal = new System.Windows.Forms.Button();
@@ -137,54 +174,15 @@
             this.btnSorgula = new System.Windows.Forms.Button();
             this.txtBiletId = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.e16 = new System.Windows.Forms.PictureBox();
-            this.e14 = new System.Windows.Forms.PictureBox();
-            this.e15 = new System.Windows.Forms.PictureBox();
-            this.e13 = new System.Windows.Forms.PictureBox();
-            this.e12 = new System.Windows.Forms.PictureBox();
-            this.e11 = new System.Windows.Forms.PictureBox();
-            this.e10 = new System.Windows.Forms.PictureBox();
-            this.e8 = new System.Windows.Forms.PictureBox();
-            this.e9 = new System.Windows.Forms.PictureBox();
-            this.e7 = new System.Windows.Forms.PictureBox();
-            this.e6 = new System.Windows.Forms.PictureBox();
-            this.e5 = new System.Windows.Forms.PictureBox();
-            this.e4 = new System.Windows.Forms.PictureBox();
-            this.e2 = new System.Windows.Forms.PictureBox();
-            this.e3 = new System.Windows.Forms.PictureBox();
-            this.e1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox8 = new System.Windows.Forms.PictureBox();
-            this.b10 = new System.Windows.Forms.PictureBox();
-            this.b8 = new System.Windows.Forms.PictureBox();
-            this.b9 = new System.Windows.Forms.PictureBox();
-            this.b7 = new System.Windows.Forms.PictureBox();
-            this.b6 = new System.Windows.Forms.PictureBox();
-            this.b5 = new System.Windows.Forms.PictureBox();
-            this.b4 = new System.Windows.Forms.PictureBox();
-            this.b2 = new System.Windows.Forms.PictureBox();
-            this.b3 = new System.Windows.Forms.PictureBox();
-            this.b1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.pbEko = new System.Windows.Forms.PictureBox();
-            this.pbBusiness = new System.Windows.Forms.PictureBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label46 = new System.Windows.Forms.Label();
-            this.label47 = new System.Windows.Forms.Label();
             this.TrenTab.SuspendLayout();
             this.Giris.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.BiletDurak.SuspendLayout();
             this.grpDurak.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmrYolcuSayisi)).BeginInit();
             this.BiletSefer.SuspendLayout();
             this.BiletKoltuk.SuspendLayout();
             this.grpKoltukEkonomi.SuspendLayout();
-            this.grpKoltukBusiness.SuspendLayout();
-            this.pnlKisi4.SuspendLayout();
-            this.Biletlerim.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.e16)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.e14)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.e15)).BeginInit();
@@ -201,7 +199,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.e2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.e3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.e1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
+            this.grpKoltukBusiness.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kd)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kd2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.b10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.b8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.b9)).BeginInit();
@@ -212,11 +212,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.b2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.b3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.b1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.pnlKisi.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbEko)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBusiness)).BeginInit();
+            this.Biletlerim.SuspendLayout();
             this.SuspendLayout();
             // 
             // TrenTab
@@ -231,6 +232,7 @@
             this.TrenTab.SelectedIndex = 0;
             this.TrenTab.Size = new System.Drawing.Size(954, 468);
             this.TrenTab.TabIndex = 0;
+            this.TrenTab.SelectedIndexChanged += new System.EventHandler(this.TrenTab_SelectedIndexChanged);
             // 
             // Giris
             // 
@@ -251,6 +253,16 @@
             this.Giris.Text = "Giriş";
             this.Giris.UseVisualStyleBackColor = true;
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::UI.Properties.Resources.girisTren;
+            this.pictureBox2.Location = new System.Drawing.Point(385, 32);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(143, 92);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 18;
+            this.pictureBox2.TabStop = false;
+            // 
             // label16
             // 
             this.label16.AutoSize = true;
@@ -268,8 +280,8 @@
             this.btnDevamEt.Location = new System.Drawing.Point(465, 346);
             this.btnDevamEt.Margin = new System.Windows.Forms.Padding(4);
             this.btnDevamEt.Name = "btnDevamEt";
-            this.btnDevamEt.Size = new System.Drawing.Size(208, 34);
-            this.btnDevamEt.TabIndex = 16;
+            this.btnDevamEt.Size = new System.Drawing.Size(216, 34);
+            this.btnDevamEt.TabIndex = 5;
             this.btnDevamEt.Text = "Üye Olmadan Devam Et";
             this.btnDevamEt.UseVisualStyleBackColor = false;
             this.btnDevamEt.Click += new System.EventHandler(this.btnDevamEt_Click);
@@ -278,11 +290,11 @@
             // 
             this.btnGirisYap.BackColor = System.Drawing.Color.LightSteelBlue;
             this.btnGirisYap.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnGirisYap.Location = new System.Drawing.Point(367, 285);
+            this.btnGirisYap.Location = new System.Drawing.Point(367, 281);
             this.btnGirisYap.Margin = new System.Windows.Forms.Padding(4);
             this.btnGirisYap.Name = "btnGirisYap";
             this.btnGirisYap.Size = new System.Drawing.Size(186, 40);
-            this.btnGirisYap.TabIndex = 14;
+            this.btnGirisYap.TabIndex = 3;
             this.btnGirisYap.Text = "Giriş Yap";
             this.btnGirisYap.UseVisualStyleBackColor = false;
             this.btnGirisYap.Click += new System.EventHandler(this.btnGirisYap_Click);
@@ -295,7 +307,7 @@
             this.btnUyeOl.Margin = new System.Windows.Forms.Padding(4);
             this.btnUyeOl.Name = "btnUyeOl";
             this.btnUyeOl.Size = new System.Drawing.Size(197, 35);
-            this.btnUyeOl.TabIndex = 15;
+            this.btnUyeOl.TabIndex = 4;
             this.btnUyeOl.Text = "Üye Ol";
             this.btnUyeOl.UseVisualStyleBackColor = false;
             this.btnUyeOl.Click += new System.EventHandler(this.btnUyeOl_Click);
@@ -308,7 +320,7 @@
             this.txtSifre.Name = "txtSifre";
             this.txtSifre.PasswordChar = '*';
             this.txtSifre.Size = new System.Drawing.Size(186, 29);
-            this.txtSifre.TabIndex = 12;
+            this.txtSifre.TabIndex = 2;
             // 
             // txtEposta
             // 
@@ -317,7 +329,7 @@
             this.txtEposta.Margin = new System.Windows.Forms.Padding(4);
             this.txtEposta.Name = "txtEposta";
             this.txtEposta.Size = new System.Drawing.Size(186, 29);
-            this.txtEposta.TabIndex = 13;
+            this.txtEposta.TabIndex = 1;
             // 
             // label2
             // 
@@ -690,7 +702,7 @@
             this.BiletKoltuk.Controls.Add(this.btnRezerve);
             this.BiletKoltuk.Controls.Add(this.btnSatinAl);
             this.BiletKoltuk.Controls.Add(this.button2);
-            this.BiletKoltuk.Controls.Add(this.pnlKisi4);
+            this.BiletKoltuk.Controls.Add(this.pnlKisi);
             this.BiletKoltuk.Controls.Add(this.label12);
             this.BiletKoltuk.Controls.Add(this.label11);
             this.BiletKoltuk.Controls.Add(this.KoltukSecimiYolcu);
@@ -706,6 +718,39 @@
             this.BiletKoltuk.Text = "Koltuk Seçimi";
             this.BiletKoltuk.UseVisualStyleBackColor = true;
             this.BiletKoltuk.Click += new System.EventHandler(this.BiletKoltuk_Click);
+            // 
+            // label47
+            // 
+            this.label47.AutoSize = true;
+            this.label47.BackColor = System.Drawing.Color.Chartreuse;
+            this.label47.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label47.Location = new System.Drawing.Point(144, 118);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(48, 19);
+            this.label47.TabIndex = 68;
+            this.label47.Text = "Satıldı";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.BackColor = System.Drawing.Color.Yellow;
+            this.label13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label13.Location = new System.Drawing.Point(31, 118);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(43, 19);
+            this.label13.TabIndex = 23;
+            this.label13.Text = "Seçili";
+            // 
+            // label46
+            // 
+            this.label46.AutoSize = true;
+            this.label46.BackColor = System.Drawing.Color.Orange;
+            this.label46.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label46.Location = new System.Drawing.Point(77, 118);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(63, 19);
+            this.label46.TabIndex = 24;
+            this.label46.Text = "Rezerve";
             // 
             // grpKoltukEkonomi
             // 
@@ -742,7 +787,7 @@
             this.grpKoltukEkonomi.Controls.Add(this.e2);
             this.grpKoltukEkonomi.Controls.Add(this.e3);
             this.grpKoltukEkonomi.Controls.Add(this.e1);
-            this.grpKoltukEkonomi.Location = new System.Drawing.Point(20, 137);
+            this.grpKoltukEkonomi.Location = new System.Drawing.Point(20, 138);
             this.grpKoltukEkonomi.Name = "grpKoltukEkonomi";
             this.grpKoltukEkonomi.Size = new System.Drawing.Size(634, 237);
             this.grpKoltukEkonomi.TabIndex = 63;
@@ -814,12 +859,90 @@
             this.label43.TabIndex = 29;
             this.label43.Text = "13";
             // 
+            // e16
+            // 
+            this.e16.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.e16.Image = ((System.Drawing.Image)(resources.GetObject("e16.Image")));
+            this.e16.Location = new System.Drawing.Point(543, 131);
+            this.e16.Name = "e16";
+            this.e16.Size = new System.Drawing.Size(49, 42);
+            this.e16.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.e16.TabIndex = 28;
+            this.e16.TabStop = false;
+            this.e16.Tag = "16";
+            this.e16.Click += new System.EventHandler(this.koltukSecildi);
+            // 
+            // e14
+            // 
+            this.e14.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.e14.Image = ((System.Drawing.Image)(resources.GetObject("e14.Image")));
+            this.e14.Location = new System.Drawing.Point(468, 131);
+            this.e14.Name = "e14";
+            this.e14.Size = new System.Drawing.Size(49, 42);
+            this.e14.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.e14.TabIndex = 27;
+            this.e14.TabStop = false;
+            this.e14.Tag = "14";
+            this.e14.Click += new System.EventHandler(this.koltukSecildi);
+            // 
+            // e15
+            // 
+            this.e15.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.e15.Image = ((System.Drawing.Image)(resources.GetObject("e15.Image")));
+            this.e15.Location = new System.Drawing.Point(543, 55);
+            this.e15.Name = "e15";
+            this.e15.Size = new System.Drawing.Size(49, 42);
+            this.e15.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.e15.TabIndex = 26;
+            this.e15.TabStop = false;
+            this.e15.Tag = "15";
+            this.e15.Click += new System.EventHandler(this.koltukSecildi);
+            // 
+            // e13
+            // 
+            this.e13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.e13.Image = ((System.Drawing.Image)(resources.GetObject("e13.Image")));
+            this.e13.Location = new System.Drawing.Point(468, 55);
+            this.e13.Name = "e13";
+            this.e13.Size = new System.Drawing.Size(49, 42);
+            this.e13.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.e13.TabIndex = 25;
+            this.e13.TabStop = false;
+            this.e13.Tag = "13";
+            this.e13.Click += new System.EventHandler(this.koltukSecildi);
+            // 
+            // e12
+            // 
+            this.e12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.e12.Image = ((System.Drawing.Image)(resources.GetObject("e12.Image")));
+            this.e12.Location = new System.Drawing.Point(397, 131);
+            this.e12.Name = "e12";
+            this.e12.Size = new System.Drawing.Size(49, 42);
+            this.e12.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.e12.TabIndex = 24;
+            this.e12.TabStop = false;
+            this.e12.Tag = "12";
+            this.e12.Click += new System.EventHandler(this.koltukSecildi);
+            // 
+            // e11
+            // 
+            this.e11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.e11.Image = ((System.Drawing.Image)(resources.GetObject("e11.Image")));
+            this.e11.Location = new System.Drawing.Point(397, 55);
+            this.e11.Name = "e11";
+            this.e11.Size = new System.Drawing.Size(49, 42);
+            this.e11.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.e11.TabIndex = 23;
+            this.e11.TabStop = false;
+            this.e11.Tag = "11";
+            this.e11.Click += new System.EventHandler(this.koltukSecildi);
+            // 
             // label30
             // 
             this.label30.AutoSize = true;
             this.label30.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label30.Font = new System.Drawing.Font("Calibri", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label30.Location = new System.Drawing.Point(341, 174);
+            this.label30.Location = new System.Drawing.Point(339, 174);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(24, 19);
             this.label30.TabIndex = 22;
@@ -924,9 +1047,141 @@
             this.label39.TabIndex = 13;
             this.label39.Text = "1";
             // 
+            // e10
+            // 
+            this.e10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.e10.Image = ((System.Drawing.Image)(resources.GetObject("e10.Image")));
+            this.e10.Location = new System.Drawing.Point(326, 131);
+            this.e10.Name = "e10";
+            this.e10.Size = new System.Drawing.Size(49, 42);
+            this.e10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.e10.TabIndex = 10;
+            this.e10.TabStop = false;
+            this.e10.Tag = "10";
+            this.e10.Click += new System.EventHandler(this.koltukSecildi);
+            // 
+            // e8
+            // 
+            this.e8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.e8.Image = ((System.Drawing.Image)(resources.GetObject("e8.Image")));
+            this.e8.Location = new System.Drawing.Point(251, 131);
+            this.e8.Name = "e8";
+            this.e8.Size = new System.Drawing.Size(49, 42);
+            this.e8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.e8.TabIndex = 9;
+            this.e8.TabStop = false;
+            this.e8.Tag = "8";
+            this.e8.Click += new System.EventHandler(this.koltukSecildi);
+            // 
+            // e9
+            // 
+            this.e9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.e9.Image = ((System.Drawing.Image)(resources.GetObject("e9.Image")));
+            this.e9.Location = new System.Drawing.Point(326, 55);
+            this.e9.Name = "e9";
+            this.e9.Size = new System.Drawing.Size(49, 42);
+            this.e9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.e9.TabIndex = 8;
+            this.e9.TabStop = false;
+            this.e9.Tag = "9";
+            this.e9.Click += new System.EventHandler(this.koltukSecildi);
+            // 
+            // e7
+            // 
+            this.e7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.e7.Image = ((System.Drawing.Image)(resources.GetObject("e7.Image")));
+            this.e7.Location = new System.Drawing.Point(251, 55);
+            this.e7.Name = "e7";
+            this.e7.Size = new System.Drawing.Size(49, 42);
+            this.e7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.e7.TabIndex = 7;
+            this.e7.TabStop = false;
+            this.e7.Tag = "7";
+            this.e7.Click += new System.EventHandler(this.koltukSecildi);
+            // 
+            // e6
+            // 
+            this.e6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.e6.Image = ((System.Drawing.Image)(resources.GetObject("e6.Image")));
+            this.e6.Location = new System.Drawing.Point(180, 131);
+            this.e6.Name = "e6";
+            this.e6.Size = new System.Drawing.Size(49, 42);
+            this.e6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.e6.TabIndex = 6;
+            this.e6.TabStop = false;
+            this.e6.Tag = "6";
+            this.e6.Click += new System.EventHandler(this.koltukSecildi);
+            // 
+            // e5
+            // 
+            this.e5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.e5.Image = ((System.Drawing.Image)(resources.GetObject("e5.Image")));
+            this.e5.Location = new System.Drawing.Point(180, 55);
+            this.e5.Name = "e5";
+            this.e5.Size = new System.Drawing.Size(49, 42);
+            this.e5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.e5.TabIndex = 5;
+            this.e5.TabStop = false;
+            this.e5.Tag = "5";
+            this.e5.Click += new System.EventHandler(this.koltukSecildi);
+            // 
+            // e4
+            // 
+            this.e4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.e4.Image = ((System.Drawing.Image)(resources.GetObject("e4.Image")));
+            this.e4.Location = new System.Drawing.Point(109, 131);
+            this.e4.Name = "e4";
+            this.e4.Size = new System.Drawing.Size(49, 42);
+            this.e4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.e4.TabIndex = 4;
+            this.e4.TabStop = false;
+            this.e4.Tag = "4";
+            this.e4.Click += new System.EventHandler(this.koltukSecildi);
+            // 
+            // e2
+            // 
+            this.e2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.e2.Image = ((System.Drawing.Image)(resources.GetObject("e2.Image")));
+            this.e2.Location = new System.Drawing.Point(34, 132);
+            this.e2.Name = "e2";
+            this.e2.Size = new System.Drawing.Size(49, 42);
+            this.e2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.e2.TabIndex = 3;
+            this.e2.TabStop = false;
+            this.e2.Tag = "2";
+            this.e2.Click += new System.EventHandler(this.koltukSecildi);
+            // 
+            // e3
+            // 
+            this.e3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.e3.Image = ((System.Drawing.Image)(resources.GetObject("e3.Image")));
+            this.e3.Location = new System.Drawing.Point(109, 55);
+            this.e3.Name = "e3";
+            this.e3.Size = new System.Drawing.Size(49, 42);
+            this.e3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.e3.TabIndex = 2;
+            this.e3.TabStop = false;
+            this.e3.Tag = "3";
+            this.e3.Click += new System.EventHandler(this.koltukSecildi);
+            // 
+            // e1
+            // 
+            this.e1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.e1.Image = global::UI.Properties.Resources.bos1;
+            this.e1.Location = new System.Drawing.Point(34, 55);
+            this.e1.Name = "e1";
+            this.e1.Size = new System.Drawing.Size(49, 42);
+            this.e1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.e1.TabIndex = 1;
+            this.e1.TabStop = false;
+            this.e1.Tag = "1";
+            this.e1.Click += new System.EventHandler(this.koltukSecildi);
+            // 
             // grpKoltukBusiness
             // 
             this.grpKoltukBusiness.BackColor = System.Drawing.Color.AliceBlue;
+            this.grpKoltukBusiness.Controls.Add(this.kd);
+            this.grpKoltukBusiness.Controls.Add(this.kd2);
             this.grpKoltukBusiness.Controls.Add(this.label29);
             this.grpKoltukBusiness.Controls.Add(this.label24);
             this.grpKoltukBusiness.Controls.Add(this.label23);
@@ -934,7 +1189,6 @@
             this.grpKoltukBusiness.Controls.Add(this.label21);
             this.grpKoltukBusiness.Controls.Add(this.label20);
             this.grpKoltukBusiness.Controls.Add(this.label14);
-            this.grpKoltukBusiness.Controls.Add(this.pictureBox8);
             this.grpKoltukBusiness.Controls.Add(this.b10);
             this.grpKoltukBusiness.Controls.Add(this.b8);
             this.grpKoltukBusiness.Controls.Add(this.b9);
@@ -945,7 +1199,6 @@
             this.grpKoltukBusiness.Controls.Add(this.b2);
             this.grpKoltukBusiness.Controls.Add(this.b3);
             this.grpKoltukBusiness.Controls.Add(this.b1);
-            this.grpKoltukBusiness.Controls.Add(this.pictureBox1);
             this.grpKoltukBusiness.Controls.Add(this.label26);
             this.grpKoltukBusiness.Controls.Add(this.label25);
             this.grpKoltukBusiness.Controls.Add(this.label27);
@@ -955,6 +1208,28 @@
             this.grpKoltukBusiness.Size = new System.Drawing.Size(634, 237);
             this.grpKoltukBusiness.TabIndex = 62;
             this.grpKoltukBusiness.TabStop = false;
+            // 
+            // kd
+            // 
+            this.kd.Image = global::UI.Properties.Resources.masa;
+            this.kd.Location = new System.Drawing.Point(44, 181);
+            this.kd.Name = "kd";
+            this.kd.Size = new System.Drawing.Size(294, 56);
+            this.kd.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.kd.TabIndex = 24;
+            this.kd.TabStop = false;
+            this.kd.Tag = "10";
+            // 
+            // kd2
+            // 
+            this.kd2.Image = global::UI.Properties.Resources.bufe1;
+            this.kd2.Location = new System.Drawing.Point(525, 21);
+            this.kd2.Name = "kd2";
+            this.kd2.Size = new System.Drawing.Size(89, 89);
+            this.kd2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.kd2.TabIndex = 23;
+            this.kd2.TabStop = false;
+            this.kd2.Tag = "10";
             // 
             // label29
             // 
@@ -1026,11 +1301,141 @@
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Calibri", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label14.Location = new System.Drawing.Point(537, 113);
+            this.label14.Location = new System.Drawing.Point(538, 113);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(64, 17);
             this.label14.TabIndex = 12;
             this.label14.Text = "Mini Büfe";
+            // 
+            // b10
+            // 
+            this.b10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.b10.Image = ((System.Drawing.Image)(resources.GetObject("b10.Image")));
+            this.b10.Location = new System.Drawing.Point(326, 105);
+            this.b10.Name = "b10";
+            this.b10.Size = new System.Drawing.Size(49, 42);
+            this.b10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.b10.TabIndex = 10;
+            this.b10.TabStop = false;
+            this.b10.Tag = "10";
+            this.b10.Click += new System.EventHandler(this.koltukSecildi);
+            // 
+            // b8
+            // 
+            this.b8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.b8.Image = ((System.Drawing.Image)(resources.GetObject("b8.Image")));
+            this.b8.Location = new System.Drawing.Point(251, 105);
+            this.b8.Name = "b8";
+            this.b8.Size = new System.Drawing.Size(49, 42);
+            this.b8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.b8.TabIndex = 9;
+            this.b8.TabStop = false;
+            this.b8.Tag = "8";
+            this.b8.Click += new System.EventHandler(this.koltukSecildi);
+            // 
+            // b9
+            // 
+            this.b9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.b9.Image = ((System.Drawing.Image)(resources.GetObject("b9.Image")));
+            this.b9.Location = new System.Drawing.Point(326, 29);
+            this.b9.Name = "b9";
+            this.b9.Size = new System.Drawing.Size(49, 42);
+            this.b9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.b9.TabIndex = 8;
+            this.b9.TabStop = false;
+            this.b9.Tag = "9";
+            this.b9.Click += new System.EventHandler(this.koltukSecildi);
+            // 
+            // b7
+            // 
+            this.b7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.b7.Image = ((System.Drawing.Image)(resources.GetObject("b7.Image")));
+            this.b7.Location = new System.Drawing.Point(251, 29);
+            this.b7.Name = "b7";
+            this.b7.Size = new System.Drawing.Size(49, 42);
+            this.b7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.b7.TabIndex = 7;
+            this.b7.TabStop = false;
+            this.b7.Tag = "7";
+            this.b7.Click += new System.EventHandler(this.koltukSecildi);
+            // 
+            // b6
+            // 
+            this.b6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.b6.Image = ((System.Drawing.Image)(resources.GetObject("b6.Image")));
+            this.b6.Location = new System.Drawing.Point(180, 105);
+            this.b6.Name = "b6";
+            this.b6.Size = new System.Drawing.Size(49, 42);
+            this.b6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.b6.TabIndex = 6;
+            this.b6.TabStop = false;
+            this.b6.Tag = "6";
+            this.b6.Click += new System.EventHandler(this.koltukSecildi);
+            // 
+            // b5
+            // 
+            this.b5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.b5.Image = ((System.Drawing.Image)(resources.GetObject("b5.Image")));
+            this.b5.Location = new System.Drawing.Point(180, 29);
+            this.b5.Name = "b5";
+            this.b5.Size = new System.Drawing.Size(49, 42);
+            this.b5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.b5.TabIndex = 5;
+            this.b5.TabStop = false;
+            this.b5.Tag = "5";
+            this.b5.Click += new System.EventHandler(this.koltukSecildi);
+            // 
+            // b4
+            // 
+            this.b4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.b4.Image = ((System.Drawing.Image)(resources.GetObject("b4.Image")));
+            this.b4.Location = new System.Drawing.Point(109, 105);
+            this.b4.Name = "b4";
+            this.b4.Size = new System.Drawing.Size(49, 42);
+            this.b4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.b4.TabIndex = 4;
+            this.b4.TabStop = false;
+            this.b4.Tag = "4";
+            this.b4.Click += new System.EventHandler(this.koltukSecildi);
+            // 
+            // b2
+            // 
+            this.b2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.b2.Image = ((System.Drawing.Image)(resources.GetObject("b2.Image")));
+            this.b2.Location = new System.Drawing.Point(34, 105);
+            this.b2.Name = "b2";
+            this.b2.Size = new System.Drawing.Size(49, 42);
+            this.b2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.b2.TabIndex = 3;
+            this.b2.TabStop = false;
+            this.b2.Tag = "2";
+            this.b2.Click += new System.EventHandler(this.koltukSecildi);
+            // 
+            // b3
+            // 
+            this.b3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.b3.Image = ((System.Drawing.Image)(resources.GetObject("b3.Image")));
+            this.b3.Location = new System.Drawing.Point(109, 29);
+            this.b3.Name = "b3";
+            this.b3.Size = new System.Drawing.Size(49, 42);
+            this.b3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.b3.TabIndex = 2;
+            this.b3.TabStop = false;
+            this.b3.Tag = "3";
+            this.b3.Click += new System.EventHandler(this.koltukSecildi);
+            // 
+            // b1
+            // 
+            this.b1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.b1.Image = ((System.Drawing.Image)(resources.GetObject("b1.Image")));
+            this.b1.Location = new System.Drawing.Point(34, 29);
+            this.b1.Name = "b1";
+            this.b1.Size = new System.Drawing.Size(49, 42);
+            this.b1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.b1.TabIndex = 1;
+            this.b1.TabStop = false;
+            this.b1.Tag = "1";
+            this.b1.Click += new System.EventHandler(this.koltukSecildi);
             // 
             // label26
             // 
@@ -1114,30 +1519,40 @@
             this.button2.Text = "Geri";
             this.button2.UseVisualStyleBackColor = false;
             // 
-            // pnlKisi4
+            // pnlKisi
             // 
-            this.pnlKisi4.AutoSize = true;
-            this.pnlKisi4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pnlKisi4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlKisi4.Controls.Add(this.ckhEkstraHizmet);
-            this.pnlKisi4.Controls.Add(this.lblBiletFiyati4);
-            this.pnlKisi4.Controls.Add(this.label15);
-            this.pnlKisi4.Controls.Add(this.chkSigortali);
-            this.pnlKisi4.Controls.Add(this.chkYemekli);
-            this.pnlKisi4.Controls.Add(this.rdoCocuk);
-            this.pnlKisi4.Controls.Add(this.rdoYetiskin);
-            this.pnlKisi4.Controls.Add(this.txtSoyad);
-            this.pnlKisi4.Controls.Add(this.txtAd);
-            this.pnlKisi4.Controls.Add(this.txtTc);
-            this.pnlKisi4.Controls.Add(this.label17);
-            this.pnlKisi4.Controls.Add(this.label18);
-            this.pnlKisi4.Controls.Add(this.label19);
-            this.pnlKisi4.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.pnlKisi4.Location = new System.Drawing.Point(682, 30);
-            this.pnlKisi4.Margin = new System.Windows.Forms.Padding(4);
-            this.pnlKisi4.Name = "pnlKisi4";
-            this.pnlKisi4.Size = new System.Drawing.Size(259, 292);
-            this.pnlKisi4.TabIndex = 31;
+            this.pnlKisi.AutoSize = true;
+            this.pnlKisi.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pnlKisi.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlKisi.Controls.Add(this.lblFiyat);
+            this.pnlKisi.Controls.Add(this.ckhEkstraHizmet);
+            this.pnlKisi.Controls.Add(this.lblBiletFiyati4);
+            this.pnlKisi.Controls.Add(this.label15);
+            this.pnlKisi.Controls.Add(this.chkSigortali);
+            this.pnlKisi.Controls.Add(this.chkYemekli);
+            this.pnlKisi.Controls.Add(this.rdoCocuk);
+            this.pnlKisi.Controls.Add(this.rdoYetiskin);
+            this.pnlKisi.Controls.Add(this.txtSoyad);
+            this.pnlKisi.Controls.Add(this.txtAd);
+            this.pnlKisi.Controls.Add(this.txtTc);
+            this.pnlKisi.Controls.Add(this.label17);
+            this.pnlKisi.Controls.Add(this.label18);
+            this.pnlKisi.Controls.Add(this.label19);
+            this.pnlKisi.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.pnlKisi.Location = new System.Drawing.Point(682, 30);
+            this.pnlKisi.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlKisi.Name = "pnlKisi";
+            this.pnlKisi.Size = new System.Drawing.Size(259, 292);
+            this.pnlKisi.TabIndex = 31;
+            // 
+            // lblFiyat
+            // 
+            this.lblFiyat.AutoSize = true;
+            this.lblFiyat.Location = new System.Drawing.Point(117, 249);
+            this.lblFiyat.Name = "lblFiyat";
+            this.lblFiyat.Size = new System.Drawing.Size(20, 23);
+            this.lblFiyat.TabIndex = 22;
+            this.lblFiyat.Text = "0";
             // 
             // ckhEkstraHizmet
             // 
@@ -1200,11 +1615,13 @@
             // rdoYetiskin
             // 
             this.rdoYetiskin.AutoSize = true;
+            this.rdoYetiskin.Checked = true;
             this.rdoYetiskin.Location = new System.Drawing.Point(20, 127);
             this.rdoYetiskin.Margin = new System.Windows.Forms.Padding(4);
             this.rdoYetiskin.Name = "rdoYetiskin";
             this.rdoYetiskin.Size = new System.Drawing.Size(89, 27);
             this.rdoYetiskin.TabIndex = 7;
+            this.rdoYetiskin.TabStop = true;
             this.rdoYetiskin.Text = "Yetişkin";
             this.rdoYetiskin.UseVisualStyleBackColor = true;
             // 
@@ -1295,6 +1712,48 @@
             this.KoltukSecimiYolcu.Size = new System.Drawing.Size(20, 23);
             this.KoltukSecimiYolcu.TabIndex = 0;
             this.KoltukSecimiYolcu.Text = "1";
+            // 
+            // pictureBox5
+            // 
+            this.pictureBox5.Image = global::UI.Properties.Resources.trenSol;
+            this.pictureBox5.Location = new System.Drawing.Point(38, 20);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(142, 85);
+            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox5.TabIndex = 67;
+            this.pictureBox5.TabStop = false;
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Image = global::UI.Properties.Resources.trenSag;
+            this.pictureBox4.Location = new System.Drawing.Point(484, 13);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(146, 98);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox4.TabIndex = 66;
+            this.pictureBox4.TabStop = false;
+            // 
+            // pbEko
+            // 
+            this.pbEko.Image = global::UI.Properties.Resources.trenEko;
+            this.pbEko.Location = new System.Drawing.Point(331, 26);
+            this.pbEko.Name = "pbEko";
+            this.pbEko.Size = new System.Drawing.Size(150, 85);
+            this.pbEko.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbEko.TabIndex = 65;
+            this.pbEko.TabStop = false;
+            this.pbEko.Click += new System.EventHandler(this.pbEko_Click);
+            // 
+            // pbBusiness
+            // 
+            this.pbBusiness.Image = global::UI.Properties.Resources.trenBus;
+            this.pbBusiness.Location = new System.Drawing.Point(181, 31);
+            this.pbBusiness.Name = "pbBusiness";
+            this.pbBusiness.Size = new System.Drawing.Size(149, 77);
+            this.pbBusiness.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbBusiness.TabIndex = 64;
+            this.pbBusiness.TabStop = false;
+            this.pbBusiness.Click += new System.EventHandler(this.pbBusiness_Click);
             // 
             // Biletlerim
             // 
@@ -1449,449 +1908,6 @@
             this.label9.TabIndex = 20;
             this.label9.Text = "Bilet No :";
             // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = global::UI.Properties.Resources.girisTren;
-            this.pictureBox2.Location = new System.Drawing.Point(385, 32);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(143, 92);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox2.TabIndex = 18;
-            this.pictureBox2.TabStop = false;
-            // 
-            // e16
-            // 
-            this.e16.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.e16.Image = ((System.Drawing.Image)(resources.GetObject("e16.Image")));
-            this.e16.Location = new System.Drawing.Point(543, 131);
-            this.e16.Name = "e16";
-            this.e16.Size = new System.Drawing.Size(49, 42);
-            this.e16.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.e16.TabIndex = 28;
-            this.e16.TabStop = false;
-            this.e16.Tag = "16";
-            this.e16.Click += new System.EventHandler(this.koltukSecildi);
-            // 
-            // e14
-            // 
-            this.e14.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.e14.Image = ((System.Drawing.Image)(resources.GetObject("e14.Image")));
-            this.e14.Location = new System.Drawing.Point(468, 131);
-            this.e14.Name = "e14";
-            this.e14.Size = new System.Drawing.Size(49, 42);
-            this.e14.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.e14.TabIndex = 27;
-            this.e14.TabStop = false;
-            this.e14.Tag = "14";
-            this.e14.Click += new System.EventHandler(this.koltukSecildi);
-            // 
-            // e15
-            // 
-            this.e15.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.e15.Image = ((System.Drawing.Image)(resources.GetObject("e15.Image")));
-            this.e15.Location = new System.Drawing.Point(543, 55);
-            this.e15.Name = "e15";
-            this.e15.Size = new System.Drawing.Size(49, 42);
-            this.e15.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.e15.TabIndex = 26;
-            this.e15.TabStop = false;
-            this.e15.Tag = "15";
-            this.e15.Click += new System.EventHandler(this.koltukSecildi);
-            // 
-            // e13
-            // 
-            this.e13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.e13.Image = ((System.Drawing.Image)(resources.GetObject("e13.Image")));
-            this.e13.Location = new System.Drawing.Point(468, 55);
-            this.e13.Name = "e13";
-            this.e13.Size = new System.Drawing.Size(49, 42);
-            this.e13.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.e13.TabIndex = 25;
-            this.e13.TabStop = false;
-            this.e13.Tag = "13";
-            this.e13.Click += new System.EventHandler(this.koltukSecildi);
-            // 
-            // e12
-            // 
-            this.e12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.e12.Image = ((System.Drawing.Image)(resources.GetObject("e12.Image")));
-            this.e12.Location = new System.Drawing.Point(397, 131);
-            this.e12.Name = "e12";
-            this.e12.Size = new System.Drawing.Size(49, 42);
-            this.e12.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.e12.TabIndex = 24;
-            this.e12.TabStop = false;
-            this.e12.Tag = "12";
-            this.e12.Click += new System.EventHandler(this.koltukSecildi);
-            // 
-            // e11
-            // 
-            this.e11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.e11.Image = ((System.Drawing.Image)(resources.GetObject("e11.Image")));
-            this.e11.Location = new System.Drawing.Point(397, 55);
-            this.e11.Name = "e11";
-            this.e11.Size = new System.Drawing.Size(49, 42);
-            this.e11.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.e11.TabIndex = 23;
-            this.e11.TabStop = false;
-            this.e11.Tag = "11";
-            this.e11.Click += new System.EventHandler(this.koltukSecildi);
-            // 
-            // e10
-            // 
-            this.e10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.e10.Image = ((System.Drawing.Image)(resources.GetObject("e10.Image")));
-            this.e10.Location = new System.Drawing.Point(326, 131);
-            this.e10.Name = "e10";
-            this.e10.Size = new System.Drawing.Size(49, 42);
-            this.e10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.e10.TabIndex = 10;
-            this.e10.TabStop = false;
-            this.e10.Tag = "10";
-            this.e10.Click += new System.EventHandler(this.koltukSecildi);
-            // 
-            // e8
-            // 
-            this.e8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.e8.Image = ((System.Drawing.Image)(resources.GetObject("e8.Image")));
-            this.e8.Location = new System.Drawing.Point(251, 131);
-            this.e8.Name = "e8";
-            this.e8.Size = new System.Drawing.Size(49, 42);
-            this.e8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.e8.TabIndex = 9;
-            this.e8.TabStop = false;
-            this.e8.Tag = "8";
-            this.e8.Click += new System.EventHandler(this.koltukSecildi);
-            // 
-            // e9
-            // 
-            this.e9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.e9.Image = ((System.Drawing.Image)(resources.GetObject("e9.Image")));
-            this.e9.Location = new System.Drawing.Point(326, 55);
-            this.e9.Name = "e9";
-            this.e9.Size = new System.Drawing.Size(49, 42);
-            this.e9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.e9.TabIndex = 8;
-            this.e9.TabStop = false;
-            this.e9.Tag = "9";
-            this.e9.Click += new System.EventHandler(this.koltukSecildi);
-            // 
-            // e7
-            // 
-            this.e7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.e7.Image = ((System.Drawing.Image)(resources.GetObject("e7.Image")));
-            this.e7.Location = new System.Drawing.Point(251, 55);
-            this.e7.Name = "e7";
-            this.e7.Size = new System.Drawing.Size(49, 42);
-            this.e7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.e7.TabIndex = 7;
-            this.e7.TabStop = false;
-            this.e7.Tag = "7";
-            this.e7.Click += new System.EventHandler(this.koltukSecildi);
-            // 
-            // e6
-            // 
-            this.e6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.e6.Image = ((System.Drawing.Image)(resources.GetObject("e6.Image")));
-            this.e6.Location = new System.Drawing.Point(180, 131);
-            this.e6.Name = "e6";
-            this.e6.Size = new System.Drawing.Size(49, 42);
-            this.e6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.e6.TabIndex = 6;
-            this.e6.TabStop = false;
-            this.e6.Tag = "6";
-            this.e6.Click += new System.EventHandler(this.koltukSecildi);
-            // 
-            // e5
-            // 
-            this.e5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.e5.Image = ((System.Drawing.Image)(resources.GetObject("e5.Image")));
-            this.e5.Location = new System.Drawing.Point(180, 55);
-            this.e5.Name = "e5";
-            this.e5.Size = new System.Drawing.Size(49, 42);
-            this.e5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.e5.TabIndex = 5;
-            this.e5.TabStop = false;
-            this.e5.Tag = "5";
-            this.e5.Click += new System.EventHandler(this.koltukSecildi);
-            // 
-            // e4
-            // 
-            this.e4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.e4.Image = ((System.Drawing.Image)(resources.GetObject("e4.Image")));
-            this.e4.Location = new System.Drawing.Point(109, 131);
-            this.e4.Name = "e4";
-            this.e4.Size = new System.Drawing.Size(49, 42);
-            this.e4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.e4.TabIndex = 4;
-            this.e4.TabStop = false;
-            this.e4.Tag = "4";
-            this.e4.Click += new System.EventHandler(this.koltukSecildi);
-            // 
-            // e2
-            // 
-            this.e2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.e2.Image = ((System.Drawing.Image)(resources.GetObject("e2.Image")));
-            this.e2.Location = new System.Drawing.Point(34, 132);
-            this.e2.Name = "e2";
-            this.e2.Size = new System.Drawing.Size(49, 42);
-            this.e2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.e2.TabIndex = 3;
-            this.e2.TabStop = false;
-            this.e2.Tag = "2";
-            this.e2.Click += new System.EventHandler(this.koltukSecildi);
-            // 
-            // e3
-            // 
-            this.e3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.e3.Image = ((System.Drawing.Image)(resources.GetObject("e3.Image")));
-            this.e3.Location = new System.Drawing.Point(109, 55);
-            this.e3.Name = "e3";
-            this.e3.Size = new System.Drawing.Size(49, 42);
-            this.e3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.e3.TabIndex = 2;
-            this.e3.TabStop = false;
-            this.e3.Tag = "3";
-            this.e3.Click += new System.EventHandler(this.koltukSecildi);
-            // 
-            // e1
-            // 
-            this.e1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.e1.Image = global::UI.Properties.Resources.bos1;
-            this.e1.Location = new System.Drawing.Point(34, 55);
-            this.e1.Name = "e1";
-            this.e1.Size = new System.Drawing.Size(49, 42);
-            this.e1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.e1.TabIndex = 1;
-            this.e1.TabStop = false;
-            this.e1.Tag = "1";
-            this.e1.Click += new System.EventHandler(this.koltukSecildi);
-            // 
-            // pictureBox8
-            // 
-            this.pictureBox8.Image = global::UI.Properties.Resources.bufe1;
-            this.pictureBox8.Location = new System.Drawing.Point(503, 21);
-            this.pictureBox8.Name = "pictureBox8";
-            this.pictureBox8.Size = new System.Drawing.Size(131, 89);
-            this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox8.TabIndex = 11;
-            this.pictureBox8.TabStop = false;
-            // 
-            // b10
-            // 
-            this.b10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.b10.Image = ((System.Drawing.Image)(resources.GetObject("b10.Image")));
-            this.b10.Location = new System.Drawing.Point(326, 105);
-            this.b10.Name = "b10";
-            this.b10.Size = new System.Drawing.Size(49, 42);
-            this.b10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.b10.TabIndex = 10;
-            this.b10.TabStop = false;
-            this.b10.Tag = "10";
-            this.b10.Click += new System.EventHandler(this.koltukSecildi);
-            // 
-            // b8
-            // 
-            this.b8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.b8.Image = ((System.Drawing.Image)(resources.GetObject("b8.Image")));
-            this.b8.Location = new System.Drawing.Point(251, 105);
-            this.b8.Name = "b8";
-            this.b8.Size = new System.Drawing.Size(49, 42);
-            this.b8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.b8.TabIndex = 9;
-            this.b8.TabStop = false;
-            this.b8.Tag = "8";
-            this.b8.Click += new System.EventHandler(this.koltukSecildi);
-            // 
-            // b9
-            // 
-            this.b9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.b9.Image = ((System.Drawing.Image)(resources.GetObject("b9.Image")));
-            this.b9.Location = new System.Drawing.Point(326, 29);
-            this.b9.Name = "b9";
-            this.b9.Size = new System.Drawing.Size(49, 42);
-            this.b9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.b9.TabIndex = 8;
-            this.b9.TabStop = false;
-            this.b9.Tag = "9";
-            this.b9.Click += new System.EventHandler(this.koltukSecildi);
-            // 
-            // b7
-            // 
-            this.b7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.b7.Image = ((System.Drawing.Image)(resources.GetObject("b7.Image")));
-            this.b7.Location = new System.Drawing.Point(251, 29);
-            this.b7.Name = "b7";
-            this.b7.Size = new System.Drawing.Size(49, 42);
-            this.b7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.b7.TabIndex = 7;
-            this.b7.TabStop = false;
-            this.b7.Tag = "7";
-            this.b7.Click += new System.EventHandler(this.koltukSecildi);
-            // 
-            // b6
-            // 
-            this.b6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.b6.Image = ((System.Drawing.Image)(resources.GetObject("b6.Image")));
-            this.b6.Location = new System.Drawing.Point(180, 105);
-            this.b6.Name = "b6";
-            this.b6.Size = new System.Drawing.Size(49, 42);
-            this.b6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.b6.TabIndex = 6;
-            this.b6.TabStop = false;
-            this.b6.Tag = "6";
-            this.b6.Click += new System.EventHandler(this.koltukSecildi);
-            // 
-            // b5
-            // 
-            this.b5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.b5.Image = ((System.Drawing.Image)(resources.GetObject("b5.Image")));
-            this.b5.Location = new System.Drawing.Point(180, 29);
-            this.b5.Name = "b5";
-            this.b5.Size = new System.Drawing.Size(49, 42);
-            this.b5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.b5.TabIndex = 5;
-            this.b5.TabStop = false;
-            this.b5.Tag = "5";
-            this.b5.Click += new System.EventHandler(this.koltukSecildi);
-            // 
-            // b4
-            // 
-            this.b4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.b4.Image = ((System.Drawing.Image)(resources.GetObject("b4.Image")));
-            this.b4.Location = new System.Drawing.Point(109, 105);
-            this.b4.Name = "b4";
-            this.b4.Size = new System.Drawing.Size(49, 42);
-            this.b4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.b4.TabIndex = 4;
-            this.b4.TabStop = false;
-            this.b4.Tag = "4";
-            this.b4.Click += new System.EventHandler(this.koltukSecildi);
-            // 
-            // b2
-            // 
-            this.b2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.b2.Image = ((System.Drawing.Image)(resources.GetObject("b2.Image")));
-            this.b2.Location = new System.Drawing.Point(34, 105);
-            this.b2.Name = "b2";
-            this.b2.Size = new System.Drawing.Size(49, 42);
-            this.b2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.b2.TabIndex = 3;
-            this.b2.TabStop = false;
-            this.b2.Tag = "2";
-            this.b2.Click += new System.EventHandler(this.koltukSecildi);
-            // 
-            // b3
-            // 
-            this.b3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.b3.Image = ((System.Drawing.Image)(resources.GetObject("b3.Image")));
-            this.b3.Location = new System.Drawing.Point(109, 29);
-            this.b3.Name = "b3";
-            this.b3.Size = new System.Drawing.Size(49, 42);
-            this.b3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.b3.TabIndex = 2;
-            this.b3.TabStop = false;
-            this.b3.Tag = "3";
-            this.b3.Click += new System.EventHandler(this.koltukSecildi);
-            // 
-            // b1
-            // 
-            this.b1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.b1.Image = ((System.Drawing.Image)(resources.GetObject("b1.Image")));
-            this.b1.Location = new System.Drawing.Point(34, 29);
-            this.b1.Name = "b1";
-            this.b1.Size = new System.Drawing.Size(49, 42);
-            this.b1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.b1.TabIndex = 1;
-            this.b1.TabStop = false;
-            this.b1.Tag = "1";
-            this.b1.Click += new System.EventHandler(this.koltukSecildi);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::UI.Properties.Resources.masa;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 171);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(442, 66);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
-            // pictureBox5
-            // 
-            this.pictureBox5.Image = global::UI.Properties.Resources.trenSol;
-            this.pictureBox5.Location = new System.Drawing.Point(38, 20);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(142, 85);
-            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox5.TabIndex = 67;
-            this.pictureBox5.TabStop = false;
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.Image = global::UI.Properties.Resources.trenSag;
-            this.pictureBox4.Location = new System.Drawing.Point(484, 13);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(146, 98);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox4.TabIndex = 66;
-            this.pictureBox4.TabStop = false;
-            // 
-            // pbEko
-            // 
-            this.pbEko.Image = global::UI.Properties.Resources.trenEko;
-            this.pbEko.Location = new System.Drawing.Point(331, 26);
-            this.pbEko.Name = "pbEko";
-            this.pbEko.Size = new System.Drawing.Size(150, 85);
-            this.pbEko.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbEko.TabIndex = 65;
-            this.pbEko.TabStop = false;
-            this.pbEko.Click += new System.EventHandler(this.pbEko_Click);
-            // 
-            // pbBusiness
-            // 
-            this.pbBusiness.Image = global::UI.Properties.Resources.trenBus;
-            this.pbBusiness.Location = new System.Drawing.Point(181, 31);
-            this.pbBusiness.Name = "pbBusiness";
-            this.pbBusiness.Size = new System.Drawing.Size(149, 77);
-            this.pbBusiness.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbBusiness.TabIndex = 64;
-            this.pbBusiness.TabStop = false;
-            this.pbBusiness.Click += new System.EventHandler(this.pbBusiness_Click);
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.BackColor = System.Drawing.Color.Yellow;
-            this.label13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label13.Location = new System.Drawing.Point(31, 118);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(43, 19);
-            this.label13.TabIndex = 23;
-            this.label13.Text = "Seçili";
-            // 
-            // label46
-            // 
-            this.label46.AutoSize = true;
-            this.label46.BackColor = System.Drawing.Color.Orange;
-            this.label46.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label46.Location = new System.Drawing.Point(77, 118);
-            this.label46.Name = "label46";
-            this.label46.Size = new System.Drawing.Size(63, 19);
-            this.label46.TabIndex = 24;
-            this.label46.Text = "Rezerve";
-            // 
-            // label47
-            // 
-            this.label47.AutoSize = true;
-            this.label47.BackColor = System.Drawing.Color.Chartreuse;
-            this.label47.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label47.Location = new System.Drawing.Point(144, 118);
-            this.label47.Name = "label47";
-            this.label47.Size = new System.Drawing.Size(48, 19);
-            this.label47.TabIndex = 68;
-            this.label47.Text = "Satıldı";
-            // 
             // TrenBilet
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1905,6 +1921,7 @@
             this.TrenTab.ResumeLayout(false);
             this.Giris.ResumeLayout(false);
             this.Giris.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.BiletDurak.ResumeLayout(false);
             this.BiletDurak.PerformLayout();
             this.grpDurak.ResumeLayout(false);
@@ -1916,13 +1933,6 @@
             this.BiletKoltuk.PerformLayout();
             this.grpKoltukEkonomi.ResumeLayout(false);
             this.grpKoltukEkonomi.PerformLayout();
-            this.grpKoltukBusiness.ResumeLayout(false);
-            this.grpKoltukBusiness.PerformLayout();
-            this.pnlKisi4.ResumeLayout(false);
-            this.pnlKisi4.PerformLayout();
-            this.Biletlerim.ResumeLayout(false);
-            this.Biletlerim.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.e16)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.e14)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.e15)).EndInit();
@@ -1939,7 +1949,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.e2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.e3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.e1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
+            this.grpKoltukBusiness.ResumeLayout(false);
+            this.grpKoltukBusiness.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kd)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kd2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.b10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.b8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.b9)).EndInit();
@@ -1950,11 +1963,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.b2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.b3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.b1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.pnlKisi.ResumeLayout(false);
+            this.pnlKisi.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbEko)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbBusiness)).EndInit();
+            this.Biletlerim.ResumeLayout(false);
+            this.Biletlerim.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -2008,24 +2024,10 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label KoltukSecimiYolcu;
         private System.Windows.Forms.TabPage BiletSefer;
-        private System.Windows.Forms.Panel pnlKisi4;
-        private System.Windows.Forms.Label lblBiletFiyati4;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.CheckBox chkSigortali;
-        private System.Windows.Forms.CheckBox chkYemekli;
-        private System.Windows.Forms.RadioButton rdoCocuk;
-        private System.Windows.Forms.RadioButton rdoYetiskin;
-        private System.Windows.Forms.TextBox txtSoyad;
-        private System.Windows.Forms.TextBox txtAd;
-        private System.Windows.Forms.TextBox txtTc;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Button btnRezerve;
         private System.Windows.Forms.Button btnSatinAl;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.CheckBox ckhEkstraHizmet;
         private System.Windows.Forms.Label lblSeferBilgi;
         private System.Windows.Forms.ListView lstSeferler;
         private System.Windows.Forms.ColumnHeader columnHeader11;
@@ -2041,9 +2043,7 @@
         private System.Windows.Forms.Button btnIleriSefer;
         private System.Windows.Forms.GroupBox grpDurak;
         private System.Windows.Forms.GroupBox grpKoltukBusiness;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox b1;
-        private System.Windows.Forms.PictureBox pictureBox8;
         private System.Windows.Forms.PictureBox b10;
         private System.Windows.Forms.PictureBox b8;
         private System.Windows.Forms.PictureBox b9;
@@ -2105,5 +2105,22 @@
         private System.Windows.Forms.Label label47;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label46;
+        private System.Windows.Forms.PictureBox kd;
+        private System.Windows.Forms.PictureBox kd2;
+        private System.Windows.Forms.Panel pnlKisi;
+        private System.Windows.Forms.Label lblFiyat;
+        private System.Windows.Forms.CheckBox ckhEkstraHizmet;
+        private System.Windows.Forms.Label lblBiletFiyati4;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.CheckBox chkSigortali;
+        private System.Windows.Forms.CheckBox chkYemekli;
+        private System.Windows.Forms.RadioButton rdoCocuk;
+        private System.Windows.Forms.RadioButton rdoYetiskin;
+        private System.Windows.Forms.TextBox txtSoyad;
+        private System.Windows.Forms.TextBox txtAd;
+        private System.Windows.Forms.TextBox txtTc;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label19;
     }
 }

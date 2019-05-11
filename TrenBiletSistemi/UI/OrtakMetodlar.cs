@@ -37,6 +37,22 @@ namespace UI
             return false;
 
         }
+
+        public static void Temizle(Panel pnl)
+        {
+            foreach (Control item in pnl.Controls)
+            {
+                if(item is TextBox)
+                {
+                    item.Text =" ";
+                }
+                else if(item is CheckBox)
+                {
+                    ((CheckBox)item).Checked = false;
+                }
+            }
+        }
+
     }
 
     public class ComboboxItem
