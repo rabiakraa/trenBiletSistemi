@@ -91,7 +91,7 @@ namespace UI
         private void TrenBilet_Load(object sender, EventArgs e)
         {
             //Tableri gizle
-            /*  TrenTab.Appearance = TabAppearance.FlatButtons;
+             /*TrenTab.Appearance = TabAppearance.FlatButtons;
               TrenTab.ItemSize = new Size(0, 1);
               TrenTab.SizeMode = TabSizeMode.Fixed;*/
 
@@ -178,6 +178,8 @@ namespace UI
 
         private void btnAra_Click(object sender, EventArgs e)
         {
+            biletDurum = rdoSatinAl.Checked;
+
             yolcuSayisi = Convert.ToInt32(nmrYolcuSayisi.Value);
             donusBileti = 0;
             if (rdoGidisDonus.Checked)
@@ -196,12 +198,17 @@ namespace UI
                 varisId = Convert.ToInt32(((ComboboxItem)cmbNereye.SelectedItem).Value);
                 gidisTarihi = new DateTime(dtGidis.Value.Year, dtGidis.Value.Month, dtGidis.Value.Day, 0, 0, 0);
 
-                SeferleriGetir(cikisId, varisId, gidisTarihi);
-                TrenTab.SelectedIndex = (TrenTab.SelectedIndex + 1) % TrenTab.TabCount;
+                if (SeferleriGetir(cikisId, varisId, gidisTarihi)){
+                    TrenTab.SelectedIndex = (TrenTab.SelectedIndex + 1) % TrenTab.TabCount;
+                }
+                else
+                {
+                    MessageBox.Show("Sefer(ler) bulunamadı.");
+                }
+
 
             }
 
-            biletDurum = rdoSatinAl.Checked;
         }
 
         private void pbBusiness_Click(object sender, EventArgs e)
@@ -416,8 +423,33 @@ namespace UI
                 else
                 {
                     TrenTab.SelectedIndex = (TrenTab.SelectedIndex + 1) % TrenTab.TabCount;
+                    BiletleriDoldur();
                 }
             }
+        }
+
+        public void BiletleriDoldur()
+        {
+            var biletler = biletRepo.GetAll(x => x.KullaniciID == kullanici.KullaniciID && (x.BiletID.ToString()).StartsWith(txtBiletId.Text)).ToList();
+            // var biletler = biletRepo.GetAll(x => x.KullaniciID == kullanici.KullaniciID ).ToList();
+
+            lstBiletler.Items.Clear();
+            foreach (var item in biletler)
+            {
+                ListViewItem item1 = new ListViewItem(item.BiletID.ToString());
+                item1.SubItems.Add(item.Ad);
+                item1.SubItems.Add(item.Soyad);
+            /*    item1.SubItems.Add(item.Sefer.Rota.Durak.DurakAdi);
+                item1.SubItems.Add(item.VarisSaati.ToString());
+                item1.SubItems.Add(item..ToString());
+                item1.SubItems.Add(item.SeferSuresi.ToString());
+                item1.SubItems.Add(item.SeferSuresi.ToString());
+                item1.SubItems.Add(item.SeferSuresi.ToString());
+                item1.SubItems.Add(item.SeferSuresi.ToString());*/
+                lstBiletler.Items.Add(item1);
+
+            }
+
         }
 
         public void YeniBiletAl()
@@ -454,10 +486,21 @@ namespace UI
             TrenTab.SelectedIndex = 1;
         }
 
-        public void SeferleriGetir(int cikisId, int varisId, DateTime gidisTarihi)
+        private void grpDurak_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSorgula_Click(object sender, EventArgs e)
+        {
+            BiletleriDoldur();
+        }
+
+        public bool SeferleriGetir(int cikisId, int varisId, DateTime gidisTarihi)
         {
             var rotaId = rotaRepo.GetAll(x => x.CikisID == cikisId && x.VarisID == varisId).Select(x => x.RotaID).SingleOrDefault();
             var seferler = seferRepo.GetAll(x => x.RotaID == rotaId && x.Tarih == gidisTarihi).ToList();
+
 
             if (biletDurum == false)
             {     //2 saat kala seferleri rezervasyona kapat
@@ -478,6 +521,16 @@ namespace UI
                 item1.SubItems.Add(item.SeferSuresi.ToString());
                 lstSeferler.Items.Add(item1);
 
+            }
+
+
+            if (lstSeferler.Items.Count == 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
             }
 
         }

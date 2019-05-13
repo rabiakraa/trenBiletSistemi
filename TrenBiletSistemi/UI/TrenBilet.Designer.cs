@@ -124,7 +124,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.btnBiletIptal = new System.Windows.Forms.Button();
             this.btnBiletiAl = new System.Windows.Forms.Button();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.lstBiletler = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -419,6 +419,7 @@
             this.grpDurak.Size = new System.Drawing.Size(624, 427);
             this.grpDurak.TabIndex = 58;
             this.grpDurak.TabStop = false;
+            this.grpDurak.Enter += new System.EventHandler(this.grpDurak_Enter);
             // 
             // cmbNereye
             // 
@@ -457,7 +458,7 @@
             // nmrYolcuSayisi
             // 
             this.nmrYolcuSayisi.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.nmrYolcuSayisi.Location = new System.Drawing.Point(125, 279);
+            this.nmrYolcuSayisi.Location = new System.Drawing.Point(127, 279);
             this.nmrYolcuSayisi.Margin = new System.Windows.Forms.Padding(4);
             this.nmrYolcuSayisi.Maximum = new decimal(new int[] {
             4,
@@ -1315,7 +1316,7 @@
             this.Biletlerim.Controls.Add(this.button1);
             this.Biletlerim.Controls.Add(this.btnBiletIptal);
             this.Biletlerim.Controls.Add(this.btnBiletiAl);
-            this.Biletlerim.Controls.Add(this.listView1);
+            this.Biletlerim.Controls.Add(this.lstBiletler);
             this.Biletlerim.Controls.Add(this.btnSorgula);
             this.Biletlerim.Controls.Add(this.txtBiletId);
             this.Biletlerim.Controls.Add(this.label9);
@@ -1364,9 +1365,9 @@
             this.btnBiletiAl.UseVisualStyleBackColor = false;
             this.btnBiletiAl.Click += new System.EventHandler(this.btnBiletiAl_Click);
             // 
-            // listView1
+            // lstBiletler
             // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.lstBiletler.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
             this.columnHeader3,
@@ -1377,14 +1378,14 @@
             this.columnHeader8,
             this.columnHeader9,
             this.columnHeader10});
-            this.listView1.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.listView1.GridLines = true;
-            this.listView1.Location = new System.Drawing.Point(38, 59);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(887, 320);
-            this.listView1.TabIndex = 23;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
+            this.lstBiletler.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lstBiletler.GridLines = true;
+            this.lstBiletler.Location = new System.Drawing.Point(38, 59);
+            this.lstBiletler.Name = "lstBiletler";
+            this.lstBiletler.Size = new System.Drawing.Size(887, 320);
+            this.lstBiletler.TabIndex = 23;
+            this.lstBiletler.UseCompatibleStateImageBehavior = false;
+            this.lstBiletler.View = System.Windows.Forms.View.Details;
             // 
             // columnHeader1
             // 
@@ -1446,6 +1447,7 @@
             this.btnSorgula.TabIndex = 22;
             this.btnSorgula.Text = "Ara";
             this.btnSorgula.UseVisualStyleBackColor = false;
+            this.btnSorgula.Click += new System.EventHandler(this.btnSorgula_Click);
             // 
             // txtBiletId
             // 
@@ -2057,7 +2059,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button btnBiletIptal;
         private System.Windows.Forms.Button btnBiletiAl;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView lstBiletler;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
