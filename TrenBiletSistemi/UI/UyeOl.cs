@@ -34,7 +34,7 @@ namespace UI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            TrenBilet tb = new TrenBilet();
+            chkRezerve tb = new chkRezerve();
             tb.Show();
             this.Hide();
         }
@@ -76,7 +76,7 @@ namespace UI
                 int islem = uow.SaveChanges(); 
 
                    MessageBox.Show("Üyelik işlemi başarıyla gerçekleştirilmiştir.");
-                TrenBilet tb = new TrenBilet();
+                chkRezerve tb = new chkRezerve();
                 tb.Show();
                 this.Hide();
             }

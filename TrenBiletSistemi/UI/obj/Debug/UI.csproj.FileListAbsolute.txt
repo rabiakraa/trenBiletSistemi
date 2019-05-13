@@ -1,7 +1,6 @@
 C:\Users\mkara\Documents\GitHub\trenbiletsistemi\TrenBiletSistemi\UI\obj\Debug\UI.csprojAssemblyReference.cache
 C:\Users\mkara\Documents\GitHub\trenbiletsistemi\TrenBiletSistemi\UI\obj\Debug\UI.Form1.resources
 C:\Users\mkara\Documents\GitHub\trenbiletsistemi\TrenBiletSistemi\UI\obj\Debug\UI.Properties.Resources.resources
-C:\Users\mkara\Documents\GitHub\trenbiletsistemi\TrenBiletSistemi\UI\obj\Debug\UI.TrenBilet.resources
 C:\Users\mkara\Documents\GitHub\trenbiletsistemi\TrenBiletSistemi\UI\obj\Debug\UI.UyeOl.resources
 C:\Users\mkara\Documents\GitHub\trenbiletsistemi\TrenBiletSistemi\UI\obj\Debug\UI.csproj.GenerateResource.cache
 C:\Users\mkara\Documents\GitHub\trenbiletsistemi\TrenBiletSistemi\UI\obj\Debug\UI.csproj.CoreCompileInputs.cache
@@ -22,3 +21,4 @@ C:\Users\mkara\Documents\GitHub\trenbiletsistemi\TrenBiletSistemi\UI\obj\Debug\U
 C:\Users\mkara\Documents\GitHub\trenbiletsistemi\TrenBiletSistemi\UI\obj\Debug\UI.exe
 C:\Users\mkara\Documents\GitHub\trenbiletsistemi\TrenBiletSistemi\UI\obj\Debug\UI.pdb
 C:\Users\mkara\Documents\GitHub\trenbiletsistemi\TrenBiletSistemi\UI\obj\Debug\UI.Cinsiyet.resources
+C:\Users\mkara\Documents\GitHub\trenbiletsistemi\TrenBiletSistemi\UI\obj\Debug\UI.chkRezerve.resources

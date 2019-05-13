@@ -180,5 +180,17 @@
   <ItemGroup>
     <None Include="Resources\masaYeni.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\doluErkek.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\doluKadin.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\seciliRezerve.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\seciliSatinAl.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

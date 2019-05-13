@@ -113,6 +113,26 @@ namespace UI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap doluErkek {
+            get {
+                object obj = ResourceManager.GetObject("doluErkek", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap doluKadin {
+            get {
+                object obj = ResourceManager.GetObject("doluKadin", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap erkekRezerve {
             get {
                 object obj = ResourceManager.GetObject("erkekRezerve", resourceCulture);
@@ -196,6 +216,26 @@ namespace UI.Properties {
         internal static System.Drawing.Bitmap secili {
             get {
                 object obj = ResourceManager.GetObject("secili", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap seciliRezerve {
+            get {
+                object obj = ResourceManager.GetObject("seciliRezerve", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap seciliSatinAl {
+            get {
+                object obj = ResourceManager.GetObject("seciliSatinAl", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
