@@ -18,5 +18,7 @@ namespace DAL.Repositories
         void Update(T entity);
         void Delete(T entity);
         void Delete(int id);
+        void AddRange(List<T> entities);
+
     }
 }

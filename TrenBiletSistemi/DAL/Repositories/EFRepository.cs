@@ -29,6 +29,12 @@ namespace DAL.Repositories
         }
 
         #region IRepository Members
+
+        public void AddRange(List<T> entities)
+        {
+            _dbSet.AddRange(entities);
+        }
+
         public IQueryable<T> GetAll()
         {
             return _dbSet;

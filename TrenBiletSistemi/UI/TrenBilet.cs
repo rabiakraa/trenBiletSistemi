@@ -15,7 +15,7 @@ using System.Windows.Forms;
 
 namespace UI
 {
-    public partial class chkRezerve : Form
+    public partial class TrenBilet : Form
     {
         #region DbRepo
         private Context trenDb;
@@ -29,6 +29,7 @@ namespace UI
         private IRepository<Vagon> vagonRepo;
         private IRepository<TrenVagon> trenVagonRepo;
         private IRepository<VagonTipi> vagonTipiRepo;
+        private IRepository<KullaniciTip> kullaniciTipRepo;
         Bilet bilet;
         Sefer sefer;
         bool cinsiyet;
@@ -68,9 +69,10 @@ namespace UI
             vagonRepo = new EFRepository<Vagon>(trenDb);
             trenVagonRepo = new EFRepository<TrenVagon>(trenDb);
             vagonTipiRepo = new EFRepository<VagonTipi>(trenDb);
+            kullaniciTipRepo = new EFRepository<KullaniciTip>(trenDb);
         }
 
-        public chkRezerve()
+        public TrenBilet()
         {
             InitializeComponent();
             DbInitialize();
@@ -97,9 +99,9 @@ namespace UI
         private void TrenBilet_Load(object sender, EventArgs e)
         {
             //Tab butonlarını gizle
-            /*TrenTab.Appearance = TabAppearance.FlatButtons;
-             TrenTab.ItemSize = new Size(0, 1);
-             TrenTab.SizeMode = TabSizeMode.Fixed;*/
+            TrenTab.Appearance = TabAppearance.FlatButtons;
+            TrenTab.ItemSize = new Size(0, 1);
+            TrenTab.SizeMode = TabSizeMode.Fixed;
 
             //Geçmişe dair bilet alınmasını engellemek ve en fazla 14 gün sonrasına bilet vermek için.
             dtGidis.MinDate = DateTime.Today;
@@ -107,7 +109,11 @@ namespace UI
             dtDonus.MinDate = DateTime.Today;
             dtDonus.MaxDate = DateTime.Today.AddDays(14);
 
+            IlkKayitlariYap();
+
         }
+
+
 
         private void btnGirisYap_Click(object sender, EventArgs e)
         {
@@ -134,7 +140,7 @@ namespace UI
         {
             uyeDegil = true;
             kullanici = new Kullanici();
-            kullanici.KullaniciID = 1;      //Üye olmadan devam edildiği takdirde kullanıcı id olarak default bir user'ın kullanıcıID'si verilir.
+            kullanici.KullaniciID = 1;      //Üye olmadan devam edildiği takdirde alınan biletlere kullanıcıID olarak adminin kullaniciID'si verilir.
             TrenTab.SelectedIndex = (TrenTab.SelectedIndex + 1) % TrenTab.TabCount;
         }
 
@@ -283,13 +289,13 @@ namespace UI
             //Seçilen koltuğun yan koltuğun bulunup yanda oturan birisi varsa, girilen cinsiyetle aynı olup olmadığına bakılır. Farklıysa uyarı verilir.
             if (secilenKoltuk % 2 == 0)
             {
-                 yanKoltukNo = secilenKoltuk - 1;
+                yanKoltukNo = secilenKoltuk - 1;
                 string yanKoltukName = secilenPb.Name.Substring(0, 1).ToString() + (yanKoltukNo).ToString();
                 yanKoltuk = this.Controls.Find(yanKoltukName, true).FirstOrDefault() as PictureBox;
             }
             else
             {
-                 yanKoltukNo = secilenKoltuk + 1;
+                yanKoltukNo = secilenKoltuk + 1;
                 string yanKoltukName = secilenPb.Name.Substring(0, 1).ToString() + (yanKoltukNo).ToString();
                 yanKoltuk = this.Controls.Find(yanKoltukName, true).FirstOrDefault() as PictureBox;
             }
@@ -300,7 +306,7 @@ namespace UI
             //Eğer iki bilet aynı kişiye aitse kadın erkek yan yana oturabilir.
             if (yanKoltuk.Image.Tag != null)
             {
-                if (!YanKoltukAyniKisiyeMiAit(yanKoltukNo))
+                if (!YanKoltukAyniKisiyeMiAit(yanKoltukNo) || uyeDegil)
                 {
                     if (cinsiyet == false && yanKoltuk.Image.Tag.ToString() == "e")     //Seçilen cinsiyet kadınsa ve yanında erkek oturuyorsa..
                     {
@@ -319,7 +325,7 @@ namespace UI
                         secilenPb.Image = UI.Properties.Resources.seciliRezerve;
                 }
 
-                
+
             }
             else   //Yan koltuk boşsa kontrol etmeden bilet almaya izin verir.
             {
@@ -332,7 +338,7 @@ namespace UI
 
         private bool YanKoltukAyniKisiyeMiAit(int koltukNumarasi)        //Şuanda bu metod kullanılmıyor.
         {
-        //    int koltukNumarasi2 = Convert.ToInt32(koltukNumarasi);
+            //    int koltukNumarasi2 = Convert.ToInt32(koltukNumarasi);
             var yanKoltuk = biletRepo.GetAll(x => x.KullaniciID == kullanici.KullaniciID && x.KoltukNo == koltukNumarasi && x.SeferID == gidisSeferID).ToList();
             if (yanKoltuk != null) return true;
             return false;
@@ -467,6 +473,9 @@ namespace UI
             biletRepo.Add(bilet);
             uow.SaveChanges();
 
+            if (uyeDegil)
+                MessageBox.Show("Bilet numaranız: " + gidisSeferID.ToString() + " \nLütfen bilet numaranızı kaybetmeyiniz.");
+
             KoltuklariDoldur(gidisSeferID);     //bilet satıldıktan sonra yeni haliyle koltukları güncelle ve kullanıcı bilgileri kısmını temizle, yeni bilet alma işlemleri için hazırla.
             OrtakMetodlar.Temizle(pnlKisi);
 
@@ -485,7 +494,7 @@ namespace UI
             }
             else
             {
-                ayniKullanici = false; 
+                ayniKullanici = false;
 
                 if (koltukGidis == 1)           //Dönüş bileti isteniyorsa tekrar bilet al
                 {
@@ -498,9 +507,10 @@ namespace UI
                 else
                 {
                     if (uyeDegil == true)
-                        TrenTab.SelectedIndex = 5 ;
+                        TrenTab.SelectedIndex = 5;
                     else
-                    TrenTab.SelectedIndex = (TrenTab.SelectedIndex + 1) % TrenTab.TabCount;
+                        TrenTab.SelectedIndex = (TrenTab.SelectedIndex + 1) % TrenTab.TabCount;
+
                     BiletleriDoldur();
                 }
             }
@@ -604,23 +614,38 @@ namespace UI
 
         private void btnBiletNoIleAra_Click(object sender, EventArgs e)
         {
-            int bNo = int.Parse(txtBiletNumarasi.Text);
-            var biletim = biletRepo.GetAll(x => x.BiletID == bNo).SingleOrDefault();
+            if (txtBiletNumarasi.Text != null && txtTcBilet.Text != null)
+            {
+                try
+                {
+                    int bNo = int.Parse(txtBiletNumarasi.Text);
+                    string tcNo = txtTcBilet.Text;
+                    var biletim = biletRepo.GetAll(x => x.BiletID == bNo && x.TcNo == tcNo).SingleOrDefault();
 
-            string cikisDurak = durakRepo.GetAll(x => x.DurakID == biletim.Sefer.Rota.CikisID).Select(x => x.DurakAdi).SingleOrDefault();
-            string varisDurak = durakRepo.GetAll(x => x.DurakID == biletim.Sefer.Rota.VarisID).Select(x => x.DurakAdi).SingleOrDefault();
+                    string cikisDurak = durakRepo.GetAll(x => x.DurakID == biletim.Sefer.Rota.CikisID).Select(x => x.DurakAdi).SingleOrDefault();
+                    string varisDurak = durakRepo.GetAll(x => x.DurakID == biletim.Sefer.Rota.VarisID).Select(x => x.DurakAdi).SingleOrDefault();
 
-            lblBiletNoSonuc.Text = "Ad: " +biletim.Ad
-                +"\nSoyad: "+biletim.Soyad
-                +"\nÇıkış Durağı: " + cikisDurak 
-                +"\nVarış Durağı: "+ varisDurak
-                +"\nÇıkış Saati: " + biletim.Sefer.CikisSaati.ToString()
-                +"\nSigorta: " + (biletim.SigortaliMi ? "Var" : "Yok")
-                + "\nYemek: " + (biletim.YemekliMi ? "Var" : "Yok")
-                + "\nYolculuk Hizmeti: " + (biletim.YolculukHizmetiVarMi ? "Var" : "Yok")
-                + "\nÇocuk: " + (biletim.CocukMu ? "Evet" : "Hayır")
-                + "\nFiyat: " + (biletim.Fiyat.ToString());
+                    lblBiletNoSonuc.Text = "Ad: " + biletim.Ad
+                        + "\nSoyad: " + biletim.Soyad
+                        + "\nÇıkış Durağı: " + cikisDurak
+                        + "\nVarış Durağı: " + varisDurak
+                        + "\nÇıkış Saati: " + biletim.Sefer.CikisSaati.ToString()
+                        + "\nSigorta: " + (biletim.SigortaliMi ? "Var" : "Yok")
+                        + "\nYemek: " + (biletim.YemekliMi ? "Var" : "Yok")
+                        + "\nYolculuk Hizmeti: " + (biletim.YolculukHizmetiVarMi ? "Var" : "Yok")
+                        + "\nÇocuk: " + (biletim.CocukMu ? "Evet" : "Hayır")
+                        + "\nFiyat: " + (biletim.Fiyat.ToString());
+                }
+                catch
+                {
+                    MessageBox.Show("Bilet Bulunamadı.");
+                }
+            }
 
+            else
+            {
+                MessageBox.Show("Lütfen tüm alanları doldurunuz.");
+            }
         }
 
         private void Biletlerim_Click(object sender, EventArgs e)
@@ -690,22 +715,145 @@ namespace UI
             if (donusBileti == 1 || donusBileti == 0)
             {
                 gidisSeferID = Convert.ToInt32(lstSeferler.SelectedItems[0].SubItems[0].Text);
-                MessageBox.Show("Gidiş seferi id: " + gidisSeferID);
             }
             else
             {
                 donusSeferID = Convert.ToInt32(lstSeferler.SelectedItems[0].SubItems[0].Text);
-                MessageBox.Show("Dönüş seferi id: " + donusSeferID);
             }
         }
 
         private void BiletSefer_Click(object sender, EventArgs e)
         {
         }
+
+        private void IlkKayitlariYap()
+        {
+            //Durak yoksa durak ekle.
+            var duraklar = durakRepo.GetAll().ToList();
+            if (duraklar.Count == 0)
+            {
+                List<Durak> EklenecekDuraklar = new List<Durak>()
+                {
+                    new Durak() {DurakAdi = "İstanbul"},
+                    new Durak() {DurakAdi = "Sakarya" },
+                   new Durak() {DurakAdi = "Ankara"},
+                   new Durak() {DurakAdi = "Konya"}
+                };
+                durakRepo.AddRange(EklenecekDuraklar);
+            }
+            uow.SaveChanges();
+
+            //Rota yoksa rota ekle.
+            var rotalar = rotaRepo.GetAll().ToList();
+            if (rotalar.Count == 0)
+            {
+                List<Rota> EklenecekRotalar = new List<Rota>()
+                {
+                    new Rota() {CikisID = 1, VarisID = 2},
+                    new Rota() {CikisID = 2, VarisID = 3},
+                    new Rota() {CikisID = 3, VarisID = 4},
+                    new Rota() {CikisID = 4, VarisID = 3},
+                    new Rota() {CikisID = 3, VarisID = 2},
+                    new Rota() {CikisID = 2, VarisID = 1}
+                };
+                rotaRepo.AddRange(EklenecekRotalar);
+            }
+            uow.SaveChanges();
+
+            //VagonTipi yoksa vagontipi ekle.
+            var vagonTipleri = vagonTipiRepo.GetAll().ToList();
+            if (vagonTipleri.Count == 0)
+            {
+                List<VagonTipi> EklenecekVagonTipleri = new List<VagonTipi>()
+                {
+                    new VagonTipi() {TipAdi= "Business"},
+                    new VagonTipi() {TipAdi="Ekonomi"}
+                    
+                };
+                vagonTipiRepo.AddRange(EklenecekVagonTipleri);
+            }
+            uow.SaveChanges();
+
+            //Vagon yoksa vagon ekle.
+            var vagonlar = vagonRepo.GetAll().ToList();
+            if (vagonlar.Count == 0)
+            {
+                List<Vagon> EklenecekVagonlar = new List<Vagon>()
+                {
+                    new Vagon() {VagonID=1, VagonTipiID=1},
+                    new Vagon() {VagonID=2, VagonTipiID=2}
+
+                };
+                vagonRepo.AddRange(EklenecekVagonlar);
+            }
+            uow.SaveChanges();
+
+            //Tren yoksa tren ekle.
+            var trenler = trenRepo.GetAll().ToList();
+            if (trenler.Count == 0)
+            {
+                List<Tren> EklenecekTrenler = new List<Tren>()
+                {
+                    new Tren() {TrenID=1},
+                    new Tren() {TrenID=2}
+
+                };
+                trenRepo.AddRange(EklenecekTrenler);
+            }
+            uow.SaveChanges();
+
+            var trenVagonlar = trenVagonRepo.GetAll().ToList();
+            if (trenVagonlar.Count == 0)
+            {
+                List<TrenVagon> EklenecekTrenVagonlar = new List<TrenVagon>()
+                {
+                    new TrenVagon() {TrenID= 1, VagonID=1},
+                    new TrenVagon() {TrenID= 1, VagonID=2},
+                    new TrenVagon() {TrenID= 2, VagonID=1},
+                    new TrenVagon() {TrenID= 2, VagonID=2}
+                };
+                trenVagonRepo.AddRange(EklenecekTrenVagonlar);
+            }
+            uow.SaveChanges();
+
+            //Kullanıcı tipi yoksa ekle.
+            var kullaniciTipleri = kullaniciTipRepo.GetAll().ToList();
+            if (kullaniciTipleri.Count == 0)
+            {
+                List<KullaniciTip> EklenecekKullaniciTipleri = new List<KullaniciTip>()
+                {
+                    new KullaniciTip() {TipAdi="Üye"},
+                    new KullaniciTip() {TipAdi="Admin"}
+                };
+                kullaniciTipRepo.AddRange(EklenecekKullaniciTipleri);
+            }
+            uow.SaveChanges();
+
+            //Kullanici yoksa kullanıcı ekle.
+            var kullanicilar = kullaniciRepo.GetAll().ToList();
+            if (kullanicilar.Count == 0)
+            {
+                List<Kullanici> EklenecekKullanicilar = new List<Kullanici>()
+                {
+                    new Kullanici() {Ad="Admin", Soyad="Admin", Adres="İst", Cinsiyet=false, Email="admin  ",
+                        Sifre ="admin",KullaniciTipID = 1,TcNo="11111111111", Telefon="0555 555 55 55" }
+                };
+                kullaniciRepo.AddRange(EklenecekKullanicilar);
+            }
+            uow.SaveChanges();
+
+            //SEFER EKLEME KISMI YAPILACAK
+
+
+
+
+        }
     }
 
-
-
 }
+
+
+
+
 
 
