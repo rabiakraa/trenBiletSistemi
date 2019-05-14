@@ -21,6 +21,8 @@ namespace DAL
 
             //Database.Connection.ConnectionString = "server = .; database = TrenBiletDb; uid = sa; pwd = 123";
             Database.Connection.ConnectionString = "server = DESKTOP-N13DB8I\\SQLEXPRESS; database = TrenBiletDb; Trusted_Connection = true;";
+           // Database.Connection.ConnectionString = "server = (localdb)//mssqllocaldb; database = TrenBiletDb; uid = sa; pwd = 123";
+
 
         }
 

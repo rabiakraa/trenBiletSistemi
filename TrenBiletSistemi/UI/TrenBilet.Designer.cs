@@ -184,7 +184,6 @@
             this.btnBiletNoIleAra = new System.Windows.Forms.Button();
             this.txtBiletNumarasi = new System.Windows.Forms.TextBox();
             this.label48 = new System.Windows.Forms.Label();
-            this.tabSeferEkle = new System.Windows.Forms.TabPage();
             this.TrenTab.SuspendLayout();
             this.Giris.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -242,7 +241,6 @@
             this.TrenTab.Controls.Add(this.BiletKoltuk);
             this.TrenTab.Controls.Add(this.Biletlerim);
             this.TrenTab.Controls.Add(this.tabBiletAra);
-            this.TrenTab.Controls.Add(this.tabSeferEkle);
             this.TrenTab.Location = new System.Drawing.Point(12, 8);
             this.TrenTab.Name = "TrenTab";
             this.TrenTab.SelectedIndex = 0;
@@ -2003,11 +2001,11 @@
             // 
             // lblBiletNoSonuc
             // 
-            this.lblBiletNoSonuc.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblBiletNoSonuc.Location = new System.Drawing.Point(261, 195);
             this.lblBiletNoSonuc.Name = "lblBiletNoSonuc";
-            this.lblBiletNoSonuc.Size = new System.Drawing.Size(397, 150);
+            this.lblBiletNoSonuc.Size = new System.Drawing.Size(397, 183);
             this.lblBiletNoSonuc.TabIndex = 26;
+            this.lblBiletNoSonuc.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // btnBiletNoIleAra
             // 
@@ -2038,16 +2036,6 @@
             this.label48.Size = new System.Drawing.Size(131, 23);
             this.label48.TabIndex = 23;
             this.label48.Text = "Bilet No Giriniz :";
-            // 
-            // tabSeferEkle
-            // 
-            this.tabSeferEkle.Location = new System.Drawing.Point(4, 25);
-            this.tabSeferEkle.Name = "tabSeferEkle";
-            this.tabSeferEkle.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSeferEkle.Size = new System.Drawing.Size(946, 439);
-            this.tabSeferEkle.TabIndex = 6;
-            this.tabSeferEkle.Text = "Sefer Ekle";
-            this.tabSeferEkle.UseVisualStyleBackColor = true;
             // 
             // chkRezerve
             // 
@@ -2275,7 +2263,6 @@
         private System.Windows.Forms.RadioButton rdoGidisDonus;
         private System.Windows.Forms.Button btnBiletAra;
         private System.Windows.Forms.TabPage tabBiletAra;
-        private System.Windows.Forms.TabPage tabSeferEkle;
         private System.Windows.Forms.Label lblBiletNoSonuc;
         private System.Windows.Forms.Button btnBiletNoIleAra;
         private System.Windows.Forms.TextBox txtBiletNumarasi;
