@@ -91,6 +91,7 @@
             this.Controls.Add(this.label11);
             this.Name = "Cinsiyet";
             this.Text = "Cinsiyet";
+            this.Click += new System.EventHandler(this.btnCinsiyet_Click);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -99,8 +100,8 @@
         #endregion
 
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Button btnCinsiyet;
         public System.Windows.Forms.RadioButton rdoKadin;
         public System.Windows.Forms.RadioButton rdoErkek;
+        public System.Windows.Forms.Button btnCinsiyet;
     }
 }

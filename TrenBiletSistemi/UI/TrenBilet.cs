@@ -46,6 +46,7 @@ namespace UI
         Cinsiyet cns;
         int koltukGidis = 0;   //Dönüş bileti de alınacaksa 1 olur.
         bool biletDurum;        //satın almaysa true rezervasyonsa false
+        PictureBox secilenPb;
 
 
         public void DbInitialize()
@@ -91,9 +92,9 @@ namespace UI
         private void TrenBilet_Load(object sender, EventArgs e)
         {
             //Tableri gizle
-             /*TrenTab.Appearance = TabAppearance.FlatButtons;
-              TrenTab.ItemSize = new Size(0, 1);
-              TrenTab.SizeMode = TabSizeMode.Fixed;*/
+            /*TrenTab.Appearance = TabAppearance.FlatButtons;
+             TrenTab.ItemSize = new Size(0, 1);
+             TrenTab.SizeMode = TabSizeMode.Fixed;*/
 
             dtGidis.MinDate = DateTime.Today;
             dtGidis.MaxDate = DateTime.Today.AddDays(14);
@@ -198,14 +199,31 @@ namespace UI
                 varisId = Convert.ToInt32(((ComboboxItem)cmbNereye.SelectedItem).Value);
                 gidisTarihi = new DateTime(dtGidis.Value.Year, dtGidis.Value.Month, dtGidis.Value.Day, 0, 0, 0);
 
-                if (SeferleriGetir(cikisId, varisId, gidisTarihi)){
-                    TrenTab.SelectedIndex = (TrenTab.SelectedIndex + 1) % TrenTab.TabCount;
-                }
-                else
+                if (donusBileti == 1)    //Gidiş dönüş seçilmişse
                 {
-                    MessageBox.Show("Sefer(ler) bulunamadı.");
+                    if (SeferVarMi(cikisId, varisId, gidisTarihi) && SeferVarMi(varisId, cikisId, donusTarihi))
+                    {
+                        TrenTab.SelectedIndex = (TrenTab.SelectedIndex + 1) % TrenTab.TabCount;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Sefer(ler) bulunamadı.");
+                    }
                 }
 
+                else if (donusBileti == 0)    //Tek yön seçilmişse
+                {
+                    if (SeferVarMi(cikisId, varisId, gidisTarihi))
+                    {
+                        TrenTab.SelectedIndex = (TrenTab.SelectedIndex + 1) % TrenTab.TabCount;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Sefer bulunamadı.");
+                    }
+                }
+
+                SeferleriGetir(cikisId, varisId, gidisTarihi);
 
             }
 
@@ -238,22 +256,66 @@ namespace UI
 
         private void koltukSecildi(object sender, EventArgs e)
         {
-            PictureBox secilenPb = (sender as PictureBox);
-            cns = new Cinsiyet();
-            cns.Show();
-            cinsiyet = cns.rdoErkek.Checked;
+          
+             secilenPb = (sender as PictureBox);
             secilenKoltuk = Convert.ToInt32((sender as PictureBox).Tag.ToString());
 
-            KoltuklariDoldur(gidisSeferID);
-            if (biletDurum == true)
-                secilenPb.Image = UI.Properties.Resources.seciliSatinAl;
-            else if (biletDurum == false)
-                secilenPb.Image = UI.Properties.Resources.seciliRezerve;
+            cns = new Cinsiyet();
+             cns.Show();
+            //cinsiyet = false;
 
+            cns.btnCinsiyet.Click += BtnCinsiyet_Click;
+           
 
             /* sinif = biletSinifi == 2 ? "Business" : "Ekonomi";
             MessageBox.Show(sinif + " " + secilenKoltuk.ToString());*/
 
+        }
+
+        private void BtnCinsiyet_Click(object sender, EventArgs e)
+        {
+            cinsiyet = cns.rdoErkek.Checked;
+            KoltuklariDoldur(gidisSeferID);
+            PictureBox yanKoltuk;
+
+            if (secilenKoltuk % 2 == 0)
+            {
+                int yanKoltukNo = secilenKoltuk - 1;
+                string yanKoltukName = secilenPb.Name.Substring(0, 1).ToString() + (yanKoltukNo).ToString();
+                yanKoltuk = this.Controls.Find(yanKoltukName, true).FirstOrDefault() as PictureBox;
+            }
+            else
+            {
+                int yanKoltukNo = secilenKoltuk + 1;
+                string yanKoltukName = secilenPb.Name.Substring(0, 1).ToString() + (yanKoltukNo).ToString();
+                yanKoltuk = this.Controls.Find(yanKoltukName, true).FirstOrDefault() as PictureBox;
+            }
+
+            if (yanKoltuk.Image.Tag != null)
+            {
+                if (cinsiyet == false && yanKoltuk.Image.Tag.ToString() == "e")
+                {
+                    MessageBox.Show("Yanyana oturacak yolcuların cinsiyeti aynı olmalıdır.");
+                }
+                else if (cinsiyet == true && yanKoltuk.Image.Tag.ToString() == "k")
+                {
+                    MessageBox.Show("Yanyana oturacak yolcuların cinsiyeti aynı olmalıdır.");
+                }
+                else
+                {
+                    if (biletDurum == true)
+                        secilenPb.Image = UI.Properties.Resources.seciliSatinAl;
+                    else if (biletDurum == false)
+                        secilenPb.Image = UI.Properties.Resources.seciliRezerve;
+                }
+            }
+            else
+            {
+                if (biletDurum == true)
+                    secilenPb.Image = UI.Properties.Resources.seciliSatinAl;
+                else if (biletDurum == false)
+                    secilenPb.Image = UI.Properties.Resources.seciliRezerve;
+            }
         }
 
         private void KoltuklariDoldur(int seferID)
@@ -270,6 +332,7 @@ namespace UI
                     {
                         ((PictureBox)koltuk).Image = UI.Properties.Resources.bos1;
                         ((PictureBox)koltuk).Enabled = true;
+                        ((PictureBox)koltuk).Image.Tag = null;
                     }
                 }
 
@@ -280,6 +343,7 @@ namespace UI
                         string pbName = "e" + item.KoltukNo;
                         PictureBox pb = this.Controls.Find(pbName, true).FirstOrDefault() as PictureBox;
                         pb.Image = UI.Properties.Resources.doluKadin;
+                        pb.Image.Tag = "b";
                         pb.Enabled = false;
                     }
                     else if (item.Cinsiyet == true)  // erkek
@@ -287,6 +351,7 @@ namespace UI
                         string pbName = "e" + item.KoltukNo;
                         PictureBox pb = this.Controls.Find(pbName, true).FirstOrDefault() as PictureBox;
                         pb.Image = UI.Properties.Resources.doluErkek;
+                        pb.Image.Tag = "e";
                         pb.Enabled = false;
                     }
                     /*
@@ -323,7 +388,7 @@ namespace UI
 
                 foreach (var item in alinmisBiletler)
                 {
-                    if ( item.Cinsiyet == false)  //satın alınan ve bayan
+                    if (item.Cinsiyet == false)  //satın alınan ve bayan
                     {
                         string pbName = "b" + item.KoltukNo;
                         PictureBox pb = this.Controls.Find(pbName, true).FirstOrDefault() as PictureBox;
@@ -439,13 +504,16 @@ namespace UI
                 ListViewItem item1 = new ListViewItem(item.BiletID.ToString());
                 item1.SubItems.Add(item.Ad);
                 item1.SubItems.Add(item.Soyad);
-            /*    item1.SubItems.Add(item.Sefer.Rota.Durak.DurakAdi);
-                item1.SubItems.Add(item.VarisSaati.ToString());
-                item1.SubItems.Add(item..ToString());
-                item1.SubItems.Add(item.SeferSuresi.ToString());
-                item1.SubItems.Add(item.SeferSuresi.ToString());
-                item1.SubItems.Add(item.SeferSuresi.ToString());
-                item1.SubItems.Add(item.SeferSuresi.ToString());*/
+                string cikisDurak = durakRepo.GetAll(x => x.DurakID == item.Sefer.Rota.CikisID).Select(x => x.DurakAdi).SingleOrDefault();
+                string varisDurak = durakRepo.GetAll(x => x.DurakID == item.Sefer.Rota.VarisID).Select(x => x.DurakAdi).SingleOrDefault();
+                    item1.SubItems.Add(cikisDurak);
+                    item1.SubItems.Add(varisDurak);
+                    item1.SubItems.Add(item.Sefer.CikisSaati.ToString());
+                    item1.SubItems.Add(item.SigortaliMi ? "Var" :"Yok");
+                item1.SubItems.Add(item.YemekliMi ? "Var" : "Yok");
+                item1.SubItems.Add(item.YolculukHizmetiVarMi ? "Var" : "Yok");
+                item1.SubItems.Add(item.Fiyat.ToString());
+
                 lstBiletler.Items.Add(item1);
 
             }
@@ -467,7 +535,7 @@ namespace UI
         {
             if (TrenTab.SelectedIndex == 3)
             {
-                
+
             }
         }
 
@@ -495,16 +563,30 @@ namespace UI
         {
             BiletleriDoldur();
         }
+        public bool SeferVarMi(int cikisId, int varisId, DateTime gidisTarihi)
+        {
+            var rotaId = rotaRepo.GetAll(x => x.CikisID == cikisId && x.VarisID == varisId).Select(x => x.RotaID).SingleOrDefault();
+            var seferler = seferRepo.GetAll(x => x.RotaID == rotaId && x.Tarih == gidisTarihi).ToList();
+            if (seferler.Count == 0)
+            {
+                return false;
+            }
+            return true;
+        }
 
-        public bool SeferleriGetir(int cikisId, int varisId, DateTime gidisTarihi)
+        public void SeferleriGetir(int cikisId, int varisId, DateTime gidisTarihi)
         {
             var rotaId = rotaRepo.GetAll(x => x.CikisID == cikisId && x.VarisID == varisId).Select(x => x.RotaID).SingleOrDefault();
             var seferler = seferRepo.GetAll(x => x.RotaID == rotaId && x.Tarih == gidisTarihi).ToList();
 
+            if (gidisTarihi == DateTime.Now)
+            {
+                seferler = seferRepo.GetAll(x => x.RotaID == rotaId && x.Tarih == gidisTarihi && x.CikisSaati.Hours > DateTime.Now.Hour).ToList();
+            }
 
             if (biletDurum == false)
             {     //2 saat kala seferleri rezervasyona kapat
-                 seferler = seferRepo.GetAll(x => x.RotaID == rotaId && x.Tarih == gidisTarihi && x.CikisSaati.Hours > DateTime.Now.Hour + 2).ToList();
+                seferler = seferRepo.GetAll(x => x.RotaID == rotaId && x.Tarih == gidisTarihi && x.CikisSaati.Hours > DateTime.Now.Hour + 2).ToList();
             }
 
             var deneme = seferRepo.GetAll().Select(x => DbFunctions.TruncateTime(x.Tarih)).ToList();
@@ -520,19 +602,7 @@ namespace UI
                 item1.SubItems.Add(item.Tarih.ToString());
                 item1.SubItems.Add(item.SeferSuresi.ToString());
                 lstSeferler.Items.Add(item1);
-
             }
-
-
-            if (lstSeferler.Items.Count == 0)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-
         }
 
         private void btnIleriSefer_Click(object sender, EventArgs e)
@@ -556,6 +626,7 @@ namespace UI
 
         private void lstSeferler_SelectedIndexChanged(object sender, EventArgs e)
         {
+           // lstSeferler.SelectedItems.Clear();
 
             if (donusBileti == 1 || donusBileti == 0)
             {
