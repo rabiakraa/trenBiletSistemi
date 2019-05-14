@@ -278,17 +278,18 @@ namespace UI
             cinsiyet = cns.rdoErkek.Checked;
             KoltuklariDoldur(gidisSeferID);
             PictureBox yanKoltuk;
+            int yanKoltukNo;
 
             //Seçilen koltuğun yan koltuğun bulunup yanda oturan birisi varsa, girilen cinsiyetle aynı olup olmadığına bakılır. Farklıysa uyarı verilir.
             if (secilenKoltuk % 2 == 0)
             {
-                int yanKoltukNo = secilenKoltuk - 1;
+                 yanKoltukNo = secilenKoltuk - 1;
                 string yanKoltukName = secilenPb.Name.Substring(0, 1).ToString() + (yanKoltukNo).ToString();
                 yanKoltuk = this.Controls.Find(yanKoltukName, true).FirstOrDefault() as PictureBox;
             }
             else
             {
-                int yanKoltukNo = secilenKoltuk + 1;
+                 yanKoltukNo = secilenKoltuk + 1;
                 string yanKoltukName = secilenPb.Name.Substring(0, 1).ToString() + (yanKoltukNo).ToString();
                 yanKoltuk = this.Controls.Find(yanKoltukName, true).FirstOrDefault() as PictureBox;
             }
@@ -297,8 +298,10 @@ namespace UI
             //Yan koltuk boş değilse işleme başla.. Burada yan koltukta bayan yada erkek oturması durumu image tag özelliğiyle kontrol altında tutulmuştur. 
             //Bir bayana ait koltuğun image tag'i "b", erkeğe ait koltuğun image tag'i ise "e" olur.
             //Eğer iki bilet aynı kişiye aitse kadın erkek yan yana oturabilir.
-            if (yanKoltuk.Image.Tag != null && ayniKullanici == false)
-            {                
+            if (yanKoltuk.Image.Tag != null)
+            {
+                if (!YanKoltukAyniKisiyeMiAit(yanKoltukNo))
+                {
                     if (cinsiyet == false && yanKoltuk.Image.Tag.ToString() == "e")     //Seçilen cinsiyet kadınsa ve yanında erkek oturuyorsa..
                     {
                         MessageBox.Show("Yanyana oturacak yolcuların cinsiyeti aynı olmalıdır.");
@@ -307,7 +310,7 @@ namespace UI
                     {
                         MessageBox.Show("Yanyana oturacak yolcuların cinsiyeti aynı olmalıdır.");
                     }
-                
+                }
                 else   //Cinsiyetler farklı değilse bilet almaya izin verir.
                 {
                     if (biletDurum == true)
@@ -315,6 +318,7 @@ namespace UI
                     else if (biletDurum == false)
                         secilenPb.Image = UI.Properties.Resources.seciliRezerve;
                 }
+
                 
             }
             else   //Yan koltuk boşsa kontrol etmeden bilet almaya izin verir.
@@ -326,10 +330,10 @@ namespace UI
             }
         }
 
-        private bool YanKoltukAyniKisiyeMiAit(string koltukNumarasi)        //Şuanda bu metod kullanılmıyor.
+        private bool YanKoltukAyniKisiyeMiAit(int koltukNumarasi)        //Şuanda bu metod kullanılmıyor.
         {
-            int koltukNumarasi2 = Convert.ToInt32(koltukNumarasi);
-            var yanKoltuk = biletRepo.GetAll(x => x.KullaniciID == kullanici.KullaniciID && x.KoltukNo == koltukNumarasi2).ToList();
+        //    int koltukNumarasi2 = Convert.ToInt32(koltukNumarasi);
+            var yanKoltuk = biletRepo.GetAll(x => x.KullaniciID == kullanici.KullaniciID && x.KoltukNo == koltukNumarasi && x.SeferID == gidisSeferID).ToList();
             if (yanKoltuk != null) return true;
             return false;
         }
@@ -520,7 +524,7 @@ namespace UI
                 item1.SubItems.Add(item.YemekliMi ? "Var" : "Yok");
                 item1.SubItems.Add(item.YolculukHizmetiVarMi ? "Var" : "Yok");
                 item1.SubItems.Add(item.Fiyat.ToString());
-
+                item1.SubItems.Add(item.BiletDurumu ? "Satın Alındı." : "Rezerve");
                 lstBiletler.Items.Add(item1);
 
             }
@@ -554,6 +558,7 @@ namespace UI
         private void btnGuvenliCikis_Click(object sender, EventArgs e)
         {
             TrenTab.SelectedIndex = 0;
+            OrtakMetodlar.Temizle(pnlGiris);
         }
 
         private void btnBiletiAl_Click(object sender, EventArgs e)
@@ -621,6 +626,11 @@ namespace UI
         private void Biletlerim_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnBiletAraGeri_Click(object sender, EventArgs e)
+        {
+            TrenTab.SelectedIndex = 0;
         }
 
         public void SeferleriGetir(int cikisId, int varisId, DateTime gidisTarihi)

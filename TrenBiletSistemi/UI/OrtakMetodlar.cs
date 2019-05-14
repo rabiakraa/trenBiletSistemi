@@ -45,7 +45,7 @@ namespace UI
             {
                 if(item is TextBox)
                 {
-                    item.Text =" ";
+                    item.Text ="";
                 }
                 else if(item is CheckBox)
                 {

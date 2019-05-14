@@ -176,6 +176,7 @@
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader18 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnSorgula = new System.Windows.Forms.Button();
             this.txtBiletId = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -184,6 +185,9 @@
             this.btnBiletNoIleAra = new System.Windows.Forms.Button();
             this.txtBiletNumarasi = new System.Windows.Forms.TextBox();
             this.label48 = new System.Windows.Forms.Label();
+            this.pnlGiris = new System.Windows.Forms.Panel();
+            this.btnRSatinAl = new System.Windows.Forms.Button();
+            this.btnBiletAraGeri = new System.Windows.Forms.Button();
             this.TrenTab.SuspendLayout();
             this.Giris.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -231,6 +235,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbBusiness)).BeginInit();
             this.Biletlerim.SuspendLayout();
             this.tabBiletAra.SuspendLayout();
+            this.pnlGiris.SuspendLayout();
             this.SuspendLayout();
             // 
             // TrenTab
@@ -250,16 +255,13 @@
             // 
             // Giris
             // 
+            this.Giris.Controls.Add(this.pnlGiris);
             this.Giris.Controls.Add(this.btnBiletAra);
             this.Giris.Controls.Add(this.pictureBox2);
             this.Giris.Controls.Add(this.label16);
             this.Giris.Controls.Add(this.btnDevamEt);
             this.Giris.Controls.Add(this.btnGirisYap);
             this.Giris.Controls.Add(this.btnUyeOl);
-            this.Giris.Controls.Add(this.txtSifre);
-            this.Giris.Controls.Add(this.txtEposta);
-            this.Giris.Controls.Add(this.label2);
-            this.Giris.Controls.Add(this.label1);
             this.Giris.Location = new System.Drawing.Point(4, 25);
             this.Giris.Name = "Giris";
             this.Giris.Padding = new System.Windows.Forms.Padding(3);
@@ -343,7 +345,7 @@
             // txtSifre
             // 
             this.txtSifre.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txtSifre.Location = new System.Drawing.Point(367, 230);
+            this.txtSifre.Location = new System.Drawing.Point(82, 58);
             this.txtSifre.Margin = new System.Windows.Forms.Padding(4);
             this.txtSifre.Name = "txtSifre";
             this.txtSifre.PasswordChar = '*';
@@ -353,7 +355,7 @@
             // txtEposta
             // 
             this.txtEposta.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txtEposta.Location = new System.Drawing.Point(367, 186);
+            this.txtEposta.Location = new System.Drawing.Point(82, 14);
             this.txtEposta.Margin = new System.Windows.Forms.Padding(4);
             this.txtEposta.Name = "txtEposta";
             this.txtEposta.Size = new System.Drawing.Size(186, 29);
@@ -363,7 +365,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label2.Location = new System.Drawing.Point(300, 233);
+            this.label2.Location = new System.Drawing.Point(15, 61);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(50, 23);
@@ -374,7 +376,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label1.Location = new System.Drawing.Point(289, 186);
+            this.label1.Location = new System.Drawing.Point(4, 14);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(73, 23);
@@ -872,7 +874,7 @@
             this.grpKoltukEkonomi.Controls.Add(this.e2);
             this.grpKoltukEkonomi.Controls.Add(this.e3);
             this.grpKoltukEkonomi.Controls.Add(this.e1);
-            this.grpKoltukEkonomi.Location = new System.Drawing.Point(20, 138);
+            this.grpKoltukEkonomi.Location = new System.Drawing.Point(20, 139);
             this.grpKoltukEkonomi.Name = "grpKoltukEkonomi";
             this.grpKoltukEkonomi.Size = new System.Drawing.Size(634, 237);
             this.grpKoltukEkonomi.TabIndex = 63;
@@ -1830,6 +1832,7 @@
             // 
             // Biletlerim
             // 
+            this.Biletlerim.Controls.Add(this.btnRSatinAl);
             this.Biletlerim.Controls.Add(this.button1);
             this.Biletlerim.Controls.Add(this.btnBiletIptal);
             this.Biletlerim.Controls.Add(this.btnBiletiAl);
@@ -1875,7 +1878,7 @@
             // 
             this.btnBiletiAl.BackColor = System.Drawing.Color.LightSteelBlue;
             this.btnBiletiAl.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnBiletiAl.Location = new System.Drawing.Point(224, 385);
+            this.btnBiletiAl.Location = new System.Drawing.Point(551, 385);
             this.btnBiletiAl.Name = "btnBiletiAl";
             this.btnBiletiAl.Size = new System.Drawing.Size(161, 38);
             this.btnBiletiAl.TabIndex = 26;
@@ -1895,10 +1898,11 @@
             this.columnHeader7,
             this.columnHeader8,
             this.columnHeader9,
-            this.columnHeader10});
+            this.columnHeader10,
+            this.columnHeader18});
             this.lstBiletler.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.lstBiletler.GridLines = true;
-            this.lstBiletler.Location = new System.Drawing.Point(38, 59);
+            this.lstBiletler.Location = new System.Drawing.Point(37, 59);
             this.lstBiletler.Name = "lstBiletler";
             this.lstBiletler.Size = new System.Drawing.Size(887, 320);
             this.lstBiletler.TabIndex = 23;
@@ -1955,6 +1959,10 @@
             this.columnHeader10.Text = "Fiyat";
             this.columnHeader10.Width = 87;
             // 
+            // columnHeader18
+            // 
+            this.columnHeader18.Text = "Durum";
+            // 
             // btnSorgula
             // 
             this.btnSorgula.BackColor = System.Drawing.Color.LightSteelBlue;
@@ -1987,6 +1995,7 @@
             // 
             // tabBiletAra
             // 
+            this.tabBiletAra.Controls.Add(this.btnBiletAraGeri);
             this.tabBiletAra.Controls.Add(this.lblBiletNoSonuc);
             this.tabBiletAra.Controls.Add(this.btnBiletNoIleAra);
             this.tabBiletAra.Controls.Add(this.txtBiletNumarasi);
@@ -2036,6 +2045,40 @@
             this.label48.Size = new System.Drawing.Size(131, 23);
             this.label48.TabIndex = 23;
             this.label48.Text = "Bilet No Giriniz :";
+            // 
+            // pnlGiris
+            // 
+            this.pnlGiris.Controls.Add(this.label1);
+            this.pnlGiris.Controls.Add(this.label2);
+            this.pnlGiris.Controls.Add(this.txtEposta);
+            this.pnlGiris.Controls.Add(this.txtSifre);
+            this.pnlGiris.Location = new System.Drawing.Point(284, 174);
+            this.pnlGiris.Name = "pnlGiris";
+            this.pnlGiris.Size = new System.Drawing.Size(296, 100);
+            this.pnlGiris.TabIndex = 20;
+            // 
+            // btnRSatinAl
+            // 
+            this.btnRSatinAl.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnRSatinAl.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnRSatinAl.Location = new System.Drawing.Point(224, 385);
+            this.btnRSatinAl.Name = "btnRSatinAl";
+            this.btnRSatinAl.Size = new System.Drawing.Size(181, 38);
+            this.btnRSatinAl.TabIndex = 56;
+            this.btnRSatinAl.Text = "Seçilen Bileti Satın Al";
+            this.btnRSatinAl.UseVisualStyleBackColor = false;
+            // 
+            // btnBiletAraGeri
+            // 
+            this.btnBiletAraGeri.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnBiletAraGeri.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnBiletAraGeri.Location = new System.Drawing.Point(6, 398);
+            this.btnBiletAraGeri.Name = "btnBiletAraGeri";
+            this.btnBiletAraGeri.Size = new System.Drawing.Size(177, 35);
+            this.btnBiletAraGeri.TabIndex = 27;
+            this.btnBiletAraGeri.Text = "Geri";
+            this.btnBiletAraGeri.UseVisualStyleBackColor = false;
+            this.btnBiletAraGeri.Click += new System.EventHandler(this.btnBiletAraGeri_Click);
             // 
             // chkRezerve
             // 
@@ -2106,6 +2149,8 @@
             this.Biletlerim.PerformLayout();
             this.tabBiletAra.ResumeLayout(false);
             this.tabBiletAra.PerformLayout();
+            this.pnlGiris.ResumeLayout(false);
+            this.pnlGiris.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -2267,5 +2312,9 @@
         private System.Windows.Forms.Button btnBiletNoIleAra;
         private System.Windows.Forms.TextBox txtBiletNumarasi;
         private System.Windows.Forms.Label label48;
+        private System.Windows.Forms.ColumnHeader columnHeader18;
+        private System.Windows.Forms.Panel pnlGiris;
+        private System.Windows.Forms.Button btnRSatinAl;
+        private System.Windows.Forms.Button btnBiletAraGeri;
     }
 }
