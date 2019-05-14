@@ -13,7 +13,6 @@ C:\Users\mkara\Documents\GitHub\trenbiletsistemi\TrenBiletSistemi\UI\bin\Debug\E
 C:\Users\mkara\Documents\GitHub\trenbiletsistemi\TrenBiletSistemi\UI\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\mkara\Documents\GitHub\trenbiletsistemi\TrenBiletSistemi\UI\obj\Debug\UI.csprojAssemblyReference.cache
 C:\Users\mkara\Documents\GitHub\trenbiletsistemi\TrenBiletSistemi\UI\obj\Debug\UI.Cinsiyet.resources
-C:\Users\mkara\Documents\GitHub\trenbiletsistemi\TrenBiletSistemi\UI\obj\Debug\UI.Form1.resources
 C:\Users\mkara\Documents\GitHub\trenbiletsistemi\TrenBiletSistemi\UI\obj\Debug\UI.Properties.Resources.resources
 C:\Users\mkara\Documents\GitHub\trenbiletsistemi\TrenBiletSistemi\UI\obj\Debug\UI.chkRezerve.resources
 C:\Users\mkara\Documents\GitHub\trenbiletsistemi\TrenBiletSistemi\UI\obj\Debug\UI.UyeOl.resources

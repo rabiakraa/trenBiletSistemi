@@ -53,9 +53,9 @@ namespace UI
                 }
             }
         }
-
     }
 
+    //Comboboxta value ve text tutabilmek için kullanıyoruz. Örneğin: value: durakID, text: durakAdı
     public class ComboboxItem
     {
         public string Text { get; set; }

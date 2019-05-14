@@ -33,6 +33,8 @@ namespace UI
         Sefer sefer;
         bool cinsiyet;
         #endregion
+
+        #region Diğer Değişkenler
         int donusBileti = 0;        //Gidiş dönüş bileti isteniyorsa bu değer 1 olur, gidiş  bileti alınınca 2 olur.
         int gidisSeferID, donusSeferID, cikisId, varisId;
         DateTime gidisTarihi, donusTarihi;
@@ -47,7 +49,9 @@ namespace UI
         int koltukGidis = 0;   //Dönüş bileti de alınacaksa 1 olur.
         bool biletDurum;        //satın almaysa true rezervasyonsa false
         PictureBox secilenPb;
-
+        bool ayniKullanici = false;//alınan biletleri aynı kullanıcı alıyorsa kız erkek ayrımı yapma.
+        bool uyeDegil = false;      //Uye olmadan giriş yapılması durumunu kontrol eder.
+        #endregion
 
         public void DbInitialize()
         {
@@ -65,6 +69,7 @@ namespace UI
             trenVagonRepo = new EFRepository<TrenVagon>(trenDb);
             vagonTipiRepo = new EFRepository<VagonTipi>(trenDb);
         }
+
         public chkRezerve()
         {
             InitializeComponent();
@@ -91,11 +96,12 @@ namespace UI
 
         private void TrenBilet_Load(object sender, EventArgs e)
         {
-            //Tableri gizle
+            //Tab butonlarını gizle
             /*TrenTab.Appearance = TabAppearance.FlatButtons;
              TrenTab.ItemSize = new Size(0, 1);
              TrenTab.SizeMode = TabSizeMode.Fixed;*/
 
+            //Geçmişe dair bilet alınmasını engellemek ve en fazla 14 gün sonrasına bilet vermek için.
             dtGidis.MinDate = DateTime.Today;
             dtGidis.MaxDate = DateTime.Today.AddDays(14);
             dtDonus.MinDate = DateTime.Today;
@@ -105,8 +111,8 @@ namespace UI
 
         private void btnGirisYap_Click(object sender, EventArgs e)
         {
+            uyeDegil = false;
             var girisYapan = kullaniciRepo.Get(x => x.Email == txtEposta.Text && x.Sifre == txtSifre.Text);
-
             if (girisYapan != null)
             {
                 kullanici = new Kullanici();
@@ -126,18 +132,15 @@ namespace UI
 
         private void btnDevamEt_Click(object sender, EventArgs e)
         {
+            uyeDegil = true;
             kullanici = new Kullanici();
-            kullanici.KullaniciID = 1;
+            kullanici.KullaniciID = 1;      //Üye olmadan devam edildiği takdirde kullanıcı id olarak default bir user'ın kullanıcıID'si verilir.
             TrenTab.SelectedIndex = (TrenTab.SelectedIndex + 1) % TrenTab.TabCount;
-        }
-
-        private void BiletDurak_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void cmbNereden_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //Nereden comboboxından seçilen durağa göre nereye comboxını doldur. Örneğin İstanbul seçilirse varış durağı olarak İstanbul harici tüm duraklar alınır.
             var duraklar = durakRepo.GetAll().ToList();
             cmbNereye.Items.Clear();
 
@@ -159,6 +162,7 @@ namespace UI
             if (rdoGidisDonus.Checked)
             {
                 dtDonus.Enabled = true;
+                //Aşağıdaki iki değişken dönüş seferi seçimi ve dönüş biletlerinin alınması için gereklidir.
                 donusBileti = 1;
                 koltukGidis = 1;
             }
@@ -180,7 +184,6 @@ namespace UI
         private void btnAra_Click(object sender, EventArgs e)
         {
             biletDurum = rdoSatinAl.Checked;
-
             yolcuSayisi = Convert.ToInt32(nmrYolcuSayisi.Value);
             donusBileti = 0;
             if (rdoGidisDonus.Checked)
@@ -256,19 +259,17 @@ namespace UI
 
         private void koltukSecildi(object sender, EventArgs e)
         {
-          
-             secilenPb = (sender as PictureBox);
+            //Tıklanan koltuk secilenPb isimli PictureBox'ta tutulur.
+            secilenPb = (sender as PictureBox);
+            //Seçilen koltuğun numarası koltuğun tag'inde tutulduğundan tag üzerinden direk alınabilir.
             secilenKoltuk = Convert.ToInt32((sender as PictureBox).Tag.ToString());
 
             cns = new Cinsiyet();
-             cns.Show();
-            //cinsiyet = false;
+            cns.Show();
 
+            //Herhangi bir koltuk seçildiğinde cinsiyet seçimi yapıldıktan sonra işlemler gerçekleşir.
             cns.btnCinsiyet.Click += BtnCinsiyet_Click;
-           
 
-            /* sinif = biletSinifi == 2 ? "Business" : "Ekonomi";
-            MessageBox.Show(sinif + " " + secilenKoltuk.ToString());*/
 
         }
 
@@ -278,6 +279,7 @@ namespace UI
             KoltuklariDoldur(gidisSeferID);
             PictureBox yanKoltuk;
 
+            //Seçilen koltuğun yan koltuğun bulunup yanda oturan birisi varsa, girilen cinsiyetle aynı olup olmadığına bakılır. Farklıysa uyarı verilir.
             if (secilenKoltuk % 2 == 0)
             {
                 int yanKoltukNo = secilenKoltuk - 1;
@@ -291,31 +293,45 @@ namespace UI
                 yanKoltuk = this.Controls.Find(yanKoltukName, true).FirstOrDefault() as PictureBox;
             }
 
-            if (yanKoltuk.Image.Tag != null)
-            {
-                if (cinsiyet == false && yanKoltuk.Image.Tag.ToString() == "e")
-                {
-                    MessageBox.Show("Yanyana oturacak yolcuların cinsiyeti aynı olmalıdır.");
-                }
-                else if (cinsiyet == true && yanKoltuk.Image.Tag.ToString() == "k")
-                {
-                    MessageBox.Show("Yanyana oturacak yolcuların cinsiyeti aynı olmalıdır.");
-                }
-                else
+
+            //Yan koltuk boş değilse işleme başla.. Burada yan koltukta bayan yada erkek oturması durumu image tag özelliğiyle kontrol altında tutulmuştur. 
+            //Bir bayana ait koltuğun image tag'i "b", erkeğe ait koltuğun image tag'i ise "e" olur.
+            //Eğer iki bilet aynı kişiye aitse kadın erkek yan yana oturabilir.
+            if (yanKoltuk.Image.Tag != null && ayniKullanici == false)
+            {                
+                    if (cinsiyet == false && yanKoltuk.Image.Tag.ToString() == "e")     //Seçilen cinsiyet kadınsa ve yanında erkek oturuyorsa..
+                    {
+                        MessageBox.Show("Yanyana oturacak yolcuların cinsiyeti aynı olmalıdır.");
+                    }
+                    else if (cinsiyet == true && yanKoltuk.Image.Tag.ToString() == "b")     //Seçilen cinsiyet erkekse ve yanında kadın oturuyorsa..
+                    {
+                        MessageBox.Show("Yanyana oturacak yolcuların cinsiyeti aynı olmalıdır.");
+                    }
+                
+                else   //Cinsiyetler farklı değilse bilet almaya izin verir.
                 {
                     if (biletDurum == true)
                         secilenPb.Image = UI.Properties.Resources.seciliSatinAl;
                     else if (biletDurum == false)
                         secilenPb.Image = UI.Properties.Resources.seciliRezerve;
                 }
+                
             }
-            else
+            else   //Yan koltuk boşsa kontrol etmeden bilet almaya izin verir.
             {
                 if (biletDurum == true)
                     secilenPb.Image = UI.Properties.Resources.seciliSatinAl;
                 else if (biletDurum == false)
                     secilenPb.Image = UI.Properties.Resources.seciliRezerve;
             }
+        }
+
+        private bool YanKoltukAyniKisiyeMiAit(string koltukNumarasi)        //Şuanda bu metod kullanılmıyor.
+        {
+            int koltukNumarasi2 = Convert.ToInt32(koltukNumarasi);
+            var yanKoltuk = biletRepo.GetAll(x => x.KullaniciID == kullanici.KullaniciID && x.KoltukNo == koltukNumarasi2).ToList();
+            if (yanKoltuk != null) return true;
+            return false;
         }
 
         private void KoltuklariDoldur(int seferID)
@@ -328,9 +344,9 @@ namespace UI
 
                 foreach (Control koltuk in grpKoltukEkonomi.Controls)
                 {
-                    if (koltuk is PictureBox && koltuk.Name.StartsWith("kd") == false)
+                    if (koltuk is PictureBox && koltuk.Name.StartsWith("kd") == false)      //Koltuk olan pictureboxları al.
                     {
-                        ((PictureBox)koltuk).Image = UI.Properties.Resources.bos1;
+                        ((PictureBox)koltuk).Image = UI.Properties.Resources.bos1;      //Önce tüm koltukları boşalt.
                         ((PictureBox)koltuk).Enabled = true;
                         ((PictureBox)koltuk).Image.Tag = null;
                     }
@@ -338,7 +354,7 @@ namespace UI
 
                 foreach (var item in alinmisBiletler)
                 {
-                    if (item.Cinsiyet == false)  //bayan
+                    if (item.Cinsiyet == false)  //bayan adına alınan biletlere doluKadin isimli görseli yükle
                     {
                         string pbName = "e" + item.KoltukNo;
                         PictureBox pb = this.Controls.Find(pbName, true).FirstOrDefault() as PictureBox;
@@ -346,7 +362,7 @@ namespace UI
                         pb.Image.Tag = "b";
                         pb.Enabled = false;
                     }
-                    else if (item.Cinsiyet == true)  // erkek
+                    else if (item.Cinsiyet == true)  // erkek adına alınan biletlere doluErkek isimli görseli yükle
                     {
                         string pbName = "e" + item.KoltukNo;
                         PictureBox pb = this.Controls.Find(pbName, true).FirstOrDefault() as PictureBox;
@@ -354,26 +370,10 @@ namespace UI
                         pb.Image.Tag = "e";
                         pb.Enabled = false;
                     }
-                    /*
-                    else if (item.BiletDurumu == false && item.Cinsiyet == false)  //rezerve ve bayan 
-                    {
-                        string pbName = "e" + item.KoltukNo;
-                        PictureBox pb = this.Controls.Find(pbName, true).FirstOrDefault() as PictureBox;
-                        pb.Image = UI.Properties.Resources.kadinRezerve;
-                        pb.Enabled = false;
-                    }
-                    else if (item.BiletDurumu == false && item.Cinsiyet == true)  //rezerve ve erkek
-                    {
-                        string pbName = "e" + item.KoltukNo;
-                        PictureBox pb = this.Controls.Find(pbName, true).FirstOrDefault() as PictureBox;
-                        pb.Image = UI.Properties.Resources.erkekRezerve;
-                        pb.Enabled = false;
-                    }*/
-
                 }
 
             }
-            else if (biletSinifi == 2)  //Business
+            else if (biletSinifi == 2)  //Business || Ekonomiyle ikisinin ayrı ayrı yapılmasının sebebi; ekonomi koltuklarının namei e ile başlar, businessın b ile.
             {
                 var alinmisBiletler = biletRepo.GetAll(x => x.SeferID == seferID && x.VagonSinifi == true).ToList();
 
@@ -440,7 +440,7 @@ namespace UI
 
         private void btnSatinAl_Click(object sender, EventArgs e)
         {
-            FiyatBelirle();
+            FiyatBelirle();     //Fiyatı belirle. Çocuksa fiyatı düşür, ek hizmetler varsa artır vs.
 
             Bilet bilet = new Bilet
             {
@@ -463,21 +463,27 @@ namespace UI
             biletRepo.Add(bilet);
             uow.SaveChanges();
 
+            KoltuklariDoldur(gidisSeferID);     //bilet satıldıktan sonra yeni haliyle koltukları güncelle ve kullanıcı bilgileri kısmını temizle, yeni bilet alma işlemleri için hazırla.
+            OrtakMetodlar.Temizle(pnlKisi);
+
             if (biletDurum == true)
                 MessageBox.Show("Bilet satın alma işlemi yapılmıştır. ");
             else
                 MessageBox.Show("Bilet rezervasyon işlemi yapılmıştır.");
 
-            yolcuSayisi--;
-            aktifYolcu++;
+            yolcuSayisi--;      //Yolcu sayısı 0'a ulaşana kadar azalt, böylece her yolcuya bilet al.
+            aktifYolcu++;       //O anda bilet alınan yolcuyu tut.
 
             if (yolcuSayisi != 0)
             {
+                ayniKullanici = true;
                 YeniBiletAl();
             }
             else
             {
-                if (koltukGidis == 1)
+                ayniKullanici = false; 
+
+                if (koltukGidis == 1)           //Dönüş bileti isteniyorsa tekrar bilet al
                 {
                     gidisSeferID = donusSeferID;
                     aktifYolcu = 1;
@@ -487,6 +493,9 @@ namespace UI
                 }
                 else
                 {
+                    if (uyeDegil == true)
+                        TrenTab.SelectedIndex = 5 ;
+                    else
                     TrenTab.SelectedIndex = (TrenTab.SelectedIndex + 1) % TrenTab.TabCount;
                     BiletleriDoldur();
                 }
@@ -496,8 +505,6 @@ namespace UI
         public void BiletleriDoldur()
         {
             var biletler = biletRepo.GetAll(x => x.KullaniciID == kullanici.KullaniciID && (x.BiletID.ToString()).StartsWith(txtBiletId.Text)).ToList();
-            // var biletler = biletRepo.GetAll(x => x.KullaniciID == kullanici.KullaniciID ).ToList();
-
             lstBiletler.Items.Clear();
             foreach (var item in biletler)
             {
@@ -506,10 +513,10 @@ namespace UI
                 item1.SubItems.Add(item.Soyad);
                 string cikisDurak = durakRepo.GetAll(x => x.DurakID == item.Sefer.Rota.CikisID).Select(x => x.DurakAdi).SingleOrDefault();
                 string varisDurak = durakRepo.GetAll(x => x.DurakID == item.Sefer.Rota.VarisID).Select(x => x.DurakAdi).SingleOrDefault();
-                    item1.SubItems.Add(cikisDurak);
-                    item1.SubItems.Add(varisDurak);
-                    item1.SubItems.Add(item.Sefer.CikisSaati.ToString());
-                    item1.SubItems.Add(item.SigortaliMi ? "Var" :"Yok");
+                item1.SubItems.Add(cikisDurak);
+                item1.SubItems.Add(varisDurak);
+                item1.SubItems.Add(item.Sefer.CikisSaati.ToString());
+                item1.SubItems.Add(item.SigortaliMi ? "Var" : "Yok");
                 item1.SubItems.Add(item.YemekliMi ? "Var" : "Yok");
                 item1.SubItems.Add(item.YolculukHizmetiVarMi ? "Var" : "Yok");
                 item1.SubItems.Add(item.Fiyat.ToString());
@@ -563,7 +570,7 @@ namespace UI
         {
             BiletleriDoldur();
         }
-        public bool SeferVarMi(int cikisId, int varisId, DateTime gidisTarihi)
+        public bool SeferVarMi(int cikisId, int varisId, DateTime gidisTarihi)      //aranan seferler varmı diye bakar. sefer yoksa kullanıcıya uyarı verir.
         {
             var rotaId = rotaRepo.GetAll(x => x.CikisID == cikisId && x.VarisID == varisId).Select(x => x.RotaID).SingleOrDefault();
             var seferler = seferRepo.GetAll(x => x.RotaID == rotaId && x.Tarih == gidisTarihi).ToList();
@@ -572,6 +579,48 @@ namespace UI
                 return false;
             }
             return true;
+        }
+
+        private void btnGeriSefer_Click(object sender, EventArgs e)
+        {
+            TrenTab.SelectedIndex = 1;
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            TrenTab.SelectedIndex = 2;
+        }
+
+        private void btnBiletAra_Click(object sender, EventArgs e)
+        {
+            TrenTab.SelectedIndex = 5;
+        }
+
+        private void btnBiletNoIleAra_Click(object sender, EventArgs e)
+        {
+            int bNo = int.Parse(txtBiletNumarasi.Text);
+            var biletim = biletRepo.GetAll(x => x.BiletID == bNo).SingleOrDefault();
+
+            string cikisDurak = durakRepo.GetAll(x => x.DurakID == biletim.Sefer.Rota.CikisID).Select(x => x.DurakAdi).SingleOrDefault();
+            string varisDurak = durakRepo.GetAll(x => x.DurakID == biletim.Sefer.Rota.VarisID).Select(x => x.DurakAdi).SingleOrDefault();
+
+            lblBiletNoSonuc.Text = "Ad: " +biletim.Ad
+                +"\nSoyad: "+biletim.Soyad
+                +"\nÇıkış Durağı: " + cikisDurak 
+                +"\nVarış Durağı: "+ varisDurak
+                +"\nÇıkış Saati: " + biletim.Sefer.CikisSaati.ToString()
+                +"\nSigorta: " + (biletim.SigortaliMi ? "Var" : "Yok")
+                + "\nYemek: " + (biletim.YemekliMi ? "Var" : "Yok")
+                + "\nYolculuk Hizmeti: " + (biletim.YolculukHizmetiVarMi ? "Var" : "Yok")
+                + "\nÇocuk: " + (biletim.CocukMu ? "Evet" : "Hayır")
+                + "\nFiyat: " + (biletim.Fiyat.ToString());
+
+        }
+
+        private void Biletlerim_Click(object sender, EventArgs e)
+        {
+
         }
 
         public void SeferleriGetir(int cikisId, int varisId, DateTime gidisTarihi)
@@ -626,7 +675,7 @@ namespace UI
 
         private void lstSeferler_SelectedIndexChanged(object sender, EventArgs e)
         {
-           // lstSeferler.SelectedItems.Clear();
+            // lstSeferler.SelectedItems.Clear();
 
             if (donusBileti == 1 || donusBileti == 0)
             {
