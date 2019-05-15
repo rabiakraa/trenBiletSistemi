@@ -39,6 +39,7 @@ namespace UI
         int donusBileti = 0;        //Gidiş dönüş bileti isteniyorsa bu değer 1 olur, gidiş  bileti alınınca 2 olur.
         int gidisSeferID, donusSeferID, cikisId, varisId;
         DateTime gidisTarihi, donusTarihi;
+        TimeSpan gidisSaati;
         int biletSinifi; //1 ekonomi 2 business
         int yolcuSayisi;
         int aktifYolcu = 1;
@@ -52,6 +53,7 @@ namespace UI
         PictureBox secilenPb;
         bool ayniKullanici = false;//alınan biletleri aynı kullanıcı alıyorsa kız erkek ayrımı yapma.
         bool uyeDegil = false;      //Uye olmadan giriş yapılması durumunu kontrol eder.
+        DateTime bugun;
         #endregion
 
         public void DbInitialize()
@@ -207,10 +209,11 @@ namespace UI
                 cikisId = Convert.ToInt32(((ComboboxItem)cmbNereden.SelectedItem).Value);
                 varisId = Convert.ToInt32(((ComboboxItem)cmbNereye.SelectedItem).Value);
                 gidisTarihi = new DateTime(dtGidis.Value.Year, dtGidis.Value.Month, dtGidis.Value.Day, 0, 0, 0);
+                 gidisSaati = DateTime.Now.TimeOfDay;
 
                 if (donusBileti == 1)    //Gidiş dönüş seçilmişse
                 {
-                    if (SeferVarMi(cikisId, varisId, gidisTarihi) && SeferVarMi(varisId, cikisId, donusTarihi))
+                    if (SeferVarMi(cikisId, varisId, gidisTarihi,gidisSaati) && SeferVarMi(varisId, cikisId, donusTarihi, gidisSaati))
                     {
                         TrenTab.SelectedIndex = (TrenTab.SelectedIndex + 1) % TrenTab.TabCount;
                     }
@@ -222,7 +225,7 @@ namespace UI
 
                 else if (donusBileti == 0)    //Tek yön seçilmişse
                 {
-                    if (SeferVarMi(cikisId, varisId, gidisTarihi))
+                    if (SeferVarMi(cikisId, varisId, gidisTarihi,gidisSaati))
                     {
                         TrenTab.SelectedIndex = (TrenTab.SelectedIndex + 1) % TrenTab.TabCount;
                     }
@@ -232,7 +235,7 @@ namespace UI
                     }
                 }
 
-                SeferleriGetir(cikisId, varisId, gidisTarihi);
+                SeferleriGetir(cikisId, varisId, gidisTarihi, gidisSaati);
 
             }
 
@@ -585,10 +588,19 @@ namespace UI
         {
             BiletleriDoldur();
         }
-        public bool SeferVarMi(int cikisId, int varisId, DateTime gidisTarihi)      //aranan seferler varmı diye bakar. sefer yoksa kullanıcıya uyarı verir.
+        public bool SeferVarMi(int cikisId, int varisId, DateTime gidisTarihi, TimeSpan gidisSaati)      //aranan seferler varmı diye bakar. sefer yoksa kullanıcıya uyarı verir.
         {
+             bugun = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0); 
+
             var rotaId = rotaRepo.GetAll(x => x.CikisID == cikisId && x.VarisID == varisId).Select(x => x.RotaID).SingleOrDefault();
-            var seferler = seferRepo.GetAll(x => x.RotaID == rotaId && x.Tarih == gidisTarihi).ToList();
+
+            var seferler = seferRepo.GetAll(x => x.RotaID == rotaId && x.Tarih == gidisTarihi ).ToList();
+
+            if (gidisTarihi == bugun)
+            {
+                seferler = seferRepo.GetAll(x => x.RotaID == rotaId && x.Tarih == gidisTarihi && TimeSpan.Compare(x.CikisSaati, gidisSaati) == 1).ToList();
+            }
+
             if (seferler.Count == 0)
             {
                 return false;
@@ -658,14 +670,14 @@ namespace UI
             TrenTab.SelectedIndex = 0;
         }
 
-        public void SeferleriGetir(int cikisId, int varisId, DateTime gidisTarihi)
+        public void SeferleriGetir(int cikisId, int varisId, DateTime gidisTarihi, TimeSpan gidisSaati)
         {
             var rotaId = rotaRepo.GetAll(x => x.CikisID == cikisId && x.VarisID == varisId).Select(x => x.RotaID).SingleOrDefault();
             var seferler = seferRepo.GetAll(x => x.RotaID == rotaId && x.Tarih == gidisTarihi).ToList();
 
-            if (gidisTarihi == DateTime.Now)
+            if (gidisTarihi == bugun)
             {
-                seferler = seferRepo.GetAll(x => x.RotaID == rotaId && x.Tarih == gidisTarihi && x.CikisSaati.Hours > DateTime.Now.Hour).ToList();
+                seferler = seferRepo.GetAll(x => x.RotaID == rotaId && x.Tarih == gidisTarihi && TimeSpan.Compare(x.CikisSaati, gidisSaati) == 1).ToList();
             }
 
             if (biletDurum == false)
@@ -698,7 +710,7 @@ namespace UI
                 varisId = Convert.ToInt32(((ComboboxItem)cmbNereden.SelectedItem).Value);
                 cikisId = Convert.ToInt32(((ComboboxItem)cmbNereye.SelectedItem).Value);
                 donusTarihi = new DateTime(dtDonus.Value.Year, dtGidis.Value.Month, dtGidis.Value.Day, 0, 0, 0);
-                SeferleriGetir(cikisId, varisId, donusTarihi);
+                SeferleriGetir(cikisId, varisId, donusTarihi,gidisSaati);
 
                 donusBileti = 2;
             }
@@ -768,7 +780,7 @@ namespace UI
                 {
                     new VagonTipi() {TipAdi= "Business"},
                     new VagonTipi() {TipAdi="Ekonomi"}
-                    
+
                 };
                 vagonTipiRepo.AddRange(EklenecekVagonTipleri);
             }
@@ -842,8 +854,85 @@ namespace UI
             }
             uow.SaveChanges();
 
-            //SEFER EKLEME KISMI YAPILACAK
+            //İlk atamada 14 günlük sefer eklemesi yapalım..
+            var seferlerIlk = seferRepo.GetAll().ToList();
+            if (seferlerIlk.Count == 0)
+            {
+                for (int i = 0; i < 15; i++)
+            {
+                    DateTime gun = new DateTime(dtGidis.Value.Year, dtGidis.Value.Month, dtGidis.Value.Day + i, 0, 0, 0);
+                    List<Sefer> eklenecekSeferler = new List<Sefer>()
+                {
+                    new Sefer() { CikisSaati=TimeSpan.FromHours(8) , VarisSaati=TimeSpan.FromHours(9), RotaID =1,
+                        SeferSuresi = TimeSpan.FromHours(1), Tarih=gun, TrenID = 1 },
+                    new Sefer() { CikisSaati=TimeSpan.FromHours(9) , VarisSaati=TimeSpan.FromHours(10), RotaID =2,
+                        SeferSuresi = TimeSpan.FromHours(1), Tarih=gun, TrenID = 1 },
+                      new Sefer() { CikisSaati=TimeSpan.FromHours(10) , VarisSaati=TimeSpan.FromHours(11), RotaID =3,
+                        SeferSuresi = TimeSpan.FromHours(1), Tarih=gun, TrenID = 1 },
+                          new Sefer() { CikisSaati=TimeSpan.FromHours(11) , VarisSaati=TimeSpan.FromHours(12), RotaID =4,
+                        SeferSuresi = TimeSpan.FromHours(1), Tarih=gun, TrenID = 1 },
+                                    new Sefer() { CikisSaati=TimeSpan.FromHours(12) , VarisSaati=TimeSpan.FromHours(13), RotaID =5,
+                        SeferSuresi = TimeSpan.FromHours(1), Tarih=gun, TrenID = 1 },
+                                              new Sefer() { CikisSaati=TimeSpan.FromHours(13) , VarisSaati=TimeSpan.FromHours(14), RotaID =6,
+                        SeferSuresi = TimeSpan.FromHours(1), Tarih=gun, TrenID = 1 },
 
+                                                  new Sefer() { CikisSaati=TimeSpan.FromHours(14) , VarisSaati=TimeSpan.FromHours(15), RotaID =1,
+                        SeferSuresi = TimeSpan.FromHours(1), Tarih=gun, TrenID = 2 },
+                    new Sefer() { CikisSaati=TimeSpan.FromHours(15) , VarisSaati=TimeSpan.FromHours(16), RotaID =2,
+                        SeferSuresi = TimeSpan.FromHours(1), Tarih=gun, TrenID = 2 },
+                      new Sefer() { CikisSaati=TimeSpan.FromHours(16) , VarisSaati=TimeSpan.FromHours(17), RotaID =3,
+                        SeferSuresi = TimeSpan.FromHours(1), Tarih=gun, TrenID = 2 },
+                          new Sefer() { CikisSaati=TimeSpan.FromHours(17) , VarisSaati=TimeSpan.FromHours(18), RotaID =4,
+                        SeferSuresi = TimeSpan.FromHours(1), Tarih=gun, TrenID = 2 },
+                                    new Sefer() { CikisSaati=TimeSpan.FromHours(18) , VarisSaati=TimeSpan.FromHours(19), RotaID =5,
+                        SeferSuresi = TimeSpan.FromHours(1), Tarih=gun, TrenID = 2 },
+                                              new Sefer() { CikisSaati=TimeSpan.FromHours(19) , VarisSaati=TimeSpan.FromHours(20), RotaID =6,
+                        SeferSuresi = TimeSpan.FromHours(1), Tarih=gun, TrenID = 2 }
+                };
+                    seferRepo.AddRange(eklenecekSeferler);
+                }
+            }
+            uow.SaveChanges();
+
+
+
+            //Günlük sefer eklemesi
+            DateTime yeniGun = new DateTime(dtGidis.Value.Year, dtGidis.Value.Month, dtGidis.Value.Day + 14, 0, 0, 0);
+
+            var seferler = seferRepo.GetAll(x => x.Tarih == yeniGun).ToList();
+            if (seferler.Count == 0)
+            {
+                List<Sefer> eklenecekSeferler = new List<Sefer>()
+                {
+                    new Sefer() { CikisSaati=TimeSpan.FromHours(8) , VarisSaati=TimeSpan.FromHours(9), RotaID =1,
+                        SeferSuresi = TimeSpan.FromHours(1), Tarih=yeniGun, TrenID = 1 },
+                    new Sefer() { CikisSaati=TimeSpan.FromHours(9) , VarisSaati=TimeSpan.FromHours(10), RotaID =2,
+                        SeferSuresi = TimeSpan.FromHours(1), Tarih=yeniGun, TrenID = 1 },
+                      new Sefer() { CikisSaati=TimeSpan.FromHours(10) , VarisSaati=TimeSpan.FromHours(11), RotaID =3,
+                        SeferSuresi = TimeSpan.FromHours(1), Tarih=DateTime.Now, TrenID = 1 },
+                          new Sefer() { CikisSaati=TimeSpan.FromHours(11) , VarisSaati=TimeSpan.FromHours(12), RotaID =4,
+                        SeferSuresi = TimeSpan.FromHours(1), Tarih=yeniGun, TrenID = 1 },
+                                    new Sefer() { CikisSaati=TimeSpan.FromHours(12) , VarisSaati=TimeSpan.FromHours(13), RotaID =5,
+                        SeferSuresi = TimeSpan.FromHours(1), Tarih=yeniGun, TrenID = 1 },
+                                              new Sefer() { CikisSaati=TimeSpan.FromHours(13) , VarisSaati=TimeSpan.FromHours(14), RotaID =6,
+                        SeferSuresi = TimeSpan.FromHours(1), Tarih=yeniGun, TrenID = 1 },
+
+                                                  new Sefer() { CikisSaati=TimeSpan.FromHours(14) , VarisSaati=TimeSpan.FromHours(15), RotaID =1,
+                        SeferSuresi = TimeSpan.FromHours(1), Tarih=yeniGun, TrenID = 2 },
+                    new Sefer() { CikisSaati=TimeSpan.FromHours(15) , VarisSaati=TimeSpan.FromHours(16), RotaID =2,
+                        SeferSuresi = TimeSpan.FromHours(1), Tarih=yeniGun, TrenID = 2 },
+                      new Sefer() { CikisSaati=TimeSpan.FromHours(16) , VarisSaati=TimeSpan.FromHours(17), RotaID =3,
+                        SeferSuresi = TimeSpan.FromHours(1), Tarih=yeniGun, TrenID = 2 },
+                          new Sefer() { CikisSaati=TimeSpan.FromHours(17) , VarisSaati=TimeSpan.FromHours(18), RotaID =4,
+                        SeferSuresi = TimeSpan.FromHours(1), Tarih=yeniGun, TrenID = 2 },
+                                    new Sefer() { CikisSaati=TimeSpan.FromHours(18) , VarisSaati=TimeSpan.FromHours(19), RotaID =5,
+                        SeferSuresi = TimeSpan.FromHours(1), Tarih=yeniGun, TrenID = 2 },
+                                              new Sefer() { CikisSaati=TimeSpan.FromHours(19) , VarisSaati=TimeSpan.FromHours(20), RotaID =6,
+                        SeferSuresi = TimeSpan.FromHours(1), Tarih=yeniGun, TrenID = 2 }
+                };
+                seferRepo.AddRange(eklenecekSeferler);
+            }
+            uow.SaveChanges();
 
 
 
