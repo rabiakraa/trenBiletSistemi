@@ -813,11 +813,17 @@ namespace UI
                 List<Rota> EklenecekRotalar = new List<Rota>()
                 {
                     new Rota() {CikisID = 1, VarisID = 2},
+                    new Rota() {CikisID = 1, VarisID = 3},
+                    new Rota() {CikisID = 1, VarisID = 4},
+                    new Rota() {CikisID = 2, VarisID = 1},
                     new Rota() {CikisID = 2, VarisID = 3},
-                    new Rota() {CikisID = 3, VarisID = 4},
-                    new Rota() {CikisID = 4, VarisID = 3},
+                    new Rota() {CikisID = 2, VarisID = 4},
+                    new Rota() {CikisID = 3, VarisID = 1},
                     new Rota() {CikisID = 3, VarisID = 2},
-                    new Rota() {CikisID = 2, VarisID = 1}
+                    new Rota() {CikisID = 3, VarisID = 4},
+                      new Rota() {CikisID = 4, VarisID = 1},
+                    new Rota() {CikisID = 4, VarisID = 2},
+                    new Rota() {CikisID = 4, VarisID = 3}
                 };
                 rotaRepo.AddRange(EklenecekRotalar);
             }
@@ -898,8 +904,10 @@ namespace UI
             {
                 List<Kullanici> EklenecekKullanicilar = new List<Kullanici>()
                 {
-                    new Kullanici() {Ad="Admin", Soyad="Admin", Adres="İst", Cinsiyet=false, Email="admin  ",
-                        Sifre ="admin",KullaniciTipID = 1,TcNo="11111111111", Telefon="0555 555 55 55" }
+                    new Kullanici() {Ad="Admin", Soyad="Admin", Adres="İst", Cinsiyet=false, Email="admin ",
+                        Sifre ="admin",KullaniciTipID = 2,TcNo="1", Telefon="0555 555 55 55" },
+                    new Kullanici() {Ad="Rabia", Soyad="Karakaya", Adres="İst", Cinsiyet=false, Email="rabia",
+                        Sifre ="123",KullaniciTipID = 1,TcNo="2", Telefon="0333 333 33 33" }
                 };
                 kullaniciRepo.AddRange(EklenecekKullanicilar);
             }
@@ -926,25 +934,48 @@ namespace UI
                         SeferSuresi = TimeSpan.FromHours(1), Tarih=gun, TrenID = 1 },
                                               new Sefer() { CikisSaati=TimeSpan.FromHours(13) , VarisSaati=TimeSpan.FromHours(14), RotaID =6,
                         SeferSuresi = TimeSpan.FromHours(1), Tarih=gun, TrenID = 1 },
+                                                  new Sefer() { CikisSaati=TimeSpan.FromHours(14) , VarisSaati=TimeSpan.FromHours(15), RotaID =7,
+                        SeferSuresi = TimeSpan.FromHours(1), Tarih=gun, TrenID = 2 },
+                    new Sefer() { CikisSaati=TimeSpan.FromHours(15) , VarisSaati=TimeSpan.FromHours(16), RotaID =8,
+                        SeferSuresi = TimeSpan.FromHours(1), Tarih=gun, TrenID = 2 },
+                      new Sefer() { CikisSaati=TimeSpan.FromHours(16) , VarisSaati=TimeSpan.FromHours(17), RotaID = 9,
+                        SeferSuresi = TimeSpan.FromHours(1), Tarih=gun, TrenID = 2 },
+                          new Sefer() { CikisSaati=TimeSpan.FromHours(17) , VarisSaati=TimeSpan.FromHours(18), RotaID = 10,
+                        SeferSuresi = TimeSpan.FromHours(1), Tarih=gun, TrenID = 2 },
+                                    new Sefer() { CikisSaati=TimeSpan.FromHours(18) , VarisSaati=TimeSpan.FromHours(19), RotaID = 11,
+                        SeferSuresi = TimeSpan.FromHours(1), Tarih=gun, TrenID = 2 },
+                                              new Sefer() { CikisSaati=TimeSpan.FromHours(19) , VarisSaati=TimeSpan.FromHours(20), RotaID = 12,
+                        SeferSuresi = TimeSpan.FromHours(1), Tarih=gun, TrenID = 2 },
 
-                                                  new Sefer() { CikisSaati=TimeSpan.FromHours(14) , VarisSaati=TimeSpan.FromHours(15), RotaID =1,
+                                               new Sefer() { CikisSaati=TimeSpan.FromHours(19) , VarisSaati=TimeSpan.FromHours(20), RotaID =1,
+                        SeferSuresi = TimeSpan.FromHours(1), Tarih=gun, TrenID = 1 },
+                    new Sefer() { CikisSaati=TimeSpan.FromHours(18) , VarisSaati=TimeSpan.FromHours(19), RotaID =2,
+                        SeferSuresi = TimeSpan.FromHours(1), Tarih=gun, TrenID = 1 },
+                      new Sefer() { CikisSaati=TimeSpan.FromHours(17) , VarisSaati=TimeSpan.FromHours(18), RotaID =3,
+                        SeferSuresi = TimeSpan.FromHours(1), Tarih=gun, TrenID = 1 },
+                          new Sefer() { CikisSaati=TimeSpan.FromHours(16) , VarisSaati=TimeSpan.FromHours(17), RotaID =4,
+                        SeferSuresi = TimeSpan.FromHours(1), Tarih=gun, TrenID = 1 },
+                                    new Sefer() { CikisSaati=TimeSpan.FromHours(15) , VarisSaati=TimeSpan.FromHours(16), RotaID =5,
+                        SeferSuresi = TimeSpan.FromHours(1), Tarih=gun, TrenID = 1 },
+                                              new Sefer() { CikisSaati=TimeSpan.FromHours(14) , VarisSaati=TimeSpan.FromHours(15), RotaID =6,
+                        SeferSuresi = TimeSpan.FromHours(1), Tarih=gun, TrenID = 1 },
+                                                  new Sefer() { CikisSaati=TimeSpan.FromHours(13) , VarisSaati=TimeSpan.FromHours(14), RotaID =7,
                         SeferSuresi = TimeSpan.FromHours(1), Tarih=gun, TrenID = 2 },
-                    new Sefer() { CikisSaati=TimeSpan.FromHours(15) , VarisSaati=TimeSpan.FromHours(16), RotaID =2,
+                    new Sefer() { CikisSaati=TimeSpan.FromHours(12) , VarisSaati=TimeSpan.FromHours(13), RotaID =8,
                         SeferSuresi = TimeSpan.FromHours(1), Tarih=gun, TrenID = 2 },
-                      new Sefer() { CikisSaati=TimeSpan.FromHours(16) , VarisSaati=TimeSpan.FromHours(17), RotaID =3,
+                      new Sefer() { CikisSaati=TimeSpan.FromHours(11) , VarisSaati=TimeSpan.FromHours(12), RotaID = 9,
                         SeferSuresi = TimeSpan.FromHours(1), Tarih=gun, TrenID = 2 },
-                          new Sefer() { CikisSaati=TimeSpan.FromHours(17) , VarisSaati=TimeSpan.FromHours(18), RotaID =4,
+                          new Sefer() { CikisSaati=TimeSpan.FromHours(10) , VarisSaati=TimeSpan.FromHours(11), RotaID = 10,
                         SeferSuresi = TimeSpan.FromHours(1), Tarih=gun, TrenID = 2 },
-                                    new Sefer() { CikisSaati=TimeSpan.FromHours(18) , VarisSaati=TimeSpan.FromHours(19), RotaID =5,
+                                    new Sefer() { CikisSaati=TimeSpan.FromHours(9) , VarisSaati=TimeSpan.FromHours(10), RotaID = 11,
                         SeferSuresi = TimeSpan.FromHours(1), Tarih=gun, TrenID = 2 },
-                                              new Sefer() { CikisSaati=TimeSpan.FromHours(19) , VarisSaati=TimeSpan.FromHours(20), RotaID =6,
+                                              new Sefer() { CikisSaati=TimeSpan.FromHours(8) , VarisSaati=TimeSpan.FromHours(9), RotaID = 12,
                         SeferSuresi = TimeSpan.FromHours(1), Tarih=gun, TrenID = 2 }
                 };
                     seferRepo.AddRange(eklenecekSeferler);
                 }
             }
             uow.SaveChanges();
-
 
 
             //Günlük sefer eklemesi
@@ -967,18 +998,42 @@ namespace UI
                         SeferSuresi = TimeSpan.FromHours(1), Tarih=yeniGun, TrenID = 1 },
                                               new Sefer() { CikisSaati=TimeSpan.FromHours(13) , VarisSaati=TimeSpan.FromHours(14), RotaID =6,
                         SeferSuresi = TimeSpan.FromHours(1), Tarih=yeniGun, TrenID = 1 },
+                                                  new Sefer() { CikisSaati=TimeSpan.FromHours(14) , VarisSaati=TimeSpan.FromHours(15), RotaID =7,
+                        SeferSuresi = TimeSpan.FromHours(1), Tarih=yeniGun, TrenID = 2 },
+                    new Sefer() { CikisSaati=TimeSpan.FromHours(15) , VarisSaati=TimeSpan.FromHours(16), RotaID =8,
+                        SeferSuresi = TimeSpan.FromHours(1), Tarih=yeniGun, TrenID = 2 },
+                      new Sefer() { CikisSaati=TimeSpan.FromHours(16) , VarisSaati=TimeSpan.FromHours(17), RotaID =9,
+                        SeferSuresi = TimeSpan.FromHours(1), Tarih=yeniGun, TrenID = 2 },
+                          new Sefer() { CikisSaati=TimeSpan.FromHours(17) , VarisSaati=TimeSpan.FromHours(18), RotaID =10,
+                        SeferSuresi = TimeSpan.FromHours(1), Tarih=yeniGun, TrenID = 2 },
+                                    new Sefer() { CikisSaati=TimeSpan.FromHours(18) , VarisSaati=TimeSpan.FromHours(19), RotaID =11,
+                        SeferSuresi = TimeSpan.FromHours(1), Tarih=yeniGun, TrenID = 2 },
+                                              new Sefer() { CikisSaati=TimeSpan.FromHours(19) , VarisSaati=TimeSpan.FromHours(20), RotaID =12,
+                        SeferSuresi = TimeSpan.FromHours(1), Tarih=yeniGun, TrenID = 2 },
 
-                                                  new Sefer() { CikisSaati=TimeSpan.FromHours(14) , VarisSaati=TimeSpan.FromHours(15), RotaID =1,
+                                                    new Sefer() { CikisSaati=TimeSpan.FromHours(19) , VarisSaati=TimeSpan.FromHours(20), RotaID =1,
+                        SeferSuresi = TimeSpan.FromHours(1), Tarih=yeniGun, TrenID = 1 },
+                    new Sefer() { CikisSaati=TimeSpan.FromHours(18) , VarisSaati=TimeSpan.FromHours(19), RotaID =2,
+                        SeferSuresi = TimeSpan.FromHours(1), Tarih=yeniGun, TrenID = 1 },
+                      new Sefer() { CikisSaati=TimeSpan.FromHours(17) , VarisSaati=TimeSpan.FromHours(18), RotaID =3,
+                        SeferSuresi = TimeSpan.FromHours(1), Tarih=yeniGun, TrenID = 1 },
+                          new Sefer() { CikisSaati=TimeSpan.FromHours(16) , VarisSaati=TimeSpan.FromHours(17), RotaID =4,
+                        SeferSuresi = TimeSpan.FromHours(1), Tarih=yeniGun, TrenID = 1 },
+                                    new Sefer() { CikisSaati=TimeSpan.FromHours(15) , VarisSaati=TimeSpan.FromHours(16), RotaID =5,
+                        SeferSuresi = TimeSpan.FromHours(1), Tarih=yeniGun, TrenID = 1 },
+                                              new Sefer() { CikisSaati=TimeSpan.FromHours(14) , VarisSaati=TimeSpan.FromHours(15), RotaID =6,
+                        SeferSuresi = TimeSpan.FromHours(1), Tarih=yeniGun, TrenID = 1 },
+                                                  new Sefer() { CikisSaati=TimeSpan.FromHours(13) , VarisSaati=TimeSpan.FromHours(14), RotaID =7,
                         SeferSuresi = TimeSpan.FromHours(1), Tarih=yeniGun, TrenID = 2 },
-                    new Sefer() { CikisSaati=TimeSpan.FromHours(15) , VarisSaati=TimeSpan.FromHours(16), RotaID =2,
+                    new Sefer() { CikisSaati=TimeSpan.FromHours(12) , VarisSaati=TimeSpan.FromHours(13), RotaID =8,
                         SeferSuresi = TimeSpan.FromHours(1), Tarih=yeniGun, TrenID = 2 },
-                      new Sefer() { CikisSaati=TimeSpan.FromHours(16) , VarisSaati=TimeSpan.FromHours(17), RotaID =3,
+                      new Sefer() { CikisSaati=TimeSpan.FromHours(11) , VarisSaati=TimeSpan.FromHours(12), RotaID = 9,
                         SeferSuresi = TimeSpan.FromHours(1), Tarih=yeniGun, TrenID = 2 },
-                          new Sefer() { CikisSaati=TimeSpan.FromHours(17) , VarisSaati=TimeSpan.FromHours(18), RotaID =4,
+                          new Sefer() { CikisSaati=TimeSpan.FromHours(10) , VarisSaati=TimeSpan.FromHours(11), RotaID = 10,
                         SeferSuresi = TimeSpan.FromHours(1), Tarih=yeniGun, TrenID = 2 },
-                                    new Sefer() { CikisSaati=TimeSpan.FromHours(18) , VarisSaati=TimeSpan.FromHours(19), RotaID =5,
+                                    new Sefer() { CikisSaati=TimeSpan.FromHours(9) , VarisSaati=TimeSpan.FromHours(10), RotaID = 11,
                         SeferSuresi = TimeSpan.FromHours(1), Tarih=yeniGun, TrenID = 2 },
-                                              new Sefer() { CikisSaati=TimeSpan.FromHours(19) , VarisSaati=TimeSpan.FromHours(20), RotaID =6,
+                                              new Sefer() { CikisSaati=TimeSpan.FromHours(8) , VarisSaati=TimeSpan.FromHours(9), RotaID = 12,
                         SeferSuresi = TimeSpan.FromHours(1), Tarih=yeniGun, TrenID = 2 }
                 };
                 seferRepo.AddRange(eklenecekSeferler);
@@ -998,7 +1053,7 @@ namespace UI
                     uow.SaveChanges();
                 }
             }
-         
+
         }
     }
 }
