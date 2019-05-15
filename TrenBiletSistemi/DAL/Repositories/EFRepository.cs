@@ -22,13 +22,11 @@ namespace DAL.Repositories
         public EFRepository(Context dbContext)
         {
             if (dbContext == null)
-                throw new ArgumentNullException("dbContext can not be null.");
+                throw new ArgumentNullException("DbContext null olamaz.");
 
             _dbContext = dbContext;
             _dbSet = dbContext.Set<T>();
         }
-
-        #region IRepository Members
 
         public void AddRange(List<T> entities)
         {
@@ -67,54 +65,28 @@ namespace DAL.Repositories
             _dbContext.Entry(entity).State = EntityState.Modified;
         }
 
+
         public void Delete(T entity)
         {
-            // Eğer sizlerde genelde bir kayıtı silmek yerine IsDelete şeklinde bool bir flag alanı tutuyorsanız,
-            // Küçük bir refleciton kodu yardımı ile bunuda otomatikleştirebiliriz.
-            if (entity.GetType().GetProperty("IsDelete") != null)
+            if (entity.GetType().GetProperty("SilindiMi") != null)
             {
+                entity.GetType().GetProperty("SilindiMi").SetValue(entity, true);
                 T _entity = entity;
-
-                _entity.GetType().GetProperty("IsDelete").SetValue(_entity, true);
-
                 this.Update(_entity);
             }
-            else
-            {
-                // Önce entity'nin state'ini kontrol etmeliyiz.
-                DbEntityEntry dbEntityEntry = _dbContext.Entry(entity);
-
-                if (dbEntityEntry.State != EntityState.Deleted)
-                {
-                    dbEntityEntry.State = EntityState.Deleted;
-                }
-                else
-                {
-                    _dbSet.Attach(entity);
-                    _dbSet.Remove(entity);
-                }
-            }
         }
 
-        public void Delete(int id)
+        public bool Delete(int id)
         {
             var entity = GetById(id);
-            if (entity == null) return;
+              if (entity == null) return false;
             else
             {
-                if (entity.GetType().GetProperty("IsDelete") != null)
-                {
-                    T _entity = entity;
-                    _entity.GetType().GetProperty("IsDelete").SetValue(_entity, true);
-
-                    this.Update(_entity);
-                }
-                else
-                {
-                    Delete(entity);
-                }
+                Delete(entity);
+                return true;
             }
         }
-        #endregion
+
+      
     }
 }

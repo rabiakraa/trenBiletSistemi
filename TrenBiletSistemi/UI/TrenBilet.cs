@@ -54,6 +54,7 @@ namespace UI
         bool ayniKullanici = false;//alınan biletleri aynı kullanıcı alıyorsa kız erkek ayrımı yapma.
         bool uyeDegil = false;      //Uye olmadan giriş yapılması durumunu kontrol eder.
         DateTime bugun;
+        int secilenBiletId;
         #endregion
 
         public void DbInitialize()
@@ -119,6 +120,8 @@ namespace UI
 
         private void btnGirisYap_Click(object sender, EventArgs e)
         {
+            btnBiletlerim.Visible = true;
+            btnGuvenliCikis.Text = "Çıkış Yap";
             uyeDegil = false;
             var girisYapan = kullaniciRepo.Get(x => x.Email == txtEposta.Text && x.Sifre == txtSifre.Text);
             if (girisYapan != null)
@@ -141,8 +144,10 @@ namespace UI
         private void btnDevamEt_Click(object sender, EventArgs e)
         {
             uyeDegil = true;
+            btnBiletlerim.Visible = false;
+            btnGuvenliCikis.Text = "Geri";
             kullanici = new Kullanici();
-            kullanici.KullaniciID = 1;      //Üye olmadan devam edildiği takdirde alınan biletlere kullanıcıID olarak adminin kullaniciID'si verilir.
+            kullanici.KullaniciID = 4;      //Üye olmadan devam edildiği takdirde alınan biletlere kullanıcıID olarak adminin kullaniciID'si verilir.
             TrenTab.SelectedIndex = (TrenTab.SelectedIndex + 1) % TrenTab.TabCount;
         }
 
@@ -209,11 +214,14 @@ namespace UI
                 cikisId = Convert.ToInt32(((ComboboxItem)cmbNereden.SelectedItem).Value);
                 varisId = Convert.ToInt32(((ComboboxItem)cmbNereye.SelectedItem).Value);
                 gidisTarihi = new DateTime(dtGidis.Value.Year, dtGidis.Value.Month, dtGidis.Value.Day, 0, 0, 0);
-                 gidisSaati = DateTime.Now.TimeOfDay;
+                gidisSaati = DateTime.Now.TimeOfDay;
 
                 if (donusBileti == 1)    //Gidiş dönüş seçilmişse
                 {
-                    if (SeferVarMi(cikisId, varisId, gidisTarihi,gidisSaati) && SeferVarMi(varisId, cikisId, donusTarihi, gidisSaati))
+                    donusTarihi = new DateTime(dtDonus.Value.Year, dtDonus.Value.Month, dtDonus.Value.Day, 0, 0, 0);
+
+
+                    if (SeferVarMi(cikisId, varisId, gidisTarihi, gidisSaati) && SeferVarMi(varisId, cikisId, donusTarihi, gidisSaati))
                     {
                         TrenTab.SelectedIndex = (TrenTab.SelectedIndex + 1) % TrenTab.TabCount;
                     }
@@ -225,7 +233,7 @@ namespace UI
 
                 else if (donusBileti == 0)    //Tek yön seçilmişse
                 {
-                    if (SeferVarMi(cikisId, varisId, gidisTarihi,gidisSaati))
+                    if (SeferVarMi(cikisId, varisId, gidisTarihi, gidisSaati))
                     {
                         TrenTab.SelectedIndex = (TrenTab.SelectedIndex + 1) % TrenTab.TabCount;
                     }
@@ -236,9 +244,7 @@ namespace UI
                 }
 
                 SeferleriGetir(cikisId, varisId, gidisTarihi, gidisSaati);
-
             }
-
         }
 
         private void pbBusiness_Click(object sender, EventArgs e)
@@ -477,7 +483,7 @@ namespace UI
             uow.SaveChanges();
 
             if (uyeDegil)
-                MessageBox.Show("Bilet numaranız: " + gidisSeferID.ToString() + " \nLütfen bilet numaranızı kaybetmeyiniz.");
+                MessageBox.Show("Bilet numaranız: " + bilet.BiletID.ToString() + " \nLütfen bilet numaranızı kaybetmeyiniz.");
 
             KoltuklariDoldur(gidisSeferID);     //bilet satıldıktan sonra yeni haliyle koltukları güncelle ve kullanıcı bilgileri kısmını temizle, yeni bilet alma işlemleri için hazırla.
             OrtakMetodlar.Temizle(pnlKisi);
@@ -501,6 +507,7 @@ namespace UI
 
                 if (koltukGidis == 1)           //Dönüş bileti isteniyorsa tekrar bilet al
                 {
+                    lblYon.Text = "Dönüş Yönü";
                     gidisSeferID = donusSeferID;
                     aktifYolcu = 1;
                     yolcuSayisi = Convert.ToInt32(nmrYolcuSayisi.Value);
@@ -521,7 +528,7 @@ namespace UI
 
         public void BiletleriDoldur()
         {
-            var biletler = biletRepo.GetAll(x => x.KullaniciID == kullanici.KullaniciID && (x.BiletID.ToString()).StartsWith(txtBiletId.Text)).ToList();
+            var biletler = biletRepo.GetAll(x => x.KullaniciID == kullanici.KullaniciID && (x.BiletID.ToString()).StartsWith(txtBiletId.Text) && x.SilindiMi == false).ToList();
             lstBiletler.Items.Clear();
             foreach (var item in biletler)
             {
@@ -557,8 +564,9 @@ namespace UI
 
         private void TrenTab_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (TrenTab.SelectedIndex == 3)
+            if (TrenTab.SelectedIndex == 4)
             {
+                BiletleriDoldur();
 
             }
         }
@@ -590,11 +598,11 @@ namespace UI
         }
         public bool SeferVarMi(int cikisId, int varisId, DateTime gidisTarihi, TimeSpan gidisSaati)      //aranan seferler varmı diye bakar. sefer yoksa kullanıcıya uyarı verir.
         {
-             bugun = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0); 
+            bugun = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0);
 
             var rotaId = rotaRepo.GetAll(x => x.CikisID == cikisId && x.VarisID == varisId).Select(x => x.RotaID).SingleOrDefault();
 
-            var seferler = seferRepo.GetAll(x => x.RotaID == rotaId && x.Tarih == gidisTarihi ).ToList();
+            var seferler = seferRepo.GetAll(x => x.RotaID == rotaId && x.Tarih == gidisTarihi).ToList();
 
             if (gidisTarihi == bugun)
             {
@@ -680,7 +688,7 @@ namespace UI
                 seferler = seferRepo.GetAll(x => x.RotaID == rotaId && x.Tarih == gidisTarihi && TimeSpan.Compare(x.CikisSaati, gidisSaati) == 1).ToList();
             }
 
-            if (biletDurum == false)
+            if (biletDurum == false && gidisTarihi == bugun)
             {     //2 saat kala seferleri rezervasyona kapat
                 seferler = seferRepo.GetAll(x => x.RotaID == rotaId && x.Tarih == gidisTarihi && x.CikisSaati.Hours > DateTime.Now.Hour + 2).ToList();
             }
@@ -701,16 +709,56 @@ namespace UI
             }
         }
 
+        private void btnBiletIptal_Click(object sender, EventArgs e)
+        {
+            if (biletRepo.Delete(secilenBiletId))
+                MessageBox.Show("Bilet Silindi!");
+            else
+                MessageBox.Show("Silinemedi");
+            uow.SaveChanges();
+
+            BiletleriDoldur();
+
+        }
+
+        private void lstBiletler_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lstBiletler.SelectedItems.Count > 0)
+            {
+                secilenBiletId = Convert.ToInt32(lstBiletler.SelectedItems[0].SubItems[0].Text);
+                var secilenBilet = biletRepo.Get(x => x.BiletID == secilenBiletId);
+                if (secilenBilet.BiletDurumu == false)
+                    btnRSatinAl.Enabled = true;
+            }
+        }
+
+        private void btnRSatinAl_Click(object sender, EventArgs e)
+        {
+
+            Bilet satinAlinacakBilet = biletRepo.GetById(secilenBiletId);
+            satinAlinacakBilet.BiletDurumu = true;
+            biletRepo.Update(satinAlinacakBilet);
+            uow.SaveChanges();
+            BiletleriDoldur();
+
+
+        }
+
+        private void rdoRezerve_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
         private void btnIleriSefer_Click(object sender, EventArgs e)
         {
+            lblYon.Text = "";
             if (donusBileti == 1)
             {
                 lblSeferBilgi.Text = "Lütfen dönüş seferini seçiniz.";
                 //Dönüş bileti isteniyorsa tekrar bu sayfaya dön. dönüş seferlerini listele.
                 varisId = Convert.ToInt32(((ComboboxItem)cmbNereden.SelectedItem).Value);
                 cikisId = Convert.ToInt32(((ComboboxItem)cmbNereye.SelectedItem).Value);
-                donusTarihi = new DateTime(dtDonus.Value.Year, dtGidis.Value.Month, dtGidis.Value.Day, 0, 0, 0);
-                SeferleriGetir(cikisId, varisId, donusTarihi,gidisSaati);
+                SeferleriGetir(cikisId, varisId, donusTarihi, gidisSaati);
 
                 donusBileti = 2;
             }
@@ -722,16 +770,19 @@ namespace UI
 
         private void lstSeferler_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // lstSeferler.SelectedItems.Clear();
+            if (lstSeferler.SelectedItems.Count > 0)
+            {
+                if (donusBileti == 1 || donusBileti == 0)
+                {
+                    gidisSeferID = Convert.ToInt32(lstSeferler.SelectedItems[0].SubItems[0].Text);
+                }
+                else
+                {
+                    donusSeferID = Convert.ToInt32(lstSeferler.SelectedItems[0].SubItems[0].Text);
+                }
+            }
 
-            if (donusBileti == 1 || donusBileti == 0)
-            {
-                gidisSeferID = Convert.ToInt32(lstSeferler.SelectedItems[0].SubItems[0].Text);
-            }
-            else
-            {
-                donusSeferID = Convert.ToInt32(lstSeferler.SelectedItems[0].SubItems[0].Text);
-            }
+
         }
 
         private void BiletSefer_Click(object sender, EventArgs e)
@@ -859,7 +910,7 @@ namespace UI
             if (seferlerIlk.Count == 0)
             {
                 for (int i = 0; i < 15; i++)
-            {
+                {
                     DateTime gun = new DateTime(dtGidis.Value.Year, dtGidis.Value.Month, dtGidis.Value.Day + i, 0, 0, 0);
                     List<Sefer> eklenecekSeferler = new List<Sefer>()
                 {
@@ -935,11 +986,24 @@ namespace UI
             uow.SaveChanges();
 
 
-
+            //Sefere 2 saat kala rezervasyonları sil
+            var tumBiletler = biletRepo.GetAll(x => x.BiletDurumu == false).ToList();
+            foreach (var bilet in tumBiletler)
+            {
+                var sefer = seferRepo.Get(x => x.SeferID == bilet.SeferID);
+                var aradakiFark = (sefer.Tarih - DateTime.Now);
+                if (aradakiFark.Hours <= 2)
+                {
+                    biletRepo.Delete(bilet);
+                    uow.SaveChanges();
+                }
+            }
+         
         }
     }
-
 }
+
+
 
 
 
