@@ -47,6 +47,7 @@
             this.btnGuvenliCikis = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.grpDurak = new System.Windows.Forms.GroupBox();
+            this.dtDonus = new System.Windows.Forms.DateTimePicker();
             this.panel2 = new System.Windows.Forms.Panel();
             this.rdoRezerve = new System.Windows.Forms.RadioButton();
             this.rdoSatinAl = new System.Windows.Forms.RadioButton();
@@ -76,6 +77,11 @@
             this.columnHeader17 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnIleriSefer = new System.Windows.Forms.Button();
             this.BiletKoltuk = new System.Windows.Forms.TabPage();
+            this.lblYon = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label47 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label46 = new System.Windows.Forms.Label();
             this.grpKoltukEkonomi = new System.Windows.Forms.GroupBox();
             this.label45 = new System.Windows.Forms.Label();
             this.label44 = new System.Windows.Forms.Label();
@@ -185,12 +191,7 @@
             this.btnBiletNoIleAra = new System.Windows.Forms.Button();
             this.txtBiletNumarasi = new System.Windows.Forms.TextBox();
             this.label48 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label47 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label46 = new System.Windows.Forms.Label();
-            this.lblYon = new System.Windows.Forms.Label();
-            this.dtDonus = new System.Windows.Forms.DateTimePicker();
+            this.chkBilgiAl = new System.Windows.Forms.CheckBox();
             this.TrenTab.SuspendLayout();
             this.Giris.SuspendLayout();
             this.pnlGiris.SuspendLayout();
@@ -468,6 +469,19 @@
             this.grpDurak.TabIndex = 58;
             this.grpDurak.TabStop = false;
             this.grpDurak.Enter += new System.EventHandler(this.grpDurak_Enter);
+            // 
+            // dtDonus
+            // 
+            this.dtDonus.Enabled = false;
+            this.dtDonus.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.dtDonus.Location = new System.Drawing.Point(304, 209);
+            this.dtDonus.Margin = new System.Windows.Forms.Padding(4);
+            this.dtDonus.MaxDate = new System.DateTime(2019, 5, 24, 0, 0, 0, 0);
+            this.dtDonus.MinDate = new System.DateTime(2019, 5, 10, 0, 0, 0, 0);
+            this.dtDonus.Name = "dtDonus";
+            this.dtDonus.Size = new System.Drawing.Size(251, 30);
+            this.dtDonus.TabIndex = 64;
+            this.dtDonus.Value = new System.DateTime(2019, 5, 10, 9, 44, 21, 0);
             // 
             // panel2
             // 
@@ -776,6 +790,7 @@
             // BiletKoltuk
             // 
             this.BiletKoltuk.BackColor = System.Drawing.Color.White;
+            this.BiletKoltuk.Controls.Add(this.chkBilgiAl);
             this.BiletKoltuk.Controls.Add(this.lblYon);
             this.BiletKoltuk.Controls.Add(this.label10);
             this.BiletKoltuk.Controls.Add(this.label47);
@@ -800,6 +815,61 @@
             this.BiletKoltuk.TabIndex = 2;
             this.BiletKoltuk.Text = "Koltuk Seçimi";
             this.BiletKoltuk.Click += new System.EventHandler(this.BiletKoltuk_Click);
+            // 
+            // lblYon
+            // 
+            this.lblYon.AutoSize = true;
+            this.lblYon.BackColor = System.Drawing.Color.Gold;
+            this.lblYon.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lblYon.Location = new System.Drawing.Point(231, 12);
+            this.lblYon.Name = "lblYon";
+            this.lblYon.Size = new System.Drawing.Size(89, 23);
+            this.lblYon.TabIndex = 74;
+            this.lblYon.Text = "Gidiş Yönü";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.BackColor = System.Drawing.Color.DarkTurquoise;
+            this.label10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label10.Location = new System.Drawing.Point(440, 382);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(46, 19);
+            this.label10.TabIndex = 73;
+            this.label10.Text = "Erkek";
+            // 
+            // label47
+            // 
+            this.label47.AutoSize = true;
+            this.label47.BackColor = System.Drawing.Color.Chartreuse;
+            this.label47.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label47.Location = new System.Drawing.Point(492, 382);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(58, 19);
+            this.label47.TabIndex = 72;
+            this.label47.Text = "Satın Al";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.BackColor = System.Drawing.Color.HotPink;
+            this.label13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label13.Location = new System.Drawing.Point(388, 382);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(46, 19);
+            this.label13.TabIndex = 70;
+            this.label13.Text = "Kadın";
+            // 
+            // label46
+            // 
+            this.label46.AutoSize = true;
+            this.label46.BackColor = System.Drawing.Color.Orange;
+            this.label46.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label46.Location = new System.Drawing.Point(556, 381);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(93, 19);
+            this.label46.TabIndex = 71;
+            this.label46.Text = "Rezervasyon";
             // 
             // grpKoltukEkonomi
             // 
@@ -1723,8 +1793,9 @@
             // label12
             // 
             this.label12.AutoSize = true;
+            this.label12.BackColor = System.Drawing.Color.Gold;
             this.label12.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.label12.Location = new System.Drawing.Point(738, 26);
+            this.label12.Location = new System.Drawing.Point(733, 12);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(178, 23);
             this.label12.TabIndex = 2;
@@ -2060,73 +2131,17 @@
             this.label48.TabIndex = 23;
             this.label48.Text = "Bilet No Giriniz :";
             // 
-            // label10
+            // chkBilgiAl
             // 
-            this.label10.AutoSize = true;
-            this.label10.BackColor = System.Drawing.Color.DarkTurquoise;
-            this.label10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label10.Location = new System.Drawing.Point(440, 382);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(46, 19);
-            this.label10.TabIndex = 73;
-            this.label10.Text = "Erkek";
-            // 
-            // label47
-            // 
-            this.label47.AutoSize = true;
-            this.label47.BackColor = System.Drawing.Color.Chartreuse;
-            this.label47.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label47.Location = new System.Drawing.Point(492, 382);
-            this.label47.Name = "label47";
-            this.label47.Size = new System.Drawing.Size(58, 19);
-            this.label47.TabIndex = 72;
-            this.label47.Text = "Satın Al";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.BackColor = System.Drawing.Color.HotPink;
-            this.label13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label13.Location = new System.Drawing.Point(388, 382);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(46, 19);
-            this.label13.TabIndex = 70;
-            this.label13.Text = "Kadın";
-            // 
-            // label46
-            // 
-            this.label46.AutoSize = true;
-            this.label46.BackColor = System.Drawing.Color.Orange;
-            this.label46.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label46.Location = new System.Drawing.Point(556, 381);
-            this.label46.Name = "label46";
-            this.label46.Size = new System.Drawing.Size(93, 19);
-            this.label46.TabIndex = 71;
-            this.label46.Text = "Rezervasyon";
-            // 
-            // lblYon
-            // 
-            this.lblYon.AutoSize = true;
-            this.lblYon.BackColor = System.Drawing.Color.Gold;
-            this.lblYon.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.lblYon.Location = new System.Drawing.Point(231, 12);
-            this.lblYon.Name = "lblYon";
-            this.lblYon.Size = new System.Drawing.Size(89, 23);
-            this.lblYon.TabIndex = 74;
-            this.lblYon.Text = "Gidiş Yönü";
-            // 
-            // dtDonus
-            // 
-            this.dtDonus.Enabled = false;
-            this.dtDonus.Font = new System.Drawing.Font("Calibri", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.dtDonus.Location = new System.Drawing.Point(304, 209);
-            this.dtDonus.Margin = new System.Windows.Forms.Padding(4);
-            this.dtDonus.MaxDate = new System.DateTime(2019, 5, 24, 0, 0, 0, 0);
-            this.dtDonus.MinDate = new System.DateTime(2019, 5, 10, 0, 0, 0, 0);
-            this.dtDonus.Name = "dtDonus";
-            this.dtDonus.Size = new System.Drawing.Size(251, 30);
-            this.dtDonus.TabIndex = 64;
-            this.dtDonus.Value = new System.DateTime(2019, 5, 10, 9, 44, 21, 0);
+            this.chkBilgiAl.AutoSize = true;
+            this.chkBilgiAl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.chkBilgiAl.Location = new System.Drawing.Point(704, 36);
+            this.chkBilgiAl.Name = "chkBilgiAl";
+            this.chkBilgiAl.Size = new System.Drawing.Size(226, 24);
+            this.chkBilgiAl.TabIndex = 75;
+            this.chkBilgiAl.Text = "Kendim için bilet alıyorum.";
+            this.chkBilgiAl.UseVisualStyleBackColor = true;
+            this.chkBilgiAl.CheckedChanged += new System.EventHandler(this.chkBilgiAd_CheckedChanged);
             // 
             // TrenBilet
             // 
@@ -2367,5 +2382,6 @@
         private System.Windows.Forms.Label label46;
         private System.Windows.Forms.Label lblYon;
         private System.Windows.Forms.DateTimePicker dtDonus;
+        private System.Windows.Forms.CheckBox chkBilgiAl;
     }
 }

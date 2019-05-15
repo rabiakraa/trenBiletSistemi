@@ -55,6 +55,7 @@ namespace UI
         bool uyeDegil = false;      //Uye olmadan giriş yapılması durumunu kontrol eder.
         DateTime bugun;
         int secilenBiletId;
+        bool adminGirisYapti;
         #endregion
 
         public void DbInitialize()
@@ -124,6 +125,14 @@ namespace UI
             btnGuvenliCikis.Text = "Çıkış Yap";
             uyeDegil = false;
             var girisYapan = kullaniciRepo.Get(x => x.Email == txtEposta.Text && x.Sifre == txtSifre.Text);
+            if (girisYapan.KullaniciTipID == 2)
+            {
+                adminGirisYapti = true;
+            }
+            else
+            {
+                adminGirisYapti = false;
+            }
             if (girisYapan != null)
             {
                 kullanici = new Kullanici();
@@ -196,6 +205,7 @@ namespace UI
 
         private void btnAra_Click(object sender, EventArgs e)
         {
+            lblYon.Text = "Gidiş Yönü";
             biletDurum = rdoSatinAl.Checked;
             yolcuSayisi = Convert.ToInt32(nmrYolcuSayisi.Value);
             donusBileti = 0;
@@ -529,6 +539,10 @@ namespace UI
         public void BiletleriDoldur()
         {
             var biletler = biletRepo.GetAll(x => x.KullaniciID == kullanici.KullaniciID && (x.BiletID.ToString()).StartsWith(txtBiletId.Text) && x.SilindiMi == false).ToList();
+            if (adminGirisYapti)
+            {
+                biletler = biletRepo.GetAll(x => (x.BiletID.ToString()).StartsWith(txtBiletId.Text) && x.SilindiMi == false).ToList();
+            }
             lstBiletler.Items.Clear();
             foreach (var item in biletler)
             {
@@ -567,6 +581,14 @@ namespace UI
             if (TrenTab.SelectedIndex == 4)
             {
                 BiletleriDoldur();
+
+            }
+            else if(TrenTab.SelectedIndex == 1)
+            {
+                if (uyeDegil)
+                    chkBilgiAl.Visible = false;
+                else
+                    chkBilgiAl.Visible = true;
 
             }
         }
@@ -749,9 +771,24 @@ namespace UI
 
         }
 
+        private void chkBilgiAd_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkBilgiAl.Checked)
+            {
+                //KULLANICI TABLOSUNDAN VERİLERİ ÇEK.
+                var Kayitlikullanici = kullaniciRepo.Get(x => x.KullaniciID == kullanici.KullaniciID);
+                txtTc.Text = Kayitlikullanici.TcNo;
+                txtAd.Text = Kayitlikullanici.Ad;
+                txtSoyad.Text = Kayitlikullanici.Soyad;
+            }
+            else
+            {
+                OrtakMetodlar.Temizle(pnlKisi);
+            }
+        }
+
         private void btnIleriSefer_Click(object sender, EventArgs e)
         {
-            lblYon.Text = "";
             if (donusBileti == 1)
             {
                 lblSeferBilgi.Text = "Lütfen dönüş seferini seçiniz.";
