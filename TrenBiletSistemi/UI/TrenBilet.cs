@@ -82,7 +82,8 @@ namespace UI
             DbInitialize();
             bilet = new Bilet();
             sefer = new Sefer();
-            #region DuraklariDoldur
+
+            #region Durakları Doldur
             var duraklar = durakRepo.GetAll().ToList();
 
             foreach (var item in duraklar)
@@ -121,9 +122,7 @@ namespace UI
 
         private void btnGirisYap_Click(object sender, EventArgs e)
         {
-            btnBiletlerim.Visible = true;
             btnGuvenliCikis.Text = "Çıkış Yap";
-            uyeDegil = false;
             var girisYapan = kullaniciRepo.Get(x => x.Email == txtEposta.Text && x.Sifre == txtSifre.Text);
             if (girisYapan.KullaniciTipID == 2)
             {
@@ -134,10 +133,11 @@ namespace UI
                 adminGirisYapti = false;
             }
             if (girisYapan != null)
-            {
+            {    btnBiletlerim.Visible = true;
+            uyeDegil = false;
                 kullanici = new Kullanici();
                 kullanici.KullaniciID = girisYapan.KullaniciID;
-                TrenTab.SelectedIndex = (TrenTab.SelectedIndex + 1) % TrenTab.TabCount;
+                TrenTab.SelectedIndex = (TrenTab.SelectedIndex + 1) % TrenTab.TabCount;     //Bir sonraki tab'e gönderir.
             }
             else
                 MessageBox.Show("Kullanıcı adı veya şifre hatalı.");
@@ -309,7 +309,7 @@ namespace UI
             if (secilenKoltuk % 2 == 0)
             {
                 yanKoltukNo = secilenKoltuk - 1;
-                string yanKoltukName = secilenPb.Name.Substring(0, 1).ToString() + (yanKoltukNo).ToString();
+                string yanKoltukName = secilenPb.Name.Substring(0, 1).ToString() + (yanKoltukNo).ToString();        //substring ile tıklanan koltuğun name'inin ilk harfi alınır. Yani business ise "b" ekonomi ise "e" değeri alınır. Bu şekilde ilgili pictureboxa ulaşılır.
                 yanKoltuk = this.Controls.Find(yanKoltukName, true).FirstOrDefault() as PictureBox;
             }
             else
@@ -355,9 +355,8 @@ namespace UI
             }
         }
 
-        private bool YanKoltukAyniKisiyeMiAit(int koltukNumarasi)        //Şuanda bu metod kullanılmıyor.
+        private bool YanKoltukAyniKisiyeMiAit(int koltukNumarasi)      
         {
-            //    int koltukNumarasi2 = Convert.ToInt32(koltukNumarasi);
             var yanKoltuk = biletRepo.GetAll(x => x.KullaniciID == kullanici.KullaniciID && x.KoltukNo == koltukNumarasi && x.SeferID == gidisSeferID).ToList();
             if (yanKoltuk != null) return true;
             return false;
@@ -715,7 +714,6 @@ namespace UI
                 seferler = seferRepo.GetAll(x => x.RotaID == rotaId && x.Tarih == gidisTarihi && x.CikisSaati.Hours > DateTime.Now.Hour + 2).ToList();
             }
 
-            var deneme = seferRepo.GetAll().Select(x => DbFunctions.TruncateTime(x.Tarih)).ToList();
             lstSeferler.Items.Clear();
 
             foreach (var item in seferler)
@@ -775,7 +773,6 @@ namespace UI
         {
             if (chkBilgiAl.Checked)
             {
-                //KULLANICI TABLOSUNDAN VERİLERİ ÇEK.
                 var Kayitlikullanici = kullaniciRepo.Get(x => x.KullaniciID == kullanici.KullaniciID);
                 txtTc.Text = Kayitlikullanici.TcNo;
                 txtAd.Text = Kayitlikullanici.Ad;
@@ -1083,8 +1080,8 @@ namespace UI
             foreach (var bilet in tumBiletler)
             {
                 var sefer = seferRepo.Get(x => x.SeferID == bilet.SeferID);
-                var aradakiFark = (sefer.Tarih - DateTime.Now);
-                if (aradakiFark.Hours <= 2)
+                var aradakiFark = (sefer.CikisSaati.Hours - DateTime.Now.Hour);
+                if (aradakiFark <= 2)
                 {
                     biletRepo.Delete(bilet);
                     uow.SaveChanges();

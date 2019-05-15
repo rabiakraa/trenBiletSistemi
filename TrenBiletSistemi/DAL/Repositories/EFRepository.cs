@@ -9,15 +9,10 @@ using System.Threading.Tasks;
 
 namespace DAL.Repositories
 {
-    /// <summary>
-    /// EntityFramework için hazırlıyor olduğumuz bu repositoriyi daha önceden tasarladığımız generic repositorimiz olan IRepository arayüzünü implemente ederek tasarladık.
-    /// Bu şekilde tasarlamamızın ana sebebi ise veritabanına independent(bağımsız) bir durumda kalabilmek. Örneğin MongoDB için ise ilgili provider'ı aracılığı ile MongoDBRepository tasarlayabiliriz.
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
     public class EFRepository<T> : IRepository<T> where T : class
     {
-        private readonly DbContext _dbContext;
-        private readonly DbSet<T> _dbSet;
+        private readonly DbContext _dbContext;      //Veritabanı tutar
+        private readonly DbSet<T> _dbSet;       //Tabloları tutar
 
         public EFRepository(Context dbContext)
         {
@@ -38,7 +33,7 @@ namespace DAL.Repositories
             return _dbSet;
         }
 
-        public IQueryable<T> GetAll(Expression<Func<T, bool>> predicate)
+        public IQueryable<T> GetAll(Expression<Func<T, bool>> predicate)    //predicate koşulu ifade eder.
         {
             return _dbSet.Where(predicate);
         }
@@ -48,7 +43,7 @@ namespace DAL.Repositories
             return _dbSet.Find(id);
         }
 
-        public T Get(Expression<Func<T, bool>> predicate)
+        public T Get(Expression<Func<T, bool>> predicate)       //tek kaydı getirir.
         {
             return _dbSet.Where(predicate).SingleOrDefault();
         }
@@ -61,7 +56,7 @@ namespace DAL.Repositories
 
         public void Update(T entity)
         {
-            _dbSet.Attach(entity);
+            _dbSet.Attach(entity);      
             _dbContext.Entry(entity).State = EntityState.Modified;
         }
 

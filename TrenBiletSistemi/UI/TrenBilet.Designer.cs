@@ -821,7 +821,7 @@
             this.lblYon.AutoSize = true;
             this.lblYon.BackColor = System.Drawing.Color.Gold;
             this.lblYon.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.lblYon.Location = new System.Drawing.Point(231, 12);
+            this.lblYon.Location = new System.Drawing.Point(233, 12);
             this.lblYon.Name = "lblYon";
             this.lblYon.Size = new System.Drawing.Size(89, 23);
             this.lblYon.TabIndex = 74;
@@ -2095,7 +2095,7 @@
             // lblBiletNoSonuc
             // 
             this.lblBiletNoSonuc.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.lblBiletNoSonuc.Location = new System.Drawing.Point(267, 172);
+            this.lblBiletNoSonuc.Location = new System.Drawing.Point(306, 168);
             this.lblBiletNoSonuc.Name = "lblBiletNoSonuc";
             this.lblBiletNoSonuc.Size = new System.Drawing.Size(397, 213);
             this.lblBiletNoSonuc.TabIndex = 26;

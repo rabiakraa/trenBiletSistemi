@@ -7,7 +7,7 @@ namespace Data
 {
     public class Vagon
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]       //Id'nin otomatik artmasını engeller.
         public int VagonID { get; set; }
         public int VagonTipiID { get; set; }
 

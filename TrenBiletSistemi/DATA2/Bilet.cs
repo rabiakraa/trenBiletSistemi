@@ -25,7 +25,7 @@ namespace Data
         public float Fiyat { get; set; }
         public bool VagonSinifi { get; set; }
         public int KoltukNo { get; set; }
-      public bool SilindiMi { get; set; }
+       public bool SilindiMi { get; set; }
 
         public virtual Sefer Sefer { get; set; }
         public virtual Kullanici Kullanici { get; set; }
