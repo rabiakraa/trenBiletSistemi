@@ -133,8 +133,9 @@ namespace UI
                 adminGirisYapti = false;
             }
             if (girisYapan != null)
-            {    btnBiletlerim.Visible = true;
-            uyeDegil = false;
+            {
+                btnBiletlerim.Visible = true;
+                uyeDegil = false;
                 kullanici = new Kullanici();
                 kullanici.KullaniciID = girisYapan.KullaniciID;
                 TrenTab.SelectedIndex = (TrenTab.SelectedIndex + 1) % TrenTab.TabCount;     //Bir sonraki tab'e gönderir.
@@ -266,6 +267,7 @@ namespace UI
             KoltuklariDoldur(gidisSeferID);
 
             lblFiyat.Text = "100";
+
             fiyat = 100;
 
         }
@@ -278,6 +280,7 @@ namespace UI
             biletSinifi = 1;
             KoltuklariDoldur(gidisSeferID);
             lblFiyat.Text = "70";
+            ;
             fiyat = 70;
 
         }
@@ -355,7 +358,7 @@ namespace UI
             }
         }
 
-        private bool YanKoltukAyniKisiyeMiAit(int koltukNumarasi)      
+        private bool YanKoltukAyniKisiyeMiAit(int koltukNumarasi)
         {
             var yanKoltuk = biletRepo.GetAll(x => x.KullaniciID == kullanici.KullaniciID && x.KoltukNo == koltukNumarasi && x.SeferID == gidisSeferID).ToList();
             if (yanKoltuk != null) return true;
@@ -488,19 +491,37 @@ namespace UI
                 VagonSinifi = biletSinifi == 1 ? false : true   //biletSinifi = 1 ise ekonomi seçilmiştir. vagon sınıfı false olur. 1 değilse business seçilmiştir. Vagon sınıfı true olur.
             };
 
-            biletRepo.Add(bilet);
-            uow.SaveChanges();
 
-            if (uyeDegil)
-                MessageBox.Show("Bilet numaranız: " + bilet.BiletID.ToString() + " \nLütfen bilet numaranızı kaybetmeyiniz.");
-
-            KoltuklariDoldur(gidisSeferID);     //bilet satıldıktan sonra yeni haliyle koltukları güncelle ve kullanıcı bilgileri kısmını temizle, yeni bilet alma işlemleri için hazırla.
-            OrtakMetodlar.Temizle(pnlKisi);
 
             if (biletDurum == true)
-                MessageBox.Show("Bilet satın alma işlemi yapılmıştır. ");
+            {
+                DialogResult reply = MessageBox.Show("Bilet fiyatı = " + fiyat.ToString() + "\nÖdeme işlemini onaylıyor musunuz?",
+           "Ödeme işlemi", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (reply == DialogResult.Yes)
+                {
+                    biletRepo.Add(bilet);
+
+                    uow.SaveChanges();
+                    MessageBox.Show("Bilet satın alma işlemi yapılmıştır.");
+
+                    if (uyeDegil)
+                        MessageBox.Show("Bilet numaranız: " + bilet.BiletID.ToString() + " \nLütfen bilet numaranızı kaybetmeyiniz.");
+
+                    KoltuklariDoldur(gidisSeferID);     //bilet satıldıktan sonra yeni haliyle koltukları güncelle ve kullanıcı bilgileri kısmını temizle, yeni bilet alma işlemleri için hazırla.
+                    OrtakMetodlar.Temizle(pnlKisi);
+
+                }
+
+
+            }
             else
+            {
+                biletRepo.Add(bilet);
+            
+                uow.SaveChanges();
                 MessageBox.Show("Bilet rezervasyon işlemi yapılmıştır.");
+            }
 
             yolcuSayisi--;      //Yolcu sayısı 0'a ulaşana kadar azalt, böylece her yolcuya bilet al.
             aktifYolcu++;       //O anda bilet alınan yolcuyu tut.
@@ -582,7 +603,7 @@ namespace UI
                 BiletleriDoldur();
 
             }
-            else if(TrenTab.SelectedIndex == 1)
+            else if (TrenTab.SelectedIndex == 1)
             {
                 if (uyeDegil)
                     chkBilgiAl.Visible = false;
@@ -757,9 +778,20 @@ namespace UI
 
             Bilet satinAlinacakBilet = biletRepo.GetById(secilenBiletId);
             satinAlinacakBilet.BiletDurumu = true;
-            biletRepo.Update(satinAlinacakBilet);
-            uow.SaveChanges();
-            BiletleriDoldur();
+
+            DialogResult reply = MessageBox.Show("Bilet fiyatı = " + satinAlinacakBilet.Fiyat.ToString() + "\nÖdeme işlemini onaylıyor musunuz?",
+"Ödeme işlemi", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (reply == DialogResult.Yes)
+            {
+                biletRepo.Update(satinAlinacakBilet);
+
+                uow.SaveChanges();
+                MessageBox.Show("Bilet satın alma işlemi yapılmıştır.");
+                BiletleriDoldur();
+
+            }
+
 
 
         }
