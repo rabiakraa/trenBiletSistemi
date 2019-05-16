@@ -192,6 +192,7 @@
             this.btnBiletNoIleAra = new System.Windows.Forms.Button();
             this.txtBiletNumarasi = new System.Windows.Forms.TextBox();
             this.label48 = new System.Windows.Forms.Label();
+            this.columnHeader19 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.TrenTab.SuspendLayout();
             this.Giris.SuspendLayout();
             this.pnlGiris.SuspendLayout();
@@ -656,6 +657,7 @@
             this.dtGidis.Size = new System.Drawing.Size(251, 30);
             this.dtGidis.TabIndex = 51;
             this.dtGidis.Value = new System.DateTime(2019, 5, 10, 9, 44, 21, 0);
+            this.dtGidis.ValueChanged += new System.EventHandler(this.dtGidis_ValueChanged);
             // 
             // label7
             // 
@@ -710,6 +712,7 @@
             // lblSeferBilgi
             // 
             this.lblSeferBilgi.AutoSize = true;
+            this.lblSeferBilgi.BackColor = System.Drawing.Color.Gold;
             this.lblSeferBilgi.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.lblSeferBilgi.Location = new System.Drawing.Point(22, 19);
             this.lblSeferBilgi.Name = "lblSeferBilgi";
@@ -1955,6 +1958,7 @@
             // 
             this.lstBiletler.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
+            this.columnHeader19,
             this.columnHeader2,
             this.columnHeader3,
             this.columnHeader4,
@@ -1968,7 +1972,7 @@
             this.lstBiletler.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.lstBiletler.FullRowSelect = true;
             this.lstBiletler.GridLines = true;
-            this.lstBiletler.Location = new System.Drawing.Point(6, 53);
+            this.lstBiletler.Location = new System.Drawing.Point(6, 46);
             this.lstBiletler.MultiSelect = false;
             this.lstBiletler.Name = "lstBiletler";
             this.lstBiletler.Size = new System.Drawing.Size(919, 320);
@@ -2030,6 +2034,7 @@
             // columnHeader18
             // 
             this.columnHeader18.Text = "Durum";
+            this.columnHeader18.Width = 100;
             // 
             // btnSorgula
             // 
@@ -2146,6 +2151,11 @@
             this.label48.Size = new System.Drawing.Size(131, 23);
             this.label48.TabIndex = 23;
             this.label48.Text = "Bilet No Giriniz :";
+            // 
+            // columnHeader19
+            // 
+            this.columnHeader19.Text = "Tarih";
+            this.columnHeader19.Width = 72;
             // 
             // TrenBilet
             // 
@@ -2389,5 +2399,6 @@
         private System.Windows.Forms.Label lblYon;
         private System.Windows.Forms.DateTimePicker dtDonus;
         private System.Windows.Forms.CheckBox chkBilgiAl;
+        private System.Windows.Forms.ColumnHeader columnHeader19;
     }
 }

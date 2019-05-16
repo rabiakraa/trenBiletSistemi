@@ -56,6 +56,7 @@ namespace UI
         DateTime bugun;
         int secilenBiletId;
         bool adminGirisYapti;
+        TimeSpan gidisSeferSaati;       //Dönüş sefer saatinin kontrolü için tutulacak.
         #endregion
 
         public void DbInitialize()
@@ -223,7 +224,7 @@ namespace UI
             }
             else
             {
-                lblSeferBilgi.Text = "Lütfen gidiş seferini seçiniz.";
+                lblSeferBilgi.Text = "Lütfen gidiş seferini seçiniz: ";
                 cikisId = Convert.ToInt32(((ComboboxItem)cmbNereden.SelectedItem).Value);
                 varisId = Convert.ToInt32(((ComboboxItem)cmbNereye.SelectedItem).Value);
                 gidisTarihi = new DateTime(dtGidis.Value.Year, dtGidis.Value.Month, dtGidis.Value.Day, 0, 0, 0);
@@ -566,14 +567,18 @@ namespace UI
             lstBiletler.Items.Clear();
             foreach (var item in biletler)
             {
+                string cikisSaat = string.Format("{0:00}:{1:00}", item.Sefer.CikisSaati.Hours, item.Sefer.CikisSaati.Minutes);
+                string tarih = string.Format("{0}.{1}.{2}", item.Sefer.Tarih.Day, item.Sefer.Tarih.Month, item.Sefer.Tarih.Year);
+
                 ListViewItem item1 = new ListViewItem(item.BiletID.ToString());
+                item1.SubItems.Add(tarih);
                 item1.SubItems.Add(item.Ad);
                 item1.SubItems.Add(item.Soyad);
                 string cikisDurak = durakRepo.GetAll(x => x.DurakID == item.Sefer.Rota.CikisID).Select(x => x.DurakAdi).SingleOrDefault();
                 string varisDurak = durakRepo.GetAll(x => x.DurakID == item.Sefer.Rota.VarisID).Select(x => x.DurakAdi).SingleOrDefault();
                 item1.SubItems.Add(cikisDurak);
                 item1.SubItems.Add(varisDurak);
-                item1.SubItems.Add(item.Sefer.CikisSaati.ToString());
+                item1.SubItems.Add(cikisSaat);
                 item1.SubItems.Add(item.SigortaliMi ? "Var" : "Yok");
                 item1.SubItems.Add(item.YemekliMi ? "Var" : "Yok");
                 item1.SubItems.Add(item.YolculukHizmetiVarMi ? "Var" : "Yok");
@@ -611,6 +616,10 @@ namespace UI
                     chkBilgiAl.Visible = true;
 
             }
+            else if(TrenTab.SelectedIndex == 6)
+            {
+                txtBiletNumarasi.Text = txtTcBilet.Text = "";
+            }
         }
 
         private void btnBiletlerim_Click(object sender, EventArgs e)
@@ -646,9 +655,25 @@ namespace UI
 
             var seferler = seferRepo.GetAll(x => x.RotaID == rotaId && x.Tarih == gidisTarihi).ToList();
 
-            if (gidisTarihi == bugun)
+
+            if (gidisTarihi == bugun)       //Gidiş saati bugünse zamanı geçen seferleri gösterme.
             {
                 seferler = seferRepo.GetAll(x => x.RotaID == rotaId && x.Tarih == gidisTarihi && TimeSpan.Compare(x.CikisSaati, gidisSaati) == 1).ToList();
+
+                if (donusBileti == 1)        //Dönüş bileti alınıyorsa getirilecek biletler gidiş biletinden ileri tarihe ve saate ait olmalı.
+                {
+                    seferler = seferRepo.GetAll(x => x.RotaID == rotaId && x.Tarih == gidisTarihi && TimeSpan.Compare(x.CikisSaati, gidisSeferSaati) == 1 && TimeSpan.Compare(x.CikisSaati, gidisSaati) == 1).ToList();
+                }
+            }
+
+            if (biletDurum == false && gidisTarihi == bugun)
+            {     //2 saat kala seferleri rezervasyona kapat
+                seferler = seferRepo.GetAll(x => x.RotaID == rotaId && x.Tarih == gidisTarihi && x.CikisSaati.Hours > DateTime.Now.Hour + 2).ToList();
+
+                if (donusBileti == 1)        //Dönüş bileti alınıyorsa getirelecek biletler gidiş biletinden ileri tarihe ve saate ait olmalı.
+                {
+                    seferler = seferRepo.GetAll(x => x.RotaID == rotaId && x.Tarih == gidisTarihi && TimeSpan.Compare(x.CikisSaati, gidisSeferSaati) == 1 && x.CikisSaati.Hours > DateTime.Now.Hour + 2).ToList();
+                }
             }
 
             if (seferler.Count == 0)
@@ -687,12 +712,13 @@ namespace UI
 
                     string cikisDurak = durakRepo.GetAll(x => x.DurakID == biletim.Sefer.Rota.CikisID).Select(x => x.DurakAdi).SingleOrDefault();
                     string varisDurak = durakRepo.GetAll(x => x.DurakID == biletim.Sefer.Rota.VarisID).Select(x => x.DurakAdi).SingleOrDefault();
+                    string cikisSaat = string.Format("{0:00}:{1:00}", biletim.Sefer.CikisSaati.Hours, biletim.Sefer.CikisSaati.Minutes);
 
                     lblBiletNoSonuc.Text = "Ad: " + biletim.Ad
                         + "\nSoyad: " + biletim.Soyad
                         + "\nÇıkış Durağı: " + cikisDurak
                         + "\nVarış Durağı: " + varisDurak
-                        + "\nÇıkış Saati: " + biletim.Sefer.CikisSaati.ToString()
+                        + "\nÇıkış Saati: " + cikisSaat
                         + "\nSigorta: " + (biletim.SigortaliMi ? "Var" : "Yok")
                         + "\nYemek: " + (biletim.YemekliMi ? "Var" : "Yok")
                         + "\nYolculuk Hizmeti: " + (biletim.YolculukHizmetiVarMi ? "Var" : "Yok")
@@ -726,27 +752,42 @@ namespace UI
             var rotaId = rotaRepo.GetAll(x => x.CikisID == cikisId && x.VarisID == varisId).Select(x => x.RotaID).SingleOrDefault();
             var seferler = seferRepo.GetAll(x => x.RotaID == rotaId && x.Tarih == gidisTarihi).ToList();
 
-            if (gidisTarihi == bugun)
+            if (gidisTarihi == bugun)       //Gidiş saati bugünse zamanı geçen seferleri gösterme.
             {
                 seferler = seferRepo.GetAll(x => x.RotaID == rotaId && x.Tarih == gidisTarihi && TimeSpan.Compare(x.CikisSaati, gidisSaati) == 1).ToList();
+
+                if (donusBileti == 1)        //Dönüş bileti alınıyorsa getirilecek biletler gidiş biletinden ileri tarihe ve saate ait olmalı.
+                {
+                    seferler = seferRepo.GetAll(x => x.RotaID == rotaId && x.Tarih == gidisTarihi && TimeSpan.Compare(x.CikisSaati, gidisSeferSaati) == 1 && TimeSpan.Compare(x.CikisSaati, gidisSaati) == 1).ToList();
+                }
             }
 
             if (biletDurum == false && gidisTarihi == bugun)
             {     //2 saat kala seferleri rezervasyona kapat
                 seferler = seferRepo.GetAll(x => x.RotaID == rotaId && x.Tarih == gidisTarihi && x.CikisSaati.Hours > DateTime.Now.Hour + 2).ToList();
+
+                if (donusBileti == 1)        //Dönüş bileti alınıyorsa getirelecek biletler gidiş biletinden ileri tarihe ve saate ait olmalı.
+                {
+                    seferler = seferRepo.GetAll(x => x.RotaID == rotaId && x.Tarih == gidisTarihi && TimeSpan.Compare(x.CikisSaati, gidisSeferSaati) == 1 && x.CikisSaati.Hours > DateTime.Now.Hour + 2).ToList();
+                }
             }
 
             lstSeferler.Items.Clear();
 
             foreach (var item in seferler)
             {
+                string cikisSaat = string.Format("{0:00}:{1:00}", item.CikisSaati.Hours, item.CikisSaati.Minutes);
+                string varisSaat = string.Format("{0:00}:{1:00}", item.VarisSaati.Hours, item.VarisSaati.Minutes);
+                string seferSure = string.Format("{0:00}:{1:00}", item.SeferSuresi.Hours, item.SeferSuresi.Minutes);
+                string tarih = string.Format("{0}.{1}.{2}", item.Tarih.Day, item.Tarih.Month, item.Tarih.Year);
+
                 ListViewItem item1 = new ListViewItem(item.SeferID.ToString());
                 item1.SubItems.Add(cmbNereden.Text);
                 item1.SubItems.Add(cmbNereye.Text);
-                item1.SubItems.Add(item.CikisSaati.ToString());
-                item1.SubItems.Add(item.VarisSaati.ToString());
-                item1.SubItems.Add(item.Tarih.ToString());
-                item1.SubItems.Add(item.SeferSuresi.ToString());
+                item1.SubItems.Add(cikisSaat);
+                item1.SubItems.Add(varisSaat);
+                item1.SubItems.Add(tarih);
+                item1.SubItems.Add(seferSure);
                 lstSeferler.Items.Add(item1);
             }
         }
@@ -851,11 +892,18 @@ namespace UI
             FiyatBelirle(senderName, 10);
         }
 
+        private void dtGidis_ValueChanged(object sender, EventArgs e)
+        {
+                dtDonus.MinDate = dtGidis.Value;
+                dtDonus.Value = dtDonus.MinDate;
+            
+        }
+
         private void btnIleriSefer_Click(object sender, EventArgs e)
         {
             if (donusBileti == 1)
             {
-                lblSeferBilgi.Text = "Lütfen dönüş seferini seçiniz.";
+                lblSeferBilgi.Text = "Lütfen dönüş seferini seçiniz: ";
                 //Dönüş bileti isteniyorsa tekrar bu sayfaya dön. dönüş seferlerini listele.
                 varisId = Convert.ToInt32(((ComboboxItem)cmbNereden.SelectedItem).Value);
                 cikisId = Convert.ToInt32(((ComboboxItem)cmbNereye.SelectedItem).Value);
@@ -875,6 +923,7 @@ namespace UI
             {
                 if (donusBileti == 1 || donusBileti == 0)
                 {
+                     gidisSeferSaati = TimeSpan.Parse(lstSeferler.SelectedItems[0].SubItems[4].Text);
                     gidisSeferID = Convert.ToInt32(lstSeferler.SelectedItems[0].SubItems[0].Text);
                 }
                 else
