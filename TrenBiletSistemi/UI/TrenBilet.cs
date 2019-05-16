@@ -46,7 +46,7 @@ namespace UI
         int secilenKoltuk;
         string sinif;
         Kullanici kullanici;
-        int fiyat = 70;
+        decimal fiyat = 70;
         Cinsiyet cns;
         int koltukGidis = 0;   //Dönüş bileti de alınacaksa 1 olur.
         bool biletDurum;        //satın almaysa true rezervasyonsa false
@@ -115,6 +115,8 @@ namespace UI
             dtDonus.MaxDate = DateTime.Today.AddDays(14);
 
             IlkKayitlariYap();
+
+            lblFiyat.Text = 0.ToString("C");
 
         }
 
@@ -266,9 +268,9 @@ namespace UI
             biletSinifi = 2;
             KoltuklariDoldur(gidisSeferID);
 
-            lblFiyat.Text = "100";
-
             fiyat = 100;
+            lblFiyat.Text = fiyat.ToString("C");
+
 
         }
 
@@ -279,10 +281,9 @@ namespace UI
 
             biletSinifi = 1;
             KoltuklariDoldur(gidisSeferID);
-            lblFiyat.Text = "70";
-            ;
             fiyat = 70;
-
+            lblFiyat.Text = fiyat.ToString("C");
+            
         }
 
         private void koltukSecildi(object sender, EventArgs e)
@@ -447,36 +448,26 @@ namespace UI
 
         }
 
-        private void FiyatBelirle()
+        private void FiyatBelirle(string chkName, int miktar)
         {
-            if (rdoCocuk.Checked)
-            {
-                fiyat -= 35;
-            }
-            if (chkSigortali.Checked)
-            {
-                fiyat += 10;
-            }
-            if (chkYemekli.Checked)
-            {
-                if (biletSinifi == 1)
-                    fiyat += 20;
-                else
-                {
-                    fiyat += 15;
-                }
-            }
-            if (ckhEkstraHizmet.Checked)
-            {
-                fiyat += 10;
-            }
-            lblFiyat.Text = fiyat.ToString();
+         
 
+            CheckBox tiklanan = this.Controls.Find(chkName, true).FirstOrDefault() as CheckBox;
+
+            if (tiklanan.Checked)
+            {
+                fiyat += miktar;
+            }
+            else
+            {
+                fiyat -= miktar;
+            }
+   
+            lblFiyat.Text = fiyat.ToString("C");
         }
 
         private void btnSatinAl_Click(object sender, EventArgs e)
         {
-            FiyatBelirle();     //Fiyatı belirle. Çocuksa fiyatı düşür, ek hizmetler varsa artır vs.
 
             Bilet bilet = new Bilet
             {
@@ -492,7 +483,7 @@ namespace UI
                 YolculukHizmetiVarMi = ckhEkstraHizmet.Checked,
                 SeferID = gidisSeferID,
                 KullaniciID = kullanici.KullaniciID,
-                Fiyat = fiyat,
+                Fiyat = Convert.ToInt32(fiyat),
                 VagonSinifi = biletSinifi == 1 ? false : true   //biletSinifi = 1 ise ekonomi seçilmiştir. vagon sınıfı false olur. 1 değilse business seçilmiştir. Vagon sınıfı true olur.
             };
 
@@ -500,7 +491,7 @@ namespace UI
 
             if (biletDurum == true)
             {
-                DialogResult reply = MessageBox.Show("Bilet fiyatı = " + fiyat.ToString() + "\nÖdeme işlemini onaylıyor musunuz?",
+                DialogResult reply = MessageBox.Show("Bilet fiyatı = " + fiyat.ToString("C") + "\nÖdeme işlemini onaylıyor musunuz?",
            "Ödeme işlemi", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 if (reply == DialogResult.Yes)
@@ -517,16 +508,18 @@ namespace UI
                     OrtakMetodlar.Temizle(pnlKisi);
 
                 }
-
+                else
+                {
+                    return;
+                }
 
             }
             else
             {
                 biletRepo.Add(bilet);
-            
                 uow.SaveChanges();
                 if (uyeDegil)
-                    MessageBox.Show("Bilet numaranız: " + bilet.BiletID.ToString() + " \nLütfen bilet numaranızı kaybetmeyiniz.");
+                    MessageBox.Show("Bilet numaranız: " + bilet.BiletID.ToString("C") + " \nLütfen bilet numaranızı kaybetmeyiniz.");
                 MessageBox.Show("Bilet rezervasyon işlemi yapılmıştır.");
             }
 
@@ -598,7 +591,7 @@ namespace UI
             KoltuklariDoldur(gidisSeferID);
             OrtakMetodlar.Temizle(pnlKisi);
             rdoYetiskin.Checked = true;
-            lblFiyat.Text = "0";
+            lblFiyat.Text = 0.ToString("C");
             grpKoltukBusiness.Visible = false;
             grpKoltukEkonomi.Visible = false;
         }
@@ -787,7 +780,7 @@ namespace UI
             Bilet satinAlinacakBilet = biletRepo.GetById(secilenBiletId);
             satinAlinacakBilet.BiletDurumu = true;
 
-            DialogResult reply = MessageBox.Show("Bilet fiyatı = " + satinAlinacakBilet.Fiyat.ToString() + "\nÖdeme işlemini onaylıyor musunuz?",
+            DialogResult reply = MessageBox.Show("Bilet fiyatı = " + satinAlinacakBilet.Fiyat.ToString("C") + "\nÖdeme işlemini onaylıyor musunuz?",
 "Ödeme işlemi", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (reply == DialogResult.Yes)
@@ -822,6 +815,40 @@ namespace UI
             {
                 OrtakMetodlar.Temizle(pnlKisi);
             }
+        }
+
+        private void rdoYetiskin_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdoCocuk.Checked == true)
+            {
+                fiyat -= 35;
+            }
+            else
+            {
+                fiyat += 35;
+            }
+            lblFiyat.Text = fiyat.ToString("C");
+        }
+
+        private void chkYemekli_CheckedChanged(object sender, EventArgs e)
+        {
+            string senderName = ((CheckBox)sender).Name;
+            if (biletSinifi == 1)
+                FiyatBelirle(senderName, 20);
+            else if (biletSinifi == 2)
+                FiyatBelirle(senderName, 15);
+        }
+
+        private void chkSigortali_CheckedChanged(object sender, EventArgs e)
+        {
+            string senderName = ((CheckBox)sender).Name;
+                FiyatBelirle(senderName, 10);
+        }
+
+        private void ckhEkstraHizmet_CheckedChanged(object sender, EventArgs e)
+        {
+            string senderName = ((CheckBox)sender).Name;
+            FiyatBelirle(senderName, 10);
         }
 
         private void btnIleriSefer_Click(object sender, EventArgs e)

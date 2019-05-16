@@ -1682,6 +1682,7 @@
             this.ckhEkstraHizmet.TabIndex = 21;
             this.ckhEkstraHizmet.Text = "Ekstra Hizmetler";
             this.ckhEkstraHizmet.UseVisualStyleBackColor = true;
+            this.ckhEkstraHizmet.CheckedChanged += new System.EventHandler(this.ckhEkstraHizmet_CheckedChanged);
             // 
             // lblBiletFiyati4
             // 
@@ -1709,6 +1710,7 @@
             this.chkSigortali.TabIndex = 15;
             this.chkSigortali.Text = "Sigortali";
             this.chkSigortali.UseVisualStyleBackColor = true;
+            this.chkSigortali.CheckedChanged += new System.EventHandler(this.chkSigortali_CheckedChanged);
             // 
             // chkYemekli
             // 
@@ -1719,6 +1721,7 @@
             this.chkYemekli.TabIndex = 15;
             this.chkYemekli.Text = "Yemekli";
             this.chkYemekli.UseVisualStyleBackColor = true;
+            this.chkYemekli.CheckedChanged += new System.EventHandler(this.chkYemekli_CheckedChanged);
             // 
             // rdoCocuk
             // 
@@ -1743,6 +1746,7 @@
             this.rdoYetiskin.TabStop = true;
             this.rdoYetiskin.Text = "Yetişkin";
             this.rdoYetiskin.UseVisualStyleBackColor = true;
+            this.rdoYetiskin.CheckedChanged += new System.EventHandler(this.rdoYetiskin_CheckedChanged);
             // 
             // txtSoyad
             // 
