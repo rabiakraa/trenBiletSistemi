@@ -19,7 +19,7 @@ namespace UI
 
         private void btnCinsiyet_Click(object sender, EventArgs e)
         {
-            this.Hide();
+          //  this.Hide();
         }
 
         private void Cinsiyet_FormClosing(object sender, FormClosingEventArgs e)

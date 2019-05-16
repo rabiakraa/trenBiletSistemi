@@ -171,6 +171,7 @@
             this.btnBiletiAl = new System.Windows.Forms.Button();
             this.lstBiletler = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader19 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -192,7 +193,6 @@
             this.btnBiletNoIleAra = new System.Windows.Forms.Button();
             this.txtBiletNumarasi = new System.Windows.Forms.TextBox();
             this.label48 = new System.Windows.Forms.Label();
-            this.columnHeader19 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.TrenTab.SuspendLayout();
             this.Giris.SuspendLayout();
             this.pnlGiris.SuspendLayout();
@@ -836,7 +836,7 @@
             this.lblYon.AutoSize = true;
             this.lblYon.BackColor = System.Drawing.Color.Gold;
             this.lblYon.Font = new System.Drawing.Font("Calibri", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.lblYon.Location = new System.Drawing.Point(233, 12);
+            this.lblYon.Location = new System.Drawing.Point(235, 12);
             this.lblYon.Name = "lblYon";
             this.lblYon.Size = new System.Drawing.Size(89, 23);
             this.lblYon.TabIndex = 74;
@@ -1986,6 +1986,11 @@
             this.columnHeader1.Text = "BiletNo";
             this.columnHeader1.Width = 76;
             // 
+            // columnHeader19
+            // 
+            this.columnHeader19.Text = "Tarih";
+            this.columnHeader19.Width = 72;
+            // 
             // columnHeader2
             // 
             this.columnHeader2.Text = "Ad";
@@ -2151,11 +2156,6 @@
             this.label48.Size = new System.Drawing.Size(131, 23);
             this.label48.TabIndex = 23;
             this.label48.Text = "Bilet No Giriniz :";
-            // 
-            // columnHeader19
-            // 
-            this.columnHeader19.Text = "Tarih";
-            this.columnHeader19.Width = 72;
             // 
             // TrenBilet
             // 

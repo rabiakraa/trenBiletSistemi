@@ -284,7 +284,7 @@ namespace UI
             KoltuklariDoldur(gidisSeferID);
             fiyat = 70;
             lblFiyat.Text = fiyat.ToString("C");
-            
+
         }
 
         private void koltukSecildi(object sender, EventArgs e)
@@ -295,7 +295,7 @@ namespace UI
             secilenKoltuk = Convert.ToInt32((sender as PictureBox).Tag.ToString());
 
             cns = new Cinsiyet();
-           this.Enabled = false;
+            this.Enabled = false;
             cns.Show();
 
             //Herhangi bir koltuk seçildiğinde cinsiyet seçimi yapıldıktan sonra işlemler gerçekleşir.
@@ -362,6 +362,8 @@ namespace UI
             }
 
             this.Enabled = true;
+            cns.Hide();
+            // this.BringToFront();
 
         }
 
@@ -451,7 +453,7 @@ namespace UI
 
         private void FiyatBelirle(string chkName, int miktar)
         {
-         
+
 
             CheckBox tiklanan = this.Controls.Find(chkName, true).FirstOrDefault() as CheckBox;
 
@@ -463,97 +465,103 @@ namespace UI
             {
                 fiyat -= miktar;
             }
-   
+
             lblFiyat.Text = fiyat.ToString("C");
         }
 
         private void btnSatinAl_Click(object sender, EventArgs e)
         {
-
-            Bilet bilet = new Bilet
+            if (!OrtakMetodlar.BosAlanVarMi(pnlKisi))
             {
-                Ad = txtAd.Text,
-                Soyad = txtSoyad.Text,
-                TcNo = txtTc.Text,
-                BiletDurumu = biletDurum,     //Satın almada true, rezervasyonda false
-                Cinsiyet = cinsiyet,
-                CocukMu = rdoCocuk.Checked,
-                SigortaliMi = chkSigortali.Checked,
-                YemekliMi = chkYemekli.Checked,
-                KoltukNo = secilenKoltuk,
-                YolculukHizmetiVarMi = ckhEkstraHizmet.Checked,
-                SeferID = gidisSeferID,
-                KullaniciID = kullanici.KullaniciID,
-                Fiyat = Convert.ToInt32(fiyat),
-                VagonSinifi = biletSinifi == 1 ? false : true   //biletSinifi = 1 ise ekonomi seçilmiştir. vagon sınıfı false olur. 1 değilse business seçilmiştir. Vagon sınıfı true olur.
-            };
+                Bilet bilet = new Bilet
+                {
+                    Ad = txtAd.Text,
+                    Soyad = txtSoyad.Text,
+                    TcNo = txtTc.Text,
+                    BiletDurumu = biletDurum,     //Satın almada true, rezervasyonda false
+                    Cinsiyet = cinsiyet,
+                    CocukMu = rdoCocuk.Checked,
+                    SigortaliMi = chkSigortali.Checked,
+                    YemekliMi = chkYemekli.Checked,
+                    KoltukNo = secilenKoltuk,
+                    YolculukHizmetiVarMi = ckhEkstraHizmet.Checked,
+                    SeferID = gidisSeferID,
+                    KullaniciID = kullanici.KullaniciID,
+                    Fiyat = Convert.ToInt32(fiyat),
+                    VagonSinifi = biletSinifi == 1 ? false : true   //biletSinifi = 1 ise ekonomi seçilmiştir. vagon sınıfı false olur. 1 değilse business seçilmiştir. Vagon sınıfı true olur.
+                };
 
 
 
-            if (biletDurum == true)
-            {
-                DialogResult reply = MessageBox.Show("Bilet fiyatı = " + fiyat.ToString("C") + "\nÖdeme işlemini onaylıyor musunuz?",
-           "Ödeme işlemi", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (biletDurum == true)
+                {
+                    DialogResult reply = MessageBox.Show("Bilet fiyatı = " + fiyat.ToString("C") + "\nÖdeme işlemini onaylıyor musunuz?",
+               "Ödeme işlemi", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                if (reply == DialogResult.Yes)
+                    if (reply == DialogResult.Yes)
+                    {
+                        biletRepo.Add(bilet);
+
+                        uow.SaveChanges();
+                        MessageBox.Show("Bilet satın alma işlemi yapılmıştır.");
+
+                        if (uyeDegil)
+                            MessageBox.Show("Bilet numaranız: " + bilet.BiletID.ToString() + " \nLütfen bilet numaranızı kaybetmeyiniz.");
+
+                        KoltuklariDoldur(gidisSeferID);     //bilet satıldıktan sonra yeni haliyle koltukları güncelle ve kullanıcı bilgileri kısmını temizle, yeni bilet alma işlemleri için hazırla.
+                        OrtakMetodlar.Temizle(pnlKisi);
+
+                    }
+                    else
+                    {
+                        return;
+                    }
+
+                }
+                else
                 {
                     biletRepo.Add(bilet);
-
                     uow.SaveChanges();
-                    MessageBox.Show("Bilet satın alma işlemi yapılmıştır.");
-
                     if (uyeDegil)
                         MessageBox.Show("Bilet numaranız: " + bilet.BiletID.ToString() + " \nLütfen bilet numaranızı kaybetmeyiniz.");
-
-                    KoltuklariDoldur(gidisSeferID);     //bilet satıldıktan sonra yeni haliyle koltukları güncelle ve kullanıcı bilgileri kısmını temizle, yeni bilet alma işlemleri için hazırla.
-                    OrtakMetodlar.Temizle(pnlKisi);
-
-                }
-                else
-                {
-                    return;
+                    MessageBox.Show("Bilet rezervasyon işlemi yapılmıştır.");
                 }
 
-            }
-            else
-            {
-                biletRepo.Add(bilet);
-                uow.SaveChanges();
-                if (uyeDegil)
-                    MessageBox.Show("Bilet numaranız: " + bilet.BiletID.ToString("C") + " \nLütfen bilet numaranızı kaybetmeyiniz.");
-                MessageBox.Show("Bilet rezervasyon işlemi yapılmıştır.");
-            }
+                yolcuSayisi--;      //Yolcu sayısı 0'a ulaşana kadar azalt, böylece her yolcuya bilet al.
+                aktifYolcu++;       //O anda bilet alınan yolcuyu tut.
 
-            yolcuSayisi--;      //Yolcu sayısı 0'a ulaşana kadar azalt, böylece her yolcuya bilet al.
-            aktifYolcu++;       //O anda bilet alınan yolcuyu tut.
-
-            if (yolcuSayisi != 0)
-            {
-                ayniKullanici = true;
-                YeniBiletAl();
-            }
-            else
-            {
-                ayniKullanici = false;
-
-                if (koltukGidis == 1)           //Dönüş bileti isteniyorsa tekrar bilet al
+                if (yolcuSayisi != 0)
                 {
-                    lblYon.Text = "Dönüş Yönü";
-                    gidisSeferID = donusSeferID;
-                    aktifYolcu = 1;
-                    yolcuSayisi = Convert.ToInt32(nmrYolcuSayisi.Value);
+                    ayniKullanici = true;
                     YeniBiletAl();
-                    koltukGidis = 0;
                 }
                 else
                 {
-                    if (uyeDegil == true)
-                        TrenTab.SelectedIndex = 5;
-                    else
-                        TrenTab.SelectedIndex = (TrenTab.SelectedIndex + 1) % TrenTab.TabCount;
+                    ayniKullanici = false;
 
-                    BiletleriDoldur();
+                    if (koltukGidis == 1)           //Dönüş bileti isteniyorsa tekrar bilet al
+                    {
+                        lblYon.Text = "Dönüş Yönü";
+                        gidisSeferID = donusSeferID;
+                        aktifYolcu = 1;
+                        yolcuSayisi = Convert.ToInt32(nmrYolcuSayisi.Value);
+                        YeniBiletAl();
+                        koltukGidis = 0;
+                    }
+                    else
+                    {
+                        if (uyeDegil == true)
+                            TrenTab.SelectedIndex = 5;
+                        else
+                            TrenTab.SelectedIndex = (TrenTab.SelectedIndex + 1) % TrenTab.TabCount;
+
+                        BiletleriDoldur();
+                    }
                 }
+            }
+            else
+            {
+                MessageBox.Show("Lütfen tüm alanları doldurunuz.");
             }
         }
 
@@ -616,7 +624,7 @@ namespace UI
                     chkBilgiAl.Visible = true;
 
             }
-            else if(TrenTab.SelectedIndex == 6)
+            else if (TrenTab.SelectedIndex == 6)
             {
                 txtBiletNumarasi.Text = txtTcBilet.Text = "";
             }
@@ -883,7 +891,7 @@ namespace UI
         private void chkSigortali_CheckedChanged(object sender, EventArgs e)
         {
             string senderName = ((CheckBox)sender).Name;
-                FiyatBelirle(senderName, 10);
+            FiyatBelirle(senderName, 10);
         }
 
         private void ckhEkstraHizmet_CheckedChanged(object sender, EventArgs e)
@@ -894,9 +902,9 @@ namespace UI
 
         private void dtGidis_ValueChanged(object sender, EventArgs e)
         {
-                dtDonus.MinDate = dtGidis.Value;
-                dtDonus.Value = dtDonus.MinDate;
-            
+            dtDonus.MinDate = dtGidis.Value;
+            dtDonus.Value = dtDonus.MinDate;
+
         }
 
         private void btnIleriSefer_Click(object sender, EventArgs e)
@@ -923,7 +931,7 @@ namespace UI
             {
                 if (donusBileti == 1 || donusBileti == 0)
                 {
-                     gidisSeferSaati = TimeSpan.Parse(lstSeferler.SelectedItems[0].SubItems[4].Text);
+                    gidisSeferSaati = TimeSpan.Parse(lstSeferler.SelectedItems[0].SubItems[4].Text);
                     gidisSeferID = Convert.ToInt32(lstSeferler.SelectedItems[0].SubItems[0].Text);
                 }
                 else

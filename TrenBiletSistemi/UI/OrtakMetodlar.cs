@@ -53,6 +53,37 @@ namespace UI
                 }
             }
         }
+
+        public static bool BosAlanVarMi(Panel pnl)
+        {
+            foreach (Control item in pnl.Controls)
+            {
+                if (item is TextBox)
+                {
+                    if (item.Text == "")
+                        return true;
+                }
+                else if (item is ComboBox)
+                {
+                    if (((ComboBox)item).Text == "")
+                    {
+                        return true;
+                    }
+                }
+
+                else if (item is NumericUpDown)
+                {
+                    if (((NumericUpDown)item).Value == 0)
+                    {
+                        return true;
+                    }
+                }
+
+            }
+            return false;
+
+        }
+
     }
 
     //Comboboxta value ve text tutabilmek için kullanıyoruz. Örneğin: value: durakID, text: durakAdı
