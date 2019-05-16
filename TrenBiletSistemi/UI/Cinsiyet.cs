@@ -21,5 +21,10 @@ namespace UI
         {
             this.Hide();
         }
+
+        private void Cinsiyet_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            btnCinsiyet.PerformClick();
+        }
     }
 }

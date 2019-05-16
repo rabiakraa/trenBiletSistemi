@@ -15,7 +15,7 @@ namespace DAL.UnitOfWork
 
             public EFUnitOfWork(Context dbContext)
             {
-                Database.SetInitializer<Context>(null);
+               // Database.SetInitializer<Context>(null);     //Varolan db üzerinde ilk context bağlantısı için kullanılır. 
 
                 if (dbContext == null)
                     throw new ArgumentNullException("DbContext null olamaz.");
@@ -41,9 +41,8 @@ namespace DAL.UnitOfWork
                 }
             }
 
-            // Burada IUnitOfWork arayüzüne implemente ettiğimiz IDisposable arayüzünün Dispose Patternini implemente ediyoruz.
             private bool disposed = false;
-            protected virtual void Dispose(bool disposing)
+            protected virtual void Dispose(bool disposing)          //Dispose işlemi garbage collector kullanımını yönetir. 
             {
                 if (!this.disposed)
                 {

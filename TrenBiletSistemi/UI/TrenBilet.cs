@@ -157,7 +157,7 @@ namespace UI
             btnBiletlerim.Visible = false;
             btnGuvenliCikis.Text = "Geri";
             kullanici = new Kullanici();
-            kullanici.KullaniciID = 4;      //Üye olmadan devam edildiği takdirde alınan biletlere kullanıcıID olarak adminin kullaniciID'si verilir.
+            kullanici.KullaniciID = 1;      //Üye olmadan devam edildiği takdirde alınan biletlere kullanıcıID olarak adminin kullaniciID'si verilir.
             TrenTab.SelectedIndex = (TrenTab.SelectedIndex + 1) % TrenTab.TabCount;
         }
 
@@ -293,10 +293,12 @@ namespace UI
             secilenKoltuk = Convert.ToInt32((sender as PictureBox).Tag.ToString());
 
             cns = new Cinsiyet();
+           this.Enabled = false;
             cns.Show();
 
             //Herhangi bir koltuk seçildiğinde cinsiyet seçimi yapıldıktan sonra işlemler gerçekleşir.
             cns.btnCinsiyet.Click += BtnCinsiyet_Click;
+
 
 
         }
@@ -356,6 +358,9 @@ namespace UI
                 else if (biletDurum == false)
                     secilenPb.Image = UI.Properties.Resources.seciliRezerve;
             }
+
+            this.Enabled = true;
+
         }
 
         private bool YanKoltukAyniKisiyeMiAit(int koltukNumarasi)
@@ -520,6 +525,8 @@ namespace UI
                 biletRepo.Add(bilet);
             
                 uow.SaveChanges();
+                if (uyeDegil)
+                    MessageBox.Show("Bilet numaranız: " + bilet.BiletID.ToString() + " \nLütfen bilet numaranızı kaybetmeyiniz.");
                 MessageBox.Show("Bilet rezervasyon işlemi yapılmıştır.");
             }
 
@@ -678,6 +685,7 @@ namespace UI
         {
             if (txtBiletNumarasi.Text != null && txtTcBilet.Text != null)
             {
+                lblBiletNoSonuc.Text = "";
                 try
                 {
                     int bNo = int.Parse(txtBiletNumarasi.Text);

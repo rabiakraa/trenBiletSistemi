@@ -77,6 +77,7 @@
             this.columnHeader17 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnIleriSefer = new System.Windows.Forms.Button();
             this.BiletKoltuk = new System.Windows.Forms.TabPage();
+            this.chkBilgiAl = new System.Windows.Forms.CheckBox();
             this.lblYon = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label47 = new System.Windows.Forms.Label();
@@ -191,7 +192,6 @@
             this.btnBiletNoIleAra = new System.Windows.Forms.Button();
             this.txtBiletNumarasi = new System.Windows.Forms.TextBox();
             this.label48 = new System.Windows.Forms.Label();
-            this.chkBilgiAl = new System.Windows.Forms.CheckBox();
             this.TrenTab.SuspendLayout();
             this.Giris.SuspendLayout();
             this.pnlGiris.SuspendLayout();
@@ -815,6 +815,18 @@
             this.BiletKoltuk.TabIndex = 2;
             this.BiletKoltuk.Text = "Koltuk Seçimi";
             this.BiletKoltuk.Click += new System.EventHandler(this.BiletKoltuk_Click);
+            // 
+            // chkBilgiAl
+            // 
+            this.chkBilgiAl.AutoSize = true;
+            this.chkBilgiAl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.chkBilgiAl.Location = new System.Drawing.Point(704, 36);
+            this.chkBilgiAl.Name = "chkBilgiAl";
+            this.chkBilgiAl.Size = new System.Drawing.Size(226, 24);
+            this.chkBilgiAl.TabIndex = 75;
+            this.chkBilgiAl.Text = "Kendim için bilet alıyorum.";
+            this.chkBilgiAl.UseVisualStyleBackColor = true;
+            this.chkBilgiAl.CheckedChanged += new System.EventHandler(this.chkBilgiAd_CheckedChanged);
             // 
             // lblYon
             // 
@@ -2131,18 +2143,6 @@
             this.label48.TabIndex = 23;
             this.label48.Text = "Bilet No Giriniz :";
             // 
-            // chkBilgiAl
-            // 
-            this.chkBilgiAl.AutoSize = true;
-            this.chkBilgiAl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.chkBilgiAl.Location = new System.Drawing.Point(704, 36);
-            this.chkBilgiAl.Name = "chkBilgiAl";
-            this.chkBilgiAl.Size = new System.Drawing.Size(226, 24);
-            this.chkBilgiAl.TabIndex = 75;
-            this.chkBilgiAl.Text = "Kendim için bilet alıyorum.";
-            this.chkBilgiAl.UseVisualStyleBackColor = true;
-            this.chkBilgiAl.CheckedChanged += new System.EventHandler(this.chkBilgiAd_CheckedChanged);
-            // 
             // TrenBilet
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -2150,7 +2150,9 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(968, 488);
             this.Controls.Add(this.TrenTab);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Name = "TrenBilet";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tren Bilet Uygulaması";
             this.Load += new System.EventHandler(this.TrenBilet_Load);
             this.TrenTab.ResumeLayout(false);
