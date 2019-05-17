@@ -251,7 +251,7 @@
             this.TrenTab.Controls.Add(this.BiletKoltuk);
             this.TrenTab.Controls.Add(this.Biletlerim);
             this.TrenTab.Controls.Add(this.tabBiletAra);
-            this.TrenTab.Location = new System.Drawing.Point(12, 8);
+            this.TrenTab.Location = new System.Drawing.Point(12, 12);
             this.TrenTab.Name = "TrenTab";
             this.TrenTab.SelectedIndex = 0;
             this.TrenTab.Size = new System.Drawing.Size(954, 468);

@@ -370,8 +370,8 @@ namespace UI
         private bool YanKoltukAyniKisiyeMiAit(int koltukNumarasi)
         {
             var yanKoltuk = biletRepo.GetAll(x => x.KullaniciID == kullanici.KullaniciID && x.KoltukNo == koltukNumarasi && x.SeferID == gidisSeferID).ToList();
-            if (yanKoltuk != null) return true;
-            return false;
+            if (yanKoltuk != null) return false;
+            return true;
         }
 
         private void KoltuklariDoldur(int seferID)
@@ -433,6 +433,7 @@ namespace UI
                         string pbName = "b" + item.KoltukNo;
                         PictureBox pb = this.Controls.Find(pbName, true).FirstOrDefault() as PictureBox;
                         pb.Image = UI.Properties.Resources.doluKadin;
+                        pb.Image.Tag = "b";
                         pb.Enabled = false;
                     }
                     else if (item.Cinsiyet == true)  //satın alınan ve erkek
@@ -440,6 +441,7 @@ namespace UI
                         string pbName = "b" + item.KoltukNo;
                         PictureBox pb = this.Controls.Find(pbName, true).FirstOrDefault() as PictureBox;
                         pb.Image = UI.Properties.Resources.doluErkek;
+                        pb.Image.Tag = "e";
                         pb.Enabled = false;
                     }
                 }
