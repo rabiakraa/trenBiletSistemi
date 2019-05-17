@@ -332,7 +332,8 @@ namespace UI
             //Eğer iki bilet aynı kişiye aitse kadın erkek yan yana oturabilir.
             if (yanKoltuk.Image.Tag != null)
             {
-                if (!YanKoltukAyniKisiyeMiAit(yanKoltukNo) || uyeDegil)
+                if (YanKoltukAyniKisiyeMiAit(yanKoltukNo) || uyeDegil)
+                //if (YanKoltukAyniKisiyeMiAit(yanKoltukNo) )
                 {
                     if (cinsiyet == false && yanKoltuk.Image.Tag.ToString() == "e")     //Seçilen cinsiyet kadınsa ve yanında erkek oturuyorsa..
                     {
@@ -370,7 +371,8 @@ namespace UI
         private bool YanKoltukAyniKisiyeMiAit(int koltukNumarasi)
         {
             var yanKoltuk = biletRepo.GetAll(x => x.KullaniciID == kullanici.KullaniciID && x.KoltukNo == koltukNumarasi && x.SeferID == gidisSeferID).ToList();
-            if (yanKoltuk != null) return false;
+            if (yanKoltuk.Count != 0) return false;
+            else
             return true;
         }
 
