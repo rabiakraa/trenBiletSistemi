@@ -632,6 +632,10 @@ namespace UI
             {
                 txtBiletNumarasi.Text = txtTcBilet.Text = "";
             }
+            else if (TrenTab.SelectedIndex == 3)
+            {
+                KoltuklariDoldur(gidisSeferID);
+            }
         }
 
         private void btnBiletlerim_Click(object sender, EventArgs e)
@@ -843,6 +847,7 @@ namespace UI
                 uow.SaveChanges();
                 MessageBox.Show("Bilet satın alma işlemi yapılmıştır.");
                 BiletleriDoldur();
+                btnRSatinAl.Enabled = false;
 
             }
 
